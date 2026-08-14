@@ -127,7 +127,8 @@ button{
     inset:0;
 
     background:
-        radial-gradient(circle,#252525,#101010 50%,#020202);
+        radial-gradient(circle at 50% 55%, rgba(80,90,95,.24), transparent 28%),
+        linear-gradient(180deg,#050708 0%,#101315 48%,#030405 100%);
 
     overflow:hidden;
 }
@@ -162,10 +163,52 @@ button{
 #office{
     position:absolute;
     inset:0;
+    overflow:hidden;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.88) 0 16%, transparent 16% 84%, rgba(0,0,0,.88) 84%),
+        repeating-linear-gradient(90deg, transparent 0 78px, rgba(255,255,255,.018) 79px 80px),
+        linear-gradient(180deg,#080a0b 0 63%,#151719 63% 65%,#050607 65% 100%);
+}
+
+/* ATMOSPHERIC ATB SECURITY OFFICE */
+#office::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-7%;
+    transform:translateX(-50%);
+    width:58%;
+    height:34%;
+    z-index:8;
+    border-radius:45% 45% 0 0;
+    background:
+        radial-gradient(circle at 30% 18%,#172128 0 4%,transparent 4.5%),
+        radial-gradient(circle at 70% 18%,#172128 0 4%,transparent 4.5%),
+        linear-gradient(180deg,#292c2f,#0d0f10 28%,#050606);
+    border-top:3px solid #34383b;
+    box-shadow:0 -16px 60px rgba(0,0,0,.8), inset 0 12px 30px rgba(255,255,255,.03);
+}
+
+#office::after{
+    content:"АТБ   •   НІЧНА ОХОРОНА";
+    position:absolute;
+    left:50%;
+    top:19%;
+    transform:translateX(-50%);
+    z-index:9;
+    padding:9px 24px;
+    border:1px solid #30363a;
+    border-radius:7px;
+    background:#080a0b;
+    color:#8b969d;
+    font-size:13px;
+    letter-spacing:5px;
+    box-shadow:0 0 30px #000;
 }
 
 #title{
     position:absolute;
+    z-index:12;
 
     top:33%;
     left:50%;
@@ -178,7 +221,8 @@ button{
 
 #title h1{
     font-size:clamp(40px,6vw,85px);
-    text-shadow:0 0 25px red;
+    letter-spacing:4px;
+    text-shadow:0 0 8px #fff,0 0 28px #d71920,0 0 70px rgba(215,25,32,.35);
 }
 
 #status{
@@ -433,7 +477,31 @@ button{
     overflow:hidden;
 
     background:
-        radial-gradient(circle,#333,#111 55%,#020202);
+        linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.35)),
+        radial-gradient(circle at center,#3a3d3f,#111 58%,#020202);
+}
+
+#cameraScene{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-size:clamp(28px,4vw,58px);
+    letter-spacing:14px;
+    color:#aeb5b9;
+    opacity:.48;
+    text-shadow:0 0 18px #000;
+}
+
+#cameraScene::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(90deg,transparent 0 110px,rgba(255,255,255,.025) 111px 112px),
+        linear-gradient(180deg,rgba(255,255,255,.03),transparent 35%,rgba(0,0,0,.45));
 }
 
 #cameraRoomIcon{
@@ -665,6 +733,17 @@ button{
 .endBtn.gray{
     background:#222;
     border:1px solid #555;
+}
+
+@keyframes officeFlicker{
+    0%,94%,100%{filter:brightness(1)}
+    95%{filter:brightness(.72)}
+    96%{filter:brightness(1.12)}
+    97%{filter:brightness(.82)}
+}
+
+#office{
+    animation:officeFlicker 9s infinite;
 }
 
 /* MOBILE */
@@ -912,6 +991,8 @@ button{
 
             <div class="scanlines"></div>
 
+            <div id="cameraScene">🚪 ВХІД • ТУРНІКЕТ • ВІТРИНИ</div>
+
             <div id="cameraRoomIcon">
                 🚪
             </div>
@@ -1138,6 +1219,9 @@ const cameraText =
 const cameraRoomIcon =
     document.getElementById("cameraRoomIcon");
 
+const cameraScene =
+    document.getElementById("cameraScene");
+
 const cameraButtons =
     document.querySelectorAll(".camBtn");
 
@@ -1197,6 +1281,15 @@ const cameraIcons = [
     "⬅️",
     "➡️",
     "🚨"
+];
+
+const cameraScenes = [
+    "🚪  ВХІД  •  ВІТРИНИ  •  ТУРНІКЕТ",
+    "🛒  КАСИ  •  ВІЗКИ  •  ТОРГОВИЙ ЗАЛ",
+    "📦  КОРОБКИ  •  СКЛАД  •  СТЕЛАЖІ",
+    "⬅️  ЛІВИЙ КОРИДОР  •  СЛУЖБОВІ ДВЕРІ",
+    "➡️  ПРАВИЙ КОРИДОР  •  ХОЛОДИЛЬНИКИ",
+    "🚨  ОФІС ОХОРОНИ  •  ЗАПАСНИЙ ВИХІД"
 ];
 
 
@@ -1769,6 +1862,9 @@ function renderCamera(){
 
     cameraRoomIcon.textContent =
         cameraIcons[selectedCamera];
+
+    cameraScene.textContent =
+        cameraScenes[selectedCamera];
 
 
     enemy1El.classList.remove("visible");
