@@ -371,6 +371,34 @@ button{
     box-shadow:0 0 30px rgba(255,0,0,.5);
 }
 
+
+/* ENEMIES IN DOORWAYS */
+
+.doorEnemy{
+    position:absolute;
+    top:47%;
+    z-index:18;
+    font-size:105px;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-50%) scale(.72);
+    transition:opacity .12s, transform .12s;
+    filter:drop-shadow(0 0 22px rgba(255,0,0,.85));
+}
+
+#leftDoorEnemy{
+    left:12%;
+}
+
+#rightDoorEnemy{
+    right:12%;
+}
+
+.doorEnemy.visible{
+    opacity:1;
+    transform:translateY(-50%) scale(1);
+}
+
 /* CAMERA BUTTON */
 
 #cameraBtn{
@@ -895,6 +923,17 @@ button{
 
 
         <div
+            id="leftDoorEnemy"
+            class="doorEnemy"
+        >👀</div>
+
+        <div
+            id="rightDoorEnemy"
+            class="doorEnemy"
+        >🐺</div>
+
+
+        <div
             id="leftDoor"
             class="door"
         ></div>
@@ -1198,6 +1237,13 @@ const leftLightEffect =
 
 const rightLightEffect =
     document.getElementById("rightLightEffect");
+
+
+const leftDoorEnemy =
+    document.getElementById("leftDoorEnemy");
+
+const rightDoorEnemy =
+    document.getElementById("rightDoorEnemy");
 
 
 const cameraBtn =
@@ -1518,6 +1564,9 @@ function startGame(night){
 
     rightLightEffect.classList.remove("on");
 
+    leftDoorEnemy.classList.remove("visible");
+    rightDoorEnemy.classList.remove("visible");
+
 
     leftDoorBtn.textContent =
         "🚪 Ліві двері";
@@ -1639,6 +1688,65 @@ rightDoorBtn.addEventListener(
 );
 
 
+
+function updateDoorEnemies(){
+
+    const leftVisible =
+        leftLightOn &&
+        (
+            enemy1 >= 5 ||
+            (
+                enemy3 >= 5 &&
+                enemy3Side === "left"
+            )
+        );
+
+    const rightVisible =
+        rightLightOn &&
+        (
+            enemy2 >= 5 ||
+            (
+                enemy3 >= 5 &&
+                enemy3Side === "right"
+            )
+        );
+
+    if(leftVisible){
+
+        leftDoorEnemy.textContent =
+            (
+                enemy3 >= 5 &&
+                enemy3Side === "left"
+            )
+                ? "🦆"
+                : "👀";
+
+    }
+
+    if(rightVisible){
+
+        rightDoorEnemy.textContent =
+            (
+                enemy3 >= 5 &&
+                enemy3Side === "right"
+            )
+                ? "🦆"
+                : "🐺";
+
+    }
+
+    leftDoorEnemy.classList.toggle(
+        "visible",
+        leftVisible
+    );
+
+    rightDoorEnemy.classList.toggle(
+        "visible",
+        rightVisible
+    );
+}
+
+
 /* LEFT LIGHT */
 
 leftLightBtn.addEventListener(
@@ -1694,6 +1802,7 @@ leftLightBtn.addEventListener(
         }
 
 
+        updateDoorEnemies();
         updateUsage();
     }
 );
@@ -1754,6 +1863,7 @@ rightLightBtn.addEventListener(
         }
 
 
+        updateDoorEnemies();
         updateUsage();
     }
 );
@@ -2066,6 +2176,9 @@ function powerOut(){
 
     rightLightEffect.classList.remove("on");
 
+    leftDoorEnemy.classList.remove("visible");
+    rightDoorEnemy.classList.remove("visible");
+
 
     closeCamera();
 
@@ -2161,6 +2274,8 @@ function moveEnemies(){
         );
     }
 
+
+    updateDoorEnemies();
 
     if(camerasOpen){
 
