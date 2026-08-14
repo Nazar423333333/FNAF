@@ -774,6 +774,26 @@ button{
     animation:officeFlicker 9s infinite;
 }
 
+
+/* SOUND */
+
+#soundBtn{
+    position:absolute;
+    top:88px;
+    left:25px;
+    z-index:70;
+    padding:9px 13px;
+    border:1px solid #555;
+    border-radius:9px;
+    background:rgba(0,0,0,.72);
+    color:white;
+    font-weight:bold;
+}
+
+#soundBtn.off{
+    opacity:.55;
+}
+
 /* MOBILE */
 
 @media(max-width:750px){
@@ -896,6 +916,8 @@ button{
         </div>
 
     </div>
+
+    <button id="soundBtn">🔊 ЗВУК</button>
 
 
     <div id="usage">
@@ -1209,6 +1231,10 @@ const powerLabel =
 
 const status =
     document.getElementById("status");
+
+
+const soundBtn =
+    document.getElementById("soundBtn");
 
 
 const leftDoor =
@@ -1614,6 +1640,8 @@ leftDoorBtn.addEventListener(
         leftDoorClosed =
             !leftDoorClosed;
 
+        soundDoor(leftDoorClosed);
+
 
         leftDoor.classList.toggle(
             "closed",
@@ -1657,6 +1685,8 @@ rightDoorBtn.addEventListener(
 
         rightDoorClosed =
             !rightDoorClosed;
+
+        soundDoor(rightDoorClosed);
 
 
         rightDoor.classList.toggle(
@@ -1761,6 +1791,8 @@ leftLightBtn.addEventListener(
         leftLightOn =
             !leftLightOn;
 
+        soundLight();
+
 
         leftLightBtn.classList.toggle(
             "lightOn",
@@ -1822,6 +1854,8 @@ rightLightBtn.addEventListener(
         rightLightOn =
             !rightLightOn;
 
+        soundLight();
+
 
         rightLightBtn.classList.toggle(
             "lightOn",
@@ -1882,6 +1916,8 @@ cameraBtn.addEventListener(
 
         camerasOpen = true;
 
+        soundCamera(true);
+
 
         cameraPanel.classList.remove(
             "hidden"
@@ -1908,6 +1944,10 @@ closeCameraBtn.addEventListener(
 
 
 function closeCamera(){
+
+    if(camerasOpen){
+        soundCamera(false);
+    }
 
     camerasOpen = false;
 
@@ -1936,6 +1976,7 @@ cameraButtons.forEach(
                     );
 
 
+                soundCameraSwitch();
                 selectCamera(cam);
             }
         );
@@ -2309,6 +2350,8 @@ function attack(
                 ? "💥 Щось ударило у ліві двері!"
                 : "💥 Щось ударило у праві двері!";
 
+        soundHit();
+
 
         if(enemyNumber === 1){
             enemy1 = 0;
@@ -2337,6 +2380,8 @@ function attack(
 
     warningIcon.textContent =
         icon;
+
+    soundWarning();
 
 
     warning.classList.remove(
@@ -2427,6 +2472,8 @@ function winGame(){
 
     closeCamera();
 
+    soundWin();
+
 
     endScreen.classList.remove(
         "hidden"
@@ -2489,6 +2536,8 @@ function loseGame(reason){
     stopTimers();
 
     closeCamera();
+
+    soundLose();
 
 
     warning.classList.add(
