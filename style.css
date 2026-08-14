@@ -1,0 +1,856 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #242424 0%,
+            #111 45%,
+            #050505 100%
+        );
+
+    color: white;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* ============================= */
+/* GAME */
+/* ============================= */
+
+#game {
+    width: 100vw;
+    height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* ============================= */
+/* TOP BAR */
+/* ============================= */
+
+#topbar {
+    position: absolute;
+
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(900px, 92%);
+
+    z-index: 50;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 25px;
+
+    border-radius: 15px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(0,0,0,0.8);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.8);
+
+    font-size: 20px;
+}
+
+
+/* ============================= */
+/* OFFICE */
+/* ============================= */
+
+#office {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,0.15),
+            rgba(0,0,0,0.55)
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,0.015) 0,
+            rgba(255,255,255,0.015) 2px,
+            transparent 2px,
+            transparent 6px
+        );
+}
+
+
+/* ============================= */
+/* CENTER */
+/* ============================= */
+
+.office-center {
+    position: absolute;
+
+    top: 38%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    text-align: center;
+
+    width: 80%;
+}
+
+.office-center h1 {
+
+    font-size:
+        clamp(40px, 6vw, 90px);
+
+    letter-spacing: 6px;
+
+    color: #f2f2f2;
+
+    text-shadow:
+
+        0 0 8px rgba(255,255,255,0.3),
+
+        0 0 25px rgba(255,0,0,0.7),
+
+        0 0 70px rgba(255,0,0,0.25);
+}
+
+#status {
+    margin-top: 20px;
+
+    font-size: 20px;
+
+    color: #bbb;
+}
+
+
+/* ============================= */
+/* DOORS */
+/* ============================= */
+
+.door {
+    position: absolute;
+
+    top: 0;
+
+    width: 18%;
+    height: 100%;
+
+    z-index: 20;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            #222 0px,
+            #222 35px,
+            #444 36px,
+            #222 38px
+        );
+
+    border: 4px solid #555;
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.9);
+
+    transition:
+        transform 0.35s ease;
+}
+
+.left-door {
+    left: 0;
+
+    transform:
+        translateY(-100%);
+}
+
+.right-door {
+    right: 0;
+
+    transform:
+        translateY(-100%);
+}
+
+.door.closed {
+    transform:
+        translateY(0);
+}
+
+
+/* ============================= */
+/* SIDE CONTROLS */
+/* ============================= */
+
+.left-controls,
+.right-controls {
+
+    position: absolute;
+
+    top: 42%;
+
+    z-index: 30;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.left-controls {
+    left: 25px;
+}
+
+.right-controls {
+    right: 25px;
+}
+
+.control-button {
+
+    width: 180px;
+
+    padding: 15px;
+
+    border: 1px solid #555;
+
+    border-radius: 12px;
+
+    background: #171717;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background 0.15s,
+        box-shadow 0.15s;
+}
+
+.control-button:hover {
+
+    transform:
+        scale(1.04);
+
+    background: #272727;
+}
+
+.control-button.active {
+
+    background:
+        #ffd54a;
+
+    color: #111;
+
+    box-shadow:
+        0 0 30px rgba(255,213,74,0.7);
+}
+
+.door-control.active {
+
+    background:
+        #b71c1c;
+
+    color: white;
+
+    box-shadow:
+        0 0 30px rgba(255,0,0,0.4);
+}
+
+
+/* ============================= */
+/* CAMERA BUTTON */
+/* ============================= */
+
+#cameraBtn {
+
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 40;
+
+    padding:
+        18px 35px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1278ff,
+            #0047c7
+        );
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 30px rgba(0,95,255,0.35);
+
+    transition:
+        transform 0.15s;
+}
+
+#cameraBtn:hover {
+
+    transform:
+        translateX(-50%)
+        scale(1.05);
+}
+
+
+/* ============================= */
+/* CAMERA */
+/* ============================= */
+
+#cameraPanel {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    padding: 25px;
+
+    background: #020202;
+}
+
+.camera-header {
+
+    height: 70px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid #333;
+}
+
+.camera-header > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.record-dot {
+
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: red;
+
+    box-shadow:
+        0 0 15px red;
+
+    animation:
+        recordBlink 1s infinite;
+}
+
+@keyframes recordBlink {
+
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.camera-header button {
+
+    padding:
+        12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #a91414;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* ============================= */
+/* CAMERA VIEW */
+/* ============================= */
+
+#cameraView {
+
+    position: relative;
+
+    height: calc(100vh - 210px);
+
+    margin-top: 15px;
+
+    overflow: hidden;
+
+    border: 3px solid #333;
+
+    border-radius: 8px;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #282828 0%,
+            #121212 45%,
+            #020202 100%
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+#cameraTitle {
+
+    position: absolute;
+
+    left: 25px;
+    bottom: 55px;
+
+    font-size: 30px;
+
+    z-index: 5;
+}
+
+#cameraText {
+
+    position: absolute;
+
+    left: 25px;
+    bottom: 25px;
+
+    color: #aaa;
+
+    z-index: 5;
+}
+
+
+/* ============================= */
+/* ENEMY */
+/* ============================= */
+
+#enemyVisual {
+
+    font-size: 150px;
+
+    opacity: 0;
+
+    transform:
+        scale(0.7);
+
+    filter:
+        drop-shadow(
+            0 0 25px rgba(255,0,0,0.7)
+        );
+
+    transition:
+        0.25s;
+}
+
+#enemyVisual.visible {
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+/* ============================= */
+/* CAMERA STATIC */
+/* ============================= */
+
+.scanlines {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    background:
+
+        repeating-linear-gradient(
+
+            0deg,
+
+            transparent 0px,
+
+            transparent 3px,
+
+            rgba(255,255,255,0.03) 4px
+
+        );
+}
+
+#cameraNoise {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.07;
+
+    background-image:
+
+        repeating-radial-gradient(
+
+            circle,
+
+            white 0px,
+
+            black 1px,
+
+            transparent 2px
+
+        );
+
+    animation:
+        noiseMove 0.15s infinite;
+}
+
+@keyframes noiseMove {
+
+    0% {
+        transform:
+            translate(0,0);
+    }
+
+    25% {
+        transform:
+            translate(4px,-3px);
+    }
+
+    50% {
+        transform:
+            translate(-3px,3px);
+    }
+
+    75% {
+        transform:
+            translate(3px,4px);
+    }
+}
+
+
+/* ============================= */
+/* CAMERA MAP */
+/* ============================= */
+
+.camera-map {
+
+    height: 80px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.cam-button {
+
+    padding:
+        12px 18px;
+
+    border-radius: 8px;
+
+    border:
+        1px solid #555;
+
+    background:
+        #181818;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.cam-button:hover {
+
+    background:
+        #333;
+}
+
+.cam-button.active {
+
+    background:
+        #0072ff;
+
+    border-color:
+        #469bff;
+}
+
+
+/* ============================= */
+/* GAME OVER */
+/* ============================= */
+
+#messageScreen {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 500;
+
+    background:
+        rgba(0,0,0,0.97);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+#messageTitle {
+
+    font-size:
+        clamp(60px, 10vw, 140px);
+
+    color: white;
+
+    text-shadow:
+        0 0 30px red;
+
+    animation:
+        gameOverFlash 0.5s infinite;
+}
+
+@keyframes gameOverFlash {
+
+    50% {
+
+        color:
+            #c52222;
+
+        transform:
+            scale(1.02);
+    }
+}
+
+#messageText {
+
+    margin-top:
+        25px;
+
+    font-size:
+        22px;
+
+    color:
+        #bbb;
+}
+
+#restartBtn {
+
+    margin-top:
+        35px;
+
+    padding:
+        18px 30px;
+
+    border:
+        none;
+
+    border-radius:
+        12px;
+
+    background:
+        #0869ff;
+
+    color:
+        white;
+
+    font-size:
+        18px;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+}
+
+
+/* ============================= */
+/* WARNING */
+/* ============================= */
+
+#warningScreen {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 300;
+
+    background:
+        rgba(100,0,0,0.92);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    animation:
+        warningFlash 0.15s infinite;
+}
+
+.warning-eyes {
+
+    font-size:
+        160px;
+}
+
+#warningScreen h1 {
+
+    font-size:
+        50px;
+}
+
+@keyframes warningFlash {
+
+    50% {
+
+        background:
+            rgba(0,0,0,0.96);
+    }
+}
+
+
+/* ============================= */
+/* IMPORTANT */
+/* ============================= */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 700px) {
+
+    #topbar {
+
+        font-size:
+            14px;
+
+        padding:
+            12px;
+    }
+
+    .left-controls {
+
+        left:
+            8px;
+    }
+
+    .right-controls {
+
+        right:
+            8px;
+    }
+
+    .control-button {
+
+        width:
+            130px;
+
+        padding:
+            10px;
+
+        font-size:
+            13px;
+    }
+
+    .door {
+
+        width:
+            25%;
+    }
+}
