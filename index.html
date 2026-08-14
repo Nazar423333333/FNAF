@@ -1237,6 +1237,114 @@ const soundBtn =
     document.getElementById("soundBtn");
 
 
+/* ===== НАДІЙНА СИСТЕМА ЗВУКІВ ===== */
+
+let soundEnabled = true;
+
+const sounds = {
+    door: new Audio("sounds/door.wav"),
+    light: new Audio("sounds/light.wav"),
+    camera: new Audio("sounds/camera.wav"),
+    hit: new Audio("sounds/hit.wav"),
+    alarm: new Audio("sounds/alarm.wav"),
+    win: new Audio("sounds/win.wav"),
+    gameover: new Audio("sounds/gameover.wav")
+};
+
+Object.values(sounds).forEach(function(audio){
+    audio.preload = "auto";
+    audio.volume = 1.0;
+});
+
+function playSound(name){
+    if(!soundEnabled) return;
+
+    const audio = sounds[name];
+    if(!audio) return;
+
+    try{
+        audio.pause();
+        audio.currentTime = 0;
+
+        const result = audio.play();
+
+        if(result && typeof result.catch === "function"){
+            result.catch(function(){
+                /* Якщо браузер блокує звук, гра все одно продовжує працювати */
+            });
+        }
+    }catch(error){
+        console.log("Sound error:", error);
+    }
+}
+
+function soundDoor(){
+    playSound("door");
+}
+
+function soundLight(){
+    playSound("light");
+}
+
+function soundCamera(){
+    playSound("camera");
+}
+
+function soundCameraSwitch(){
+    playSound("camera");
+}
+
+function soundHit(){
+    playSound("hit");
+}
+
+function soundWarning(){
+    playSound("alarm");
+}
+
+function soundWin(){
+    playSound("win");
+}
+
+function soundLose(){
+    playSound("gameover");
+}
+
+soundBtn.addEventListener("click", function(){
+
+    soundEnabled = !soundEnabled;
+
+    soundBtn.textContent =
+        soundEnabled
+            ? "🔊 ЗВУК"
+            : "🔇 БЕЗ ЗВУКУ";
+
+    soundBtn.classList.toggle(
+        "off",
+        !soundEnabled
+    );
+
+    if(soundEnabled){
+        playSound("light");
+    }
+});
+
+/* Розблокування аудіо після першого натискання користувача */
+document.addEventListener("pointerdown", function unlockAudio(){
+
+    Object.values(sounds).forEach(function(audio){
+        audio.load();
+    });
+
+    document.removeEventListener(
+        "pointerdown",
+        unlockAudio
+    );
+
+});
+
+
+
 const leftDoor =
     document.getElementById("leftDoor");
 
@@ -1640,7 +1748,7 @@ leftDoorBtn.addEventListener(
         leftDoorClosed =
             !leftDoorClosed;
 
-        soundDoor(leftDoorClosed);
+        if(typeof soundDoor === "function") soundDoor();
 
 
         leftDoor.classList.toggle(
@@ -1686,7 +1794,7 @@ rightDoorBtn.addEventListener(
         rightDoorClosed =
             !rightDoorClosed;
 
-        soundDoor(rightDoorClosed);
+        if(typeof soundDoor === "function") soundDoor();
 
 
         rightDoor.classList.toggle(
@@ -1791,7 +1899,7 @@ leftLightBtn.addEventListener(
         leftLightOn =
             !leftLightOn;
 
-        soundLight();
+        if(typeof soundLight === "function") soundLight();
 
 
         leftLightBtn.classList.toggle(
@@ -1854,7 +1962,7 @@ rightLightBtn.addEventListener(
         rightLightOn =
             !rightLightOn;
 
-        soundLight();
+        if(typeof soundLight === "function") soundLight();
 
 
         rightLightBtn.classList.toggle(
@@ -1916,7 +2024,7 @@ cameraBtn.addEventListener(
 
         camerasOpen = true;
 
-        soundCamera(true);
+        if(typeof soundCamera === "function") soundCamera();
 
 
         cameraPanel.classList.remove(
@@ -1946,7 +2054,7 @@ closeCameraBtn.addEventListener(
 function closeCamera(){
 
     if(camerasOpen){
-        soundCamera(false);
+        if(typeof soundCamera === "function") soundCamera();
     }
 
     camerasOpen = false;
@@ -1976,7 +2084,7 @@ cameraButtons.forEach(
                     );
 
 
-                soundCameraSwitch();
+                if(typeof soundCameraSwitch === "function") soundCameraSwitch();
                 selectCamera(cam);
             }
         );
@@ -2350,7 +2458,7 @@ function attack(
                 ? "💥 Щось ударило у ліві двері!"
                 : "💥 Щось ударило у праві двері!";
 
-        soundHit();
+        if(typeof soundHit === "function") soundHit();
 
 
         if(enemyNumber === 1){
@@ -2381,7 +2489,7 @@ function attack(
     warningIcon.textContent =
         icon;
 
-    soundWarning();
+    if(typeof soundWarning === "function") soundWarning();
 
 
     warning.classList.remove(
@@ -2472,7 +2580,7 @@ function winGame(){
 
     closeCamera();
 
-    soundWin();
+    if(typeof soundWin === "function") soundWin();
 
 
     endScreen.classList.remove(
@@ -2537,7 +2645,7 @@ function loseGame(reason){
 
     closeCamera();
 
-    soundLose();
+    if(typeof soundLose === "function") soundLose();
 
 
     warning.classList.add(
