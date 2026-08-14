@@ -1,119 +1,761 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>П'ять ночей в АТБ</title>
+<title>П'ять ночей в АТБ</title>
 
-    <link rel="stylesheet" href="./style.css">
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    overflow:hidden;
+    background:#050505;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+/* =========================
+   GAME
+========================= */
+
+#game{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at center,#242424 0%,#111 45%,#030303 100%);
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+#topbar{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:50;
+
+    width:min(950px,94%);
+
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+
+    padding:15px 25px;
+
+    background:rgba(0,0,0,.82);
+    border:1px solid #444;
+    border-radius:15px;
+
+    box-shadow:0 0 35px #000;
+
+    font-size:20px;
+}
+
+/* =========================
+   OFFICE
+========================= */
+
+#office{
+    width:100%;
+    height:100%;
+    position:relative;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.015) 0,
+            rgba(255,255,255,.015) 2px,
+            transparent 2px,
+            transparent 7px
+        );
+}
+
+.office-center{
+    position:absolute;
+    top:37%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    width:80%;
+}
+
+.office-center h1{
+    font-size:clamp(38px,6vw,90px);
+    letter-spacing:5px;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 30px red,
+        0 0 80px rgba(255,0,0,.4);
+}
+
+#status{
+    margin-top:25px;
+    font-size:20px;
+    color:#bbb;
+}
+
+/* =========================
+   DOORS
+========================= */
+
+.door{
+    position:absolute;
+    top:0;
+
+    width:18%;
+    height:100%;
+
+    z-index:20;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #181818 0,
+            #181818 35px,
+            #444 36px,
+            #252525 39px
+        );
+
+    border:4px solid #555;
+
+    box-shadow:0 0 50px black;
+
+    transition:transform .35s ease;
+}
+
+.left-door{
+    left:0;
+    transform:translateY(-100%);
+}
+
+.right-door{
+    right:0;
+    transform:translateY(-100%);
+}
+
+.door.closed{
+    transform:translateY(0);
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.left-controls,
+.right-controls{
+    position:absolute;
+    top:42%;
+    z-index:40;
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.left-controls{
+    left:25px;
+}
+
+.right-controls{
+    right:25px;
+}
+
+.control{
+    width:190px;
+    padding:16px;
+
+    border:1px solid #555;
+    border-radius:12px;
+
+    background:#161616;
+    color:white;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.control:hover{
+    background:#292929;
+    transform:scale(1.04);
+}
+
+.control.light-active{
+    background:#ffd740;
+    color:#111;
+
+    box-shadow:0 0 35px rgba(255,215,64,.8);
+}
+
+.control.door-active{
+    background:#a50f0f;
+
+    box-shadow:0 0 30px rgba(255,0,0,.5);
+}
+
+/* =========================
+   CAMERA BUTTON
+========================= */
+
+#cameraBtn{
+    position:absolute;
+
+    bottom:35px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:45;
+
+    padding:18px 35px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#1681ff,#003da9);
+    color:white;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:0 0 35px rgba(0,100,255,.45);
+}
+
+#cameraBtn:hover{
+    transform:translateX(-50%) scale(1.05);
+}
+
+/* =========================
+   CAMERA PANEL
+========================= */
+
+#cameraPanel{
+    position:absolute;
+    inset:0;
+
+    z-index:100;
+
+    background:#020202;
+
+    padding:20px;
+}
+
+.camera-header{
+    height:70px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-bottom:1px solid #333;
+}
+
+.cam-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.record-dot{
+    width:13px;
+    height:13px;
+
+    border-radius:50%;
+    background:red;
+
+    box-shadow:0 0 15px red;
+
+    animation:recordBlink 1s infinite;
+}
+
+@keyframes recordBlink{
+    50%{
+        opacity:.2;
+    }
+}
+
+#closeCameraBtn{
+    padding:13px 20px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#a71010;
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+/* =========================
+   CAMERA VIEW
+========================= */
+
+#cameraView{
+    position:relative;
+
+    height:calc(100vh - 200px);
+
+    margin-top:15px;
+
+    border:3px solid #333;
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle,#292929,#111 55%,#020202);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.camera-location{
+    position:absolute;
+
+    left:25px;
+    bottom:25px;
+
+    z-index:10;
+}
+
+#cameraTitle{
+    font-size:28px;
+}
+
+#cameraText{
+    margin-top:8px;
+    color:#aaa;
+}
+
+/* =========================
+   ENEMY
+========================= */
+
+#enemy{
+    font-size:160px;
+
+    opacity:0;
+
+    transform:scale(.5);
+
+    transition:.25s;
+
+    filter:drop-shadow(0 0 30px red);
+}
+
+#enemy.visible{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* =========================
+   STATIC
+========================= */
+
+.scanlines{
+    position:absolute;
+    inset:0;
+
+    z-index:20;
+
+    pointer-events:none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.04) 4px
+        );
+}
+
+.noise{
+    position:absolute;
+    inset:-20px;
+
+    pointer-events:none;
+
+    opacity:.07;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            white 0,
+            transparent 1px,
+            black 2px
+        );
+
+    animation:noise .12s infinite;
+}
+
+@keyframes noise{
+    0%{transform:translate(0,0)}
+    25%{transform:translate(5px,-4px)}
+    50%{transform:translate(-5px,4px)}
+    75%{transform:translate(3px,6px)}
+}
+
+/* =========================
+   CAMERA BUTTONS
+========================= */
+
+.camera-buttons{
+    height:75px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+}
+
+.camBtn{
+    padding:12px 18px;
+
+    background:#171717;
+    color:white;
+
+    border:1px solid #555;
+    border-radius:8px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.camBtn:hover{
+    background:#333;
+}
+
+.camBtn.active{
+    background:#0875ff;
+    border-color:#51a1ff;
+}
+
+/* =========================
+   WARNING
+========================= */
+
+#warning{
+    position:absolute;
+    inset:0;
+
+    z-index:300;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(90,0,0,.95);
+
+    animation:warningFlash .15s infinite;
+}
+
+#warning .eyes{
+    font-size:170px;
+}
+
+#warning h1{
+    margin-top:20px;
+    font-size:55px;
+}
+
+@keyframes warningFlash{
+    50%{
+        background:#000;
+    }
+}
+
+/* =========================
+   GAME OVER / WIN
+========================= */
+
+#endScreen{
+    position:absolute;
+    inset:0;
+
+    z-index:500;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:rgba(0,0,0,.98);
+}
+
+#endTitle{
+    font-size:clamp(65px,10vw,150px);
+
+    text-shadow:0 0 35px red;
+}
+
+#endText{
+    margin-top:25px;
+
+    font-size:22px;
+
+    color:#aaa;
+}
+
+#restartBtn{
+    margin-top:35px;
+
+    padding:18px 30px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#0875ff;
+    color:white;
+
+    font-size:19px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px){
+
+    #topbar{
+        font-size:14px;
+        padding:12px;
+    }
+
+    .control{
+        width:130px;
+        padding:11px;
+        font-size:13px;
+    }
+
+    .left-controls{
+        left:8px;
+    }
+
+    .right-controls{
+        right:8px;
+    }
+
+    .door{
+        width:25%;
+    }
+
+    .office-center h1{
+        font-size:38px;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
 <div id="game">
 
+    <!-- TOP BAR -->
+
     <div id="topbar">
         <div>🌙 Ніч: <span id="night">1</span></div>
+
         <div>🕛 Час: <span id="time">12 AM</span></div>
+
         <div>⚡ Енергія: <span id="power">100</span>%</div>
     </div>
+
+
+    <!-- OFFICE -->
 
     <main id="office">
 
         <div id="leftDoor" class="door left-door"></div>
+
         <div id="rightDoor" class="door right-door"></div>
 
+
         <div class="office-center">
+
             <h1>П'ЯТЬ НОЧЕЙ В АТБ</h1>
-            <p id="status">Слухай звуки та перевіряй камери...</p>
+
+            <p id="status">
+                Слухай звуки та перевіряй камери...
+            </p>
+
         </div>
+
 
         <div class="left-controls">
 
-            <button id="leftLightBtn" class="control-button">
+            <button
+                id="leftLightBtn"
+                class="control"
+            >
                 💡 Ліве світло
             </button>
 
-            <button id="leftDoorBtn" class="control-button door-control">
+            <button
+                id="leftDoorBtn"
+                class="control"
+            >
                 🚪 Ліві двері
             </button>
 
         </div>
 
+
         <div class="right-controls">
 
-            <button id="rightLightBtn" class="control-button">
+            <button
+                id="rightLightBtn"
+                class="control"
+            >
                 💡 Праве світло
             </button>
 
-            <button id="rightDoorBtn" class="control-button door-control">
+            <button
+                id="rightDoorBtn"
+                class="control"
+            >
                 🚪 Праві двері
             </button>
 
         </div>
 
+
         <button id="cameraBtn">
-            📹 Відкрити камери
+            📹 ВІДКРИТИ КАМЕРИ
         </button>
 
     </main>
 
 
-    <section id="cameraPanel" class="hidden">
+    <!-- CAMERAS -->
+
+    <section
+        id="cameraPanel"
+        class="hidden"
+    >
 
         <div class="camera-header">
 
-            <div>
+            <div class="cam-title">
+
                 <div class="record-dot"></div>
-                <h2>SECURITY CAMERAS</h2>
+
+                <h2>
+                    SECURITY CAMERAS
+                </h2>
+
             </div>
 
+
             <button id="closeCameraBtn">
-                ✖ Закрити
+                ✖ ЗАКРИТИ
             </button>
 
         </div>
+
 
         <div id="cameraView">
 
+            <div class="noise"></div>
+
             <div class="scanlines"></div>
 
-            <div id="cameraNoise"></div>
 
-            <div id="enemyVisual">
+            <div id="enemy">
                 👀
             </div>
 
-            <h2 id="cameraTitle">
-                CAM 1 — Вхід
-            </h2>
 
-            <p id="cameraText">
-                Нікого не видно...
-            </p>
+            <div class="camera-location">
+
+                <h2 id="cameraTitle">
+                    CAM 1 — Вхід
+                </h2>
+
+                <p id="cameraText">
+                    Нікого не видно...
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="camera-map">
 
-            <button class="cam-button active" data-cam="0">
+        <div class="camera-buttons">
+
+            <button
+                class="camBtn active"
+                data-camera="0"
+            >
                 CAM 1
             </button>
 
-            <button class="cam-button" data-cam="1">
+            <button
+                class="camBtn"
+                data-camera="1"
+            >
                 CAM 2
             </button>
 
-            <button class="cam-button" data-cam="2">
+            <button
+                class="camBtn"
+                data-camera="2"
+            >
                 CAM 3
             </button>
 
-            <button class="cam-button" data-cam="3">
+            <button
+                class="camBtn"
+                data-camera="3"
+            >
                 CAM 4
             </button>
 
-            <button class="cam-button" data-cam="4">
+            <button
+                class="camBtn"
+                data-camera="4"
+            >
                 CAM 5
             </button>
 
@@ -122,35 +764,971 @@
     </section>
 
 
-    <section id="messageScreen" class="hidden">
+    <!-- WARNING -->
 
-        <h1 id="messageTitle">
-            GAME OVER
+    <section
+        id="warning"
+        class="hidden"
+    >
+
+        <div class="eyes">
+            👀
+        </div>
+
+        <h1>
+            ЩОСЬ ПОРУЧ...
         </h1>
-
-        <p id="messageText"></p>
-
-        <button id="restartBtn">
-            🔄 Грати ще раз
-        </button>
 
     </section>
 
 
-    <section id="warningScreen" class="hidden">
+    <!-- END -->
 
-        <div class="warning-eyes">
-            👀
-        </div>
+    <section
+        id="endScreen"
+        class="hidden"
+    >
 
-        <h1>ЩОСЬ ПОРУЧ...</h1>
+        <h1 id="endTitle">
+            GAME OVER
+        </h1>
+
+        <p id="endText"></p>
+
+        <button id="restartBtn">
+            🔄 ГРАТИ ЩЕ РАЗ
+        </button>
 
     </section>
 
 </div>
 
 
-<script src="./script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =============================
+       ELEMENTS
+    ============================= */
+
+    const powerEl =
+        document.getElementById("power");
+
+    const timeEl =
+        document.getElementById("time");
+
+    const nightEl =
+        document.getElementById("night");
+
+    const statusEl =
+        document.getElementById("status");
+
+
+    const leftDoor =
+        document.getElementById("leftDoor");
+
+    const rightDoor =
+        document.getElementById("rightDoor");
+
+
+    const leftDoorBtn =
+        document.getElementById("leftDoorBtn");
+
+    const rightDoorBtn =
+        document.getElementById("rightDoorBtn");
+
+
+    const leftLightBtn =
+        document.getElementById("leftLightBtn");
+
+    const rightLightBtn =
+        document.getElementById("rightLightBtn");
+
+
+    const cameraBtn =
+        document.getElementById("cameraBtn");
+
+    const cameraPanel =
+        document.getElementById("cameraPanel");
+
+    const closeCameraBtn =
+        document.getElementById("closeCameraBtn");
+
+
+    const cameraTitle =
+        document.getElementById("cameraTitle");
+
+    const cameraText =
+        document.getElementById("cameraText");
+
+    const enemy =
+        document.getElementById("enemy");
+
+
+    const warning =
+        document.getElementById("warning");
+
+
+    const endScreen =
+        document.getElementById("endScreen");
+
+    const endTitle =
+        document.getElementById("endTitle");
+
+    const endText =
+        document.getElementById("endText");
+
+    const restartBtn =
+        document.getElementById("restartBtn");
+
+
+    const camButtons =
+        document.querySelectorAll(".camBtn");
+
+
+    /* =============================
+       GAME DATA
+    ============================= */
+
+    let power = 100;
+
+    let night = 1;
+
+    let hour = 0;
+
+    let gameRunning = true;
+
+
+    let leftDoorClosed = false;
+
+    let rightDoorClosed = false;
+
+
+    let leftLight = false;
+
+    let rightLight = false;
+
+
+    let cameraOpen = false;
+
+    let selectedCamera = 0;
+
+
+    /*
+        0 CAM1
+        1 CAM2
+        2 CAM3
+        3 CAM4
+        4 CAM5
+        5 OFFICE
+    */
+
+    let enemyPosition = 0;
+
+
+    const cameraNames = [
+
+        "CAM 1 — Вхід",
+
+        "CAM 2 — Торговий зал",
+
+        "CAM 3 — Склад",
+
+        "CAM 4 — Коридор",
+
+        "CAM 5 — Біля офісу"
+
+    ];
+
+
+    /* =============================
+       CONTROLS
+    ============================= */
+
+    function controlsAvailable(){
+
+        return gameRunning && power > 0;
+
+    }
+
+
+    /* =============================
+       LEFT DOOR
+    ============================= */
+
+    leftDoorBtn.addEventListener(
+        "click",
+        () => {
+
+            if(!controlsAvailable()){
+                return;
+            }
+
+
+            leftDoorClosed =
+                !leftDoorClosed;
+
+
+            leftDoor.classList.toggle(
+                "closed",
+                leftDoorClosed
+            );
+
+
+            leftDoorBtn.classList.toggle(
+                "door-active",
+                leftDoorClosed
+            );
+
+
+            if(leftDoorClosed){
+
+                leftDoorBtn.textContent =
+                    "🔒 Ліві двері";
+
+            }
+            else{
+
+                leftDoorBtn.textContent =
+                    "🚪 Ліві двері";
+
+            }
+
+        }
+    );
+
+
+    /* =============================
+       RIGHT DOOR
+    ============================= */
+
+    rightDoorBtn.addEventListener(
+        "click",
+        () => {
+
+            if(!controlsAvailable()){
+                return;
+            }
+
+
+            rightDoorClosed =
+                !rightDoorClosed;
+
+
+            rightDoor.classList.toggle(
+                "closed",
+                rightDoorClosed
+            );
+
+
+            rightDoorBtn.classList.toggle(
+                "door-active",
+                rightDoorClosed
+            );
+
+
+            if(rightDoorClosed){
+
+                rightDoorBtn.textContent =
+                    "🔒 Праві двері";
+
+            }
+            else{
+
+                rightDoorBtn.textContent =
+                    "🚪 Праві двері";
+
+            }
+
+        }
+    );
+
+
+    /* =============================
+       LIGHTS
+    ============================= */
+
+    leftLightBtn.addEventListener(
+        "click",
+        () => {
+
+            if(!controlsAvailable()){
+                return;
+            }
+
+
+            leftLight =
+                !leftLight;
+
+
+            leftLightBtn.classList.toggle(
+                "light-active",
+                leftLight
+            );
+
+
+            if(
+                leftLight &&
+                enemyPosition === 5
+            ){
+
+                statusEl.textContent =
+                    "👀 Хтось стоїть біля лівого проходу!";
+
+            }
+            else{
+
+                statusEl.textContent =
+                    "Лівий прохід порожній...";
+
+            }
+
+        }
+    );
+
+
+    rightLightBtn.addEventListener(
+        "click",
+        () => {
+
+            if(!controlsAvailable()){
+                return;
+            }
+
+
+            rightLight =
+                !rightLight;
+
+
+            rightLightBtn.classList.toggle(
+                "light-active",
+                rightLight
+            );
+
+
+            if(
+                rightLight &&
+                enemyPosition === 5
+            ){
+
+                statusEl.textContent =
+                    "👀 Хтось стоїть біля правого проходу!";
+
+            }
+            else{
+
+                statusEl.textContent =
+                    "Правий прохід порожній...";
+
+            }
+
+        }
+    );
+
+
+    /* =============================
+       CAMERAS
+    ============================= */
+
+    cameraBtn.addEventListener(
+        "click",
+        () => {
+
+            if(!controlsAvailable()){
+                return;
+            }
+
+
+            cameraOpen = true;
+
+
+            cameraPanel.classList.remove(
+                "hidden"
+            );
+
+
+            renderCamera();
+
+        }
+    );
+
+
+    closeCameraBtn.addEventListener(
+        "click",
+        closeCamera
+    );
+
+
+    function closeCamera(){
+
+        cameraOpen = false;
+
+
+        cameraPanel.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    camButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                selectedCamera =
+                    Number(
+                        button.dataset.camera
+                    );
+
+
+                camButtons.forEach(btn => {
+
+                    btn.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                renderCamera();
+
+            }
+        );
+
+    });
+
+
+    function renderCamera(){
+
+        cameraTitle.textContent =
+            cameraNames[selectedCamera];
+
+
+        if(
+            enemyPosition ===
+            selectedCamera
+        ){
+
+            enemy.classList.add(
+                "visible"
+            );
+
+
+            cameraText.textContent =
+                "⚠️ Щось знаходиться тут...";
+
+        }
+        else{
+
+            enemy.classList.remove(
+                "visible"
+            );
+
+
+            cameraText.textContent =
+                "Нікого не видно...";
+
+        }
+
+    }
+
+
+    /* =============================
+       POWER
+    ============================= */
+
+    function updatePower(){
+
+        if(!gameRunning){
+            return;
+        }
+
+
+        let drain = 0.012;
+
+
+        if(leftDoorClosed){
+
+            drain += 0.02;
+
+        }
+
+
+        if(rightDoorClosed){
+
+            drain += 0.02;
+
+        }
+
+
+        if(leftLight){
+
+            drain += 0.012;
+
+        }
+
+
+        if(rightLight){
+
+            drain += 0.012;
+
+        }
+
+
+        if(cameraOpen){
+
+            drain += 0.018;
+
+        }
+
+
+        power -= drain;
+
+
+        if(power <= 0){
+
+            power = 0;
+
+            powerEl.textContent = "0";
+
+            powerOut();
+
+            return;
+        }
+
+
+        powerEl.textContent =
+            Math.floor(power);
+
+
+        if(power <= 20){
+
+            powerEl.style.color =
+                "#ff3333";
+
+        }
+        else if(power <= 40){
+
+            powerEl.style.color =
+                "#ffd740";
+
+        }
+        else{
+
+            powerEl.style.color =
+                "white";
+
+        }
+
+    }
+
+
+    function powerOut(){
+
+        leftDoorClosed = false;
+
+        rightDoorClosed = false;
+
+
+        leftDoor.classList.remove(
+            "closed"
+        );
+
+        rightDoor.classList.remove(
+            "closed"
+        );
+
+
+        leftDoorBtn.classList.remove(
+            "door-active"
+        );
+
+        rightDoorBtn.classList.remove(
+            "door-active"
+        );
+
+
+        leftLight = false;
+
+        rightLight = false;
+
+
+        leftLightBtn.classList.remove(
+            "light-active"
+        );
+
+        rightLightBtn.classList.remove(
+            "light-active"
+        );
+
+
+        closeCamera();
+
+
+        statusEl.textContent =
+            "⚡ Енергія закінчилася...";
+
+
+        setTimeout(() => {
+
+            if(gameRunning){
+
+                showWarning();
+
+            }
+
+        },1500);
+
+
+        setTimeout(() => {
+
+            if(gameRunning){
+
+                loseGame(
+                    "Енергія закінчилася."
+                );
+
+            }
+
+        },3300);
+
+    }
+
+
+    /* =============================
+       ENEMY AI
+    ============================= */
+
+    function moveEnemy(){
+
+        if(!gameRunning){
+            return;
+        }
+
+
+        const chance =
+            Math.random();
+
+
+        if(
+            chance < 0.55 &&
+            enemyPosition < 5
+        ){
+
+            enemyPosition++;
+
+        }
+        else if(
+            chance > 0.93 &&
+            enemyPosition > 0
+        ){
+
+            enemyPosition--;
+
+        }
+
+
+        if(cameraOpen){
+
+            renderCamera();
+
+        }
+
+
+        if(enemyPosition === 3){
+
+            statusEl.textContent =
+                "📹 Ти чуєш шум десь у коридорі...";
+
+        }
+
+
+        if(enemyPosition === 4){
+
+            statusEl.textContent =
+                "⚠️ Щось наближається до офісу...";
+
+        }
+
+
+        if(enemyPosition >= 5){
+
+            attackOffice();
+
+        }
+
+    }
+
+
+    /* =============================
+       ATTACK
+    ============================= */
+
+    function attackOffice(){
+
+        if(!gameRunning){
+            return;
+        }
+
+
+        const fromLeft =
+            Math.random() < 0.5;
+
+
+        if(fromLeft){
+
+            if(leftDoorClosed){
+
+                statusEl.textContent =
+                    "💥 Щось ударило у ліві двері!";
+
+
+                enemyPosition = 2;
+
+            }
+            else{
+
+                showWarning();
+
+
+                setTimeout(() => {
+
+                    loseGame(
+                        "Ти не встиг закрити ліві двері."
+                    );
+
+                },900);
+
+            }
+
+        }
+        else{
+
+            if(rightDoorClosed){
+
+                statusEl.textContent =
+                    "💥 Щось ударило у праві двері!";
+
+
+                enemyPosition = 2;
+
+            }
+            else{
+
+                showWarning();
+
+
+                setTimeout(() => {
+
+                    loseGame(
+                        "Ти не встиг закрити праві двері."
+                    );
+
+                },900);
+
+            }
+
+        }
+
+    }
+
+
+    /* =============================
+       WARNING
+    ============================= */
+
+    function showWarning(){
+
+        warning.classList.remove(
+            "hidden"
+        );
+
+
+        setTimeout(() => {
+
+            warning.classList.add(
+                "hidden"
+            );
+
+        },700);
+
+    }
+
+
+    /* =============================
+       TIME
+    ============================= */
+
+    function advanceTime(){
+
+        if(!gameRunning){
+            return;
+        }
+
+
+        hour++;
+
+
+        if(hour >= 6){
+
+            hour = 6;
+
+
+            timeEl.textContent =
+                "6 AM";
+
+
+            winGame();
+
+            return;
+        }
+
+
+        timeEl.textContent =
+            hour + " AM";
+
+    }
+
+
+    /* =============================
+       GAME OVER
+    ============================= */
+
+    function loseGame(reason){
+
+        if(!gameRunning){
+            return;
+        }
+
+
+        gameRunning = false;
+
+
+        closeCamera();
+
+
+        warning.classList.add(
+            "hidden"
+        );
+
+
+        endScreen.classList.remove(
+            "hidden"
+        );
+
+
+        endTitle.textContent =
+            "GAME OVER";
+
+
+        endText.textContent =
+            reason;
+
+    }
+
+
+    /* =============================
+       WIN
+    ============================= */
+
+    function winGame(){
+
+        if(!gameRunning){
+            return;
+        }
+
+
+        gameRunning = false;
+
+
+        closeCamera();
+
+
+        endScreen.classList.remove(
+            "hidden"
+        );
+
+
+        endTitle.textContent =
+            "🎉 6 AM";
+
+
+        endText.textContent =
+            "Ти пережив Ніч 1!";
+
+    }
+
+
+    /* =============================
+       RESTART
+    ============================= */
+
+    restartBtn.addEventListener(
+        "click",
+        () => {
+
+            location.reload();
+
+        }
+    );
+
+
+    /* =============================
+       GAME LOOPS
+    ============================= */
+
+    setInterval(
+        updatePower,
+        100
+    );
+
+
+    setInterval(
+        moveEnemy,
+        4800
+    );
+
+
+    /*
+       20 секунд = 1 година
+       12 AM -> 6 AM приблизно 2 хвилини
+    */
+
+    setInterval(
+        advanceTime,
+        20000
+    );
+
+
+    /* =============================
+       START
+    ============================= */
+
+    nightEl.textContent =
+        night;
+
+
+    timeEl.textContent =
+        "12 AM";
+
+
+    powerEl.textContent =
+        "100";
+
+
+    console.log(
+        "П'ять ночей в АТБ запущено!"
+    );
+
+});
+</script>
 
 </body>
 </html>
