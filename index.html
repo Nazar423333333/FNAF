@@ -1221,7 +1221,1486 @@ button{
 
 </section>
 
-<!-- ЧАСТИНУ 2 ВСТАВИМО СЮД -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    // =====================================================
+    // ЕЛЕМЕНТИ
+    // =====================================================
+
+    const menu = document.getElementById("menu");
+    const nightSelect = document.getElementById("nightSelect");
+    const game = document.getElementById("game");
+
+    const playBtn = document.getElementById("playBtn");
+    const backToMenu = document.getElementById("backToMenu");
+    const resetProgressBtn = document.getElementById("resetProgressBtn");
+
+    const nightButtons = document.querySelectorAll(".night-button");
+
+    const nightEl = document.getElementById("night");
+    const timeEl = document.getElementById("time");
+    const powerEl = document.getElementById("power");
+    const statusEl = document.getElementById("status");
+
+    const usageBars = document.querySelectorAll(".usage-bar");
+
+    const leftDoor = document.getElementById("leftDoor");
+    const rightDoor = document.getElementById("rightDoor");
+
+    const leftDoorBtn = document.getElementById("leftDoorBtn");
+    const rightDoorBtn = document.getElementById("rightDoorBtn");
+
+    const leftLightBtn = document.getElementById("leftLightBtn");
+    const rightLightBtn = document.getElementById("rightLightBtn");
+
+    const cameraBtn = document.getElementById("cameraBtn");
+    const cameraPanel = document.getElementById("cameraPanel");
+    const closeCameraBtn = document.getElementById("closeCameraBtn");
+
+    const cameraTitle = document.getElementById("cameraTitle");
+    const cameraText = document.getElementById("cameraText");
+
+    const cameraRooms = document.querySelectorAll(".map-room");
+
+    const enemy1El = document.getElementById("enemy1");
+    const enemy2El = document.getElementById("enemy2");
+    const enemy3El = document.getElementById("enemy3");
+
+    const warning = document.getElementById("warning");
+
+    const endScreen = document.getElementById("endScreen");
+    const endTitle = document.getElementById("endTitle");
+    const endText = document.getElementById("endText");
+
+    const restartNightBtn = document.getElementById("restartNightBtn");
+    const menuBtn = document.getElementById("menuBtn");
+
+
+    // =====================================================
+    // ЗБЕРЕЖЕННЯ ПРОГРЕСУ
+    // =====================================================
+
+    let unlockedNight = Number(
+        localStorage.getItem("atbUnlockedNight") || "1"
+    );
+
+    if (unlockedNight < 1) unlockedNight = 1;
+    if (unlockedNight > 5) unlockedNight = 5;
+
+
+    // =====================================================
+    // НАЛАШТУВАННЯ ГРИ
+    // =====================================================
+
+    const cameraNames = [
+        "CAM 1 — Вхід",
+        "CAM 2 — Торговий зал",
+        "CAM 3 — Склад",
+        "CAM 4 — Лівий коридор",
+        "CAM 5 — Правий коридор",
+        "CAM 6 — Біля офісу"
+    ];
+
+    let currentNight = 1;
+
+    let power = 100;
+    let hour = 0;
+
+    let gameRunning = false;
+
+    let leftDoorClosed = false;
+    let rightDoorClosed = false;
+
+    let leftLightOn = false;
+    let rightLightOn = false;
+
+    let cameraOpen = false;
+    let selectedCamera = 0;
+
+    // 0-5 = камери
+    // 6 = двері / атака
+    let enemy1Position = 0;
+    let enemy2Position = 2;
+    let enemy3Position = 1;
+
+    let enemy1Side = "left";
+    let enemy2Side = "right";
+    let enemy3Side = "left";
+
+    let powerTimer = null;
+    let clockTimer = null;
+    let enemy1Timer = null;
+    let enemy2Timer = null;
+    let enemy3Timer = null;
+
+
+    // =====================================================
+    // МЕНЮ
+    // =====================================================
+
+    playBtn.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        nightSelect.classList.remove("hidden");
+
+        updateNightButtons();
+    });
+
+
+    backToMenu.addEventListener("click", () => {
+        nightSelect.classList.add("hidden");
+        menu.classList.remove("hidden");
+    });
+
+
+    resetProgressBtn.addEventListener("click", () => {
+
+        const confirmed = confirm(
+            "Скинути прогрес і знову залишити відкритою тільки Ніч 1?"
+        );
+
+        if (!confirmed) return;
+
+        unlockedNight = 1;
+
+        localStorage.setItem(
+            "atbUnlockedNight",
+            "1"
+        );
+
+        updateNightButtons();
+
+        alert("Прогрес скинуто.");
+    });
+
+
+    function updateNightButtons() {
+
+        nightButtons.forEach(button => {
+
+            const night =
+                Number(button.dataset.night);
+
+            button.classList.remove("locked");
+            button.disabled = false;
+
+            if (night > unlockedNight) {
+
+                button.classList.add("locked");
+                button.disabled = true;
+
+                button.innerHTML =
+                    "🔒 Ніч " + night;
+
+            } else {
+
+                button.innerHTML =
+                    "🌙 Ніч " + night;
+
+            }
+
+        });
+
+    }
+
+
+    nightButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const night =
+                Number(button.dataset.night);
+
+            if (night > unlockedNight) {
+                return;
+            }
+
+            startNight(night);
+
+        });
+
+    });
+
+
+    // =====================================================
+    // ПОЧАТОК НОЧІ
+    // =====================================================
+
+    function startNight(night) {
+
+        stopTimers();
+
+        currentNight = night;
+
+        power = 100;
+        hour = 0;
+
+        gameRunning = true;
+
+        leftDoorClosed = false;
+        rightDoorClosed = false;
+
+        leftLightOn = false;
+        rightLightOn = false;
+
+        cameraOpen = false;
+        selectedCamera = 0;
+
+        enemy1Position = 0;
+        enemy2Position = 2;
+        enemy3Position = 1;
+
+        enemy1Side = "left";
+        enemy2Side = "right";
+        enemy3Side = Math.random() < 0.5
+            ? "left"
+            : "right";
+
+
+        nightSelect.classList.add("hidden");
+        menu.classList.add("hidden");
+
+        game.classList.remove("hidden");
+
+        cameraPanel.classList.add("hidden");
+        warning.classList.add("hidden");
+        endScreen.classList.add("hidden");
+
+
+        leftDoor.classList.remove("closed");
+        rightDoor.classList.remove("closed");
+
+        leftDoorBtn.classList.remove("door-active");
+        rightDoorBtn.classList.remove("door-active");
+
+        leftLightBtn.classList.remove("light-active");
+        rightLightBtn.classList.remove("light-active");
+
+
+        leftDoorBtn.textContent =
+            "🚪 Ліві двері";
+
+        rightDoorBtn.textContent =
+            "🚪 Праві двері";
+
+
+        nightEl.textContent =
+            currentNight;
+
+        timeEl.textContent =
+            "12 AM";
+
+        powerEl.textContent =
+            "100";
+
+        powerEl.style.color =
+            "white";
+
+
+        statusEl.textContent =
+            "Перевіряй камери та бережи енергію...";
+
+
+        selectCamera(0);
+
+        updateUsage();
+
+        startTimers();
+    }
+
+
+    // =====================================================
+    // ТАЙМЕРИ
+    // =====================================================
+
+    function startTimers() {
+
+        // Енергія
+        powerTimer = setInterval(
+            updatePower,
+            100
+        );
+
+        // 1 година = 20 секунд
+        clockTimer = setInterval(
+            advanceTime,
+            20000
+        );
+
+        /*
+            Чим більша ніч,
+            тим швидше рухаються вороги.
+        */
+
+        enemy1Timer = setInterval(
+            moveEnemy1,
+            Math.max(
+                2200,
+                5200 - currentNight * 450
+            )
+        );
+
+        enemy2Timer = setInterval(
+            moveEnemy2,
+            Math.max(
+                2500,
+                5900 - currentNight * 430
+            )
+        );
+
+        enemy3Timer = setInterval(
+            moveEnemy3,
+            Math.max(
+                2900,
+                6800 - currentNight * 470
+            )
+        );
+
+    }
+
+
+    function stopTimers() {
+
+        clearInterval(powerTimer);
+        clearInterval(clockTimer);
+
+        clearInterval(enemy1Timer);
+        clearInterval(enemy2Timer);
+        clearInterval(enemy3Timer);
+
+        powerTimer = null;
+        clockTimer = null;
+
+        enemy1Timer = null;
+        enemy2Timer = null;
+        enemy3Timer = null;
+    }
+
+
+    // =====================================================
+    // ДВЕРІ
+    // =====================================================
+
+    leftDoorBtn.addEventListener("click", () => {
+
+        if (!controlsAvailable()) return;
+
+        leftDoorClosed =
+            !leftDoorClosed;
+
+        leftDoor.classList.toggle(
+            "closed",
+            leftDoorClosed
+        );
+
+        leftDoorBtn.classList.toggle(
+            "door-active",
+            leftDoorClosed
+        );
+
+        leftDoorBtn.textContent =
+            leftDoorClosed
+                ? "🔒 Ліві двері"
+                : "🚪 Ліві двері";
+
+        updateUsage();
+    });
+
+
+    rightDoorBtn.addEventListener("click", () => {
+
+        if (!controlsAvailable()) return;
+
+        rightDoorClosed =
+            !rightDoorClosed;
+
+        rightDoor.classList.toggle(
+            "closed",
+            rightDoorClosed
+        );
+
+        rightDoorBtn.classList.toggle(
+            "door-active",
+            rightDoorClosed
+        );
+
+        rightDoorBtn.textContent =
+            rightDoorClosed
+                ? "🔒 Праві двері"
+                : "🚪 Праві двері";
+
+        updateUsage();
+    });
+
+
+    // =====================================================
+    // СВІТЛО
+    // =====================================================
+
+    leftLightBtn.addEventListener("click", () => {
+
+        if (!controlsAvailable()) return;
+
+        leftLightOn =
+            !leftLightOn;
+
+        leftLightBtn.classList.toggle(
+            "light-active",
+            leftLightOn
+        );
+
+        if (leftLightOn) {
+
+            if (enemyAtSide("left")) {
+
+                statusEl.textContent =
+                    "👀 Хтось стоїть біля ЛІВИХ дверей!";
+
+            } else {
+
+                statusEl.textContent =
+                    "💡 Лівий прохід порожній.";
+
+            }
+
+        } else {
+
+            statusEl.textContent =
+                "Світло вимкнено.";
+
+        }
+
+        updateUsage();
+    });
+
+
+    rightLightBtn.addEventListener("click", () => {
+
+        if (!controlsAvailable()) return;
+
+        rightLightOn =
+            !rightLightOn;
+
+        rightLightBtn.classList.toggle(
+            "light-active",
+            rightLightOn
+        );
+
+        if (rightLightOn) {
+
+            if (enemyAtSide("right")) {
+
+                statusEl.textContent =
+                    "👀 Хтось стоїть біля ПРАВИХ дверей!";
+
+            } else {
+
+                statusEl.textContent =
+                    "💡 Правий прохід порожній.";
+
+            }
+
+        } else {
+
+            statusEl.textContent =
+                "Світло вимкнено.";
+
+        }
+
+        updateUsage();
+    });
+
+
+    function enemyAtSide(side) {
+
+        if (
+            enemy1Position >= 6 &&
+            enemy1Side === side
+        ) {
+            return true;
+        }
+
+        if (
+            enemy2Position >= 6 &&
+            enemy2Side === side
+        ) {
+            return true;
+        }
+
+        if (
+            enemy3Position >= 6 &&
+            enemy3Side === side
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    // =====================================================
+    // КАМЕРИ
+    // =====================================================
+
+    cameraBtn.addEventListener("click", () => {
+
+        if (!controlsAvailable()) return;
+
+        cameraOpen = true;
+
+        cameraPanel.classList.remove(
+            "hidden"
+        );
+
+        renderCamera();
+
+        updateUsage();
+    });
+
+
+    closeCameraBtn.addEventListener(
+        "click",
+        closeCamera
+    );
+
+
+    function closeCamera() {
+
+        cameraOpen = false;
+
+        cameraPanel.classList.add(
+            "hidden"
+        );
+
+        updateUsage();
+    }
+
+
+    cameraRooms.forEach(room => {
+
+        room.addEventListener("click", () => {
+
+            const camera =
+                Number(room.dataset.camera);
+
+            selectCamera(camera);
+
+        });
+
+    });
+
+
+    function selectCamera(camera) {
+
+        selectedCamera = camera;
+
+        cameraRooms.forEach(room => {
+
+            room.classList.remove("active");
+
+            if (
+                Number(room.dataset.camera)
+                === selectedCamera
+            ) {
+
+                room.classList.add("active");
+
+            }
+
+        });
+
+        renderCamera();
+    }
+
+
+    function renderCamera() {
+
+        if (!cameraNames[selectedCamera]) {
+            return;
+        }
+
+        cameraTitle.textContent =
+            cameraNames[selectedCamera];
+
+
+        enemy1El.classList.remove("visible");
+        enemy2El.classList.remove("visible");
+        enemy3El.classList.remove("visible");
+
+
+        let enemiesVisible = 0;
+
+
+        if (
+            enemy1Position ===
+            selectedCamera
+        ) {
+
+            enemy1El.classList.add("visible");
+            enemiesVisible++;
+        }
+
+
+        if (
+            enemy2Position ===
+            selectedCamera
+        ) {
+
+            enemy2El.classList.add("visible");
+            enemiesVisible++;
+        }
+
+
+        if (
+            enemy3Position ===
+            selectedCamera
+        ) {
+
+            enemy3El.classList.add("visible");
+            enemiesVisible++;
+        }
+
+
+        if (enemiesVisible === 0) {
+
+            cameraText.textContent =
+                "Нікого не видно...";
+
+        }
+        else if (enemiesVisible === 1) {
+
+            cameraText.textContent =
+                "⚠️ На камері хтось є...";
+
+        }
+        else {
+
+            cameraText.textContent =
+                "⚠️ Тут одразу кілька ворогів!";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // ВИКОРИСТАННЯ ЕНЕРГІЇ
+    // =====================================================
+
+    function getUsage() {
+
+        let usage = 1;
+
+        if (leftDoorClosed) usage++;
+        if (rightDoorClosed) usage++;
+
+        if (leftLightOn) usage++;
+        if (rightLightOn) usage++;
+
+        if (cameraOpen) usage++;
+
+        return Math.min(
+            usage,
+            usageBars.length
+        );
+    }
+
+
+    function updateUsage() {
+
+        const usage =
+            getUsage();
+
+        usageBars.forEach(
+            (bar, index) => {
+
+                bar.classList.toggle(
+                    "active",
+                    index < usage
+                );
+
+            }
+        );
+    }
+
+
+    // =====================================================
+    // ЕНЕРГІЯ
+    // =====================================================
+
+    function updatePower() {
+
+        if (!gameRunning) return;
+
+
+        let drain = 0.007;
+
+        if (leftDoorClosed) {
+            drain += 0.010;
+        }
+
+        if (rightDoorClosed) {
+            drain += 0.010;
+        }
+
+        if (leftLightOn) {
+            drain += 0.006;
+        }
+
+        if (rightLightOn) {
+            drain += 0.006;
+        }
+
+        if (cameraOpen) {
+            drain += 0.008;
+        }
+
+
+        /*
+            На складніших ночах
+            енергія витрачається трохи швидше.
+        */
+
+        drain *=
+            1 + (currentNight - 1) * 0.07;
+
+
+        power -= drain;
+
+
+        if (power <= 0) {
+
+            power = 0;
+
+            powerEl.textContent = "0";
+
+            powerOut();
+
+            return;
+        }
+
+
+        powerEl.textContent =
+            Math.floor(power);
+
+
+        if (power <= 20) {
+
+            powerEl.style.color =
+                "#ff3333";
+
+        }
+        else if (power <= 40) {
+
+            powerEl.style.color =
+                "#ffd84a";
+
+        }
+        else {
+
+            powerEl.style.color =
+                "white";
+
+        }
+
+    }
+
+
+    function powerOut() {
+
+        if (!gameRunning) return;
+
+
+        leftDoorClosed = false;
+        rightDoorClosed = false;
+
+        leftLightOn = false;
+        rightLightOn = false;
+
+
+        leftDoor.classList.remove("closed");
+        rightDoor.classList.remove("closed");
+
+        leftDoorBtn.classList.remove(
+            "door-active"
+        );
+
+        rightDoorBtn.classList.remove(
+            "door-active"
+        );
+
+        leftLightBtn.classList.remove(
+            "light-active"
+        );
+
+        rightLightBtn.classList.remove(
+            "light-active"
+        );
+
+
+        closeCamera();
+
+        updateUsage();
+
+
+        statusEl.textContent =
+            "⚡ Енергія закінчилася...";
+
+
+        setTimeout(() => {
+
+            if (!gameRunning) return;
+
+            warning.classList.remove(
+                "hidden"
+            );
+
+        }, 1200);
+
+
+        setTimeout(() => {
+
+            if (!gameRunning) return;
+
+            loseGame(
+                "Енергія закінчилася до 6 AM."
+            );
+
+        }, 3200);
+
+    }
+
+
+    // =====================================================
+    // ВОРОГ №1
+    // =====================================================
+
+    function moveEnemy1() {
+
+        if (!gameRunning) return;
+
+
+        const moveChance =
+            0.33 +
+            currentNight * 0.07;
+
+
+        if (Math.random() > moveChance) {
+            return;
+        }
+
+
+        if (enemy1Position < 5) {
+
+            enemy1Position++;
+
+            if (enemy1Position === 5) {
+
+                enemy1Side = "left";
+
+                statusEl.textContent =
+                    "📹 Чути шум у лівому коридорі...";
+
+            }
+
+        }
+        else {
+
+            enemy1Position = 6;
+            enemy1Side = "left";
+
+            tryEnemyAttack(
+                "enemy1",
+                "left"
+            );
+
+        }
+
+
+        if (cameraOpen) {
+            renderCamera();
+        }
+
+    }
+
+
+    // =====================================================
+    // ВОРОГ №2
+    // =====================================================
+
+    function moveEnemy2() {
+
+        if (!gameRunning) return;
+
+
+        const moveChance =
+            0.28 +
+            currentNight * 0.075;
+
+
+        if (Math.random() > moveChance) {
+            return;
+        }
+
+
+        /*
+            Ворог №2 рухається через
+            праву сторону.
+        */
+
+        const path = [
+            2,
+            1,
+            0,
+            4,
+            5,
+            6
+        ];
+
+
+        const currentIndex =
+            path.indexOf(
+                enemy2Position
+            );
+
+
+        if (
+            currentIndex >= 0 &&
+            currentIndex <
+            path.length - 1
+        ) {
+
+            enemy2Position =
+                path[currentIndex + 1];
+
+        }
+        else {
+
+            enemy2Position = 6;
+
+        }
+
+
+        enemy2Side = "right";
+
+
+        if (enemy2Position === 5) {
+
+            statusEl.textContent =
+                "⚠️ Щось рухається правим коридором...";
+
+        }
+
+
+        if (enemy2Position >= 6) {
+
+            tryEnemyAttack(
+                "enemy2",
+                "right"
+            );
+
+        }
+
+
+        if (cameraOpen) {
+            renderCamera();
+        }
+
+    }
+
+
+    // =====================================================
+    // ВОРОГ №3
+    // =====================================================
+
+    function moveEnemy3() {
+
+        if (!gameRunning) return;
+
+
+        const moveChance =
+            0.22 +
+            currentNight * 0.08;
+
+
+        if (Math.random() > moveChance) {
+            return;
+        }
+
+
+        /*
+            Третій ворог менш передбачуваний.
+        */
+
+        if (enemy3Position < 4) {
+
+            enemy3Position +=
+                Math.random() < 0.25
+                    ? 2
+                    : 1;
+
+            if (enemy3Position > 4) {
+                enemy3Position = 4;
+            }
+
+        }
+        else if (enemy3Position === 4) {
+
+            enemy3Position = 5;
+
+            enemy3Side =
+                Math.random() < 0.5
+                    ? "left"
+                    : "right";
+
+
+            statusEl.textContent =
+                enemy3Side === "left"
+                    ? "🦆 Шурхіт чути зліва..."
+                    : "🦆 Шурхіт чути справа...";
+
+        }
+        else {
+
+            enemy3Position = 6;
+
+            tryEnemyAttack(
+                "enemy3",
+                enemy3Side
+            );
+
+        }
+
+
+        if (cameraOpen) {
+            renderCamera();
+        }
+
+    }
+
+
+    // =====================================================
+    // АТАКА
+    // =====================================================
+
+    function tryEnemyAttack(
+        enemyName,
+        side
+    ) {
+
+        if (!gameRunning) return;
+
+
+        let doorClosed = false;
+
+
+        if (side === "left") {
+
+            doorClosed =
+                leftDoorClosed;
+
+        } else {
+
+            doorClosed =
+                rightDoorClosed;
+
+        }
+
+
+        if (doorClosed) {
+
+            statusEl.textContent =
+                side === "left"
+                    ? "💥 Щось ударило в ліві двері!"
+                    : "💥 Щось ударило в праві двері!";
+
+
+            resetEnemy(enemyName);
+
+            return;
+        }
+
+
+        showWarning();
+
+
+        setTimeout(() => {
+
+            if (!gameRunning) return;
+
+
+            loseGame(
+                side === "left"
+                    ? "Ти не встиг закрити ліві двері."
+                    : "Ти не встиг закрити праві двері."
+            );
+
+        }, 800);
+
+    }
+
+
+    function resetEnemy(enemyName) {
+
+        if (enemyName === "enemy1") {
+
+            enemy1Position = 0;
+            enemy1Side = "left";
+
+        }
+
+
+        if (enemyName === "enemy2") {
+
+            enemy2Position = 2;
+            enemy2Side = "right";
+
+        }
+
+
+        if (enemyName === "enemy3") {
+
+            enemy3Position = 1;
+
+            enemy3Side =
+                Math.random() < 0.5
+                    ? "left"
+                    : "right";
+
+        }
+
+
+        if (cameraOpen) {
+            renderCamera();
+        }
+
+    }
+
+
+    // =====================================================
+    // ПОПЕРЕДЖЕННЯ
+    // =====================================================
+
+    function showWarning() {
+
+        warning.classList.remove(
+            "hidden"
+        );
+
+
+        setTimeout(() => {
+
+            warning.classList.add(
+                "hidden"
+            );
+
+        }, 650);
+
+    }
+
+
+    // =====================================================
+    // ЧАС
+    // =====================================================
+
+    function advanceTime() {
+
+        if (!gameRunning) return;
+
+
+        hour++;
+
+
+        if (hour >= 6) {
+
+            hour = 6;
+
+            timeEl.textContent =
+                "6 AM";
+
+            winNight();
+
+            return;
+        }
+
+
+        timeEl.textContent =
+            hour + " AM";
+
+
+        if (hour === 3) {
+
+            statusEl.textContent =
+                "🕒 3 AM. Вороги стають активнішими...";
+
+        }
+
+
+        if (hour === 5) {
+
+            statusEl.textContent =
+                "🕔 Майже 6 AM. Тримайся!";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // ПРОГРАШ
+    // =====================================================
+
+    function loseGame(reason) {
+
+        if (!gameRunning) return;
+
+
+        gameRunning = false;
+
+        stopTimers();
+
+        closeCamera();
+
+        warning.classList.add(
+            "hidden"
+        );
+
+
+        endScreen.classList.remove(
+            "hidden"
+        );
+
+
+        endTitle.textContent =
+            "GAME OVER";
+
+
+        endTitle.style.color =
+            "white";
+
+        endTitle.style.textShadow =
+            "0 0 35px red";
+
+
+        endText.textContent =
+            reason;
+
+    }
+
+
+    // =====================================================
+    // ПЕРЕМОГА
+    // =====================================================
+
+    function winNight() {
+
+        if (!gameRunning) return;
+
+
+        gameRunning = false;
+
+        stopTimers();
+
+        closeCamera();
+
+
+        endScreen.classList.remove(
+            "hidden"
+        );
+
+
+        endTitle.textContent =
+            "🎉 6 AM";
+
+
+        endTitle.style.color =
+            "#ffffff";
+
+        endTitle.style.textShadow =
+            "0 0 35px #39a0ff";
+
+
+        if (currentNight < 5) {
+
+            const nextNight =
+                currentNight + 1;
+
+
+            if (
+                nextNight >
+                unlockedNight
+            ) {
+
+                unlockedNight =
+                    nextNight;
+
+                localStorage.setItem(
+                    "atbUnlockedNight",
+                    String(unlockedNight)
+                );
+
+            }
+
+
+            endText.textContent =
+                "Ніч " +
+                currentNight +
+                " пройдена! Відкрито Ніч " +
+                nextNight +
+                ".";
+
+        } else {
+
+            endText.textContent =
+                "Ти пережив усі П'ЯТЬ НОЧЕЙ В АТБ! 🏆";
+
+        }
+
+
+        updateNightButtons();
+
+    }
+
+
+    // =====================================================
+    // КНОПКИ ПІСЛЯ ГРИ
+    // =====================================================
+
+    restartNightBtn.addEventListener(
+        "click",
+        () => {
+
+            startNight(
+                currentNight
+            );
+
+        }
+    );
+
+
+    menuBtn.addEventListener(
+        "click",
+        () => {
+
+            stopTimers();
+
+            gameRunning = false;
+
+            game.classList.add(
+                "hidden"
+            );
+
+            endScreen.classList.add(
+                "hidden"
+            );
+
+            warning.classList.add(
+                "hidden"
+            );
+
+            cameraPanel.classList.add(
+                "hidden"
+            );
+
+            menu.classList.remove(
+                "hidden"
+            );
+
+        }
+    );
+
+
+    // =====================================================
+    // КЛАВІАТУРА
+    // =====================================================
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (!gameRunning) return;
+
+
+            if (event.key === "Escape") {
+
+                if (cameraOpen) {
+
+                    closeCamera();
+
+                }
+
+            }
+
+
+            if (
+                event.key.toLowerCase()
+                === "q"
+            ) {
+
+                leftDoorBtn.click();
+
+            }
+
+
+            if (
+                event.key.toLowerCase()
+                === "e"
+            ) {
+
+                rightDoorBtn.click();
+
+            }
+
+
+            if (
+                event.key.toLowerCase()
+                === "a"
+            ) {
+
+                leftLightBtn.click();
+
+            }
+
+
+            if (
+                event.key.toLowerCase()
+                === "d"
+            ) {
+
+                rightLightBtn.click();
+
+            }
+
+
+            if (
+                event.key.toLowerCase()
+                === "c"
+            ) {
+
+                if (cameraOpen) {
+
+                    closeCamera();
+
+                } else {
+
+                    cameraBtn.click();
+
+                }
+
+            }
+
+        }
+    );
+
+
+    // =====================================================
+    // START
+    // =====================================================
+
+    updateNightButtons();
+
+});
+</script>
 
 </body>
 </html>
