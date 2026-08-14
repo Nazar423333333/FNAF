@@ -1,65 +1,156 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>П'ять ночей в АТБ</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>П'ять ночей в АТБ</title>
+
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-  <div id="game">
+
+<div id="game">
+
     <div id="topbar">
-      <div>🌙 Ніч: <span id="night">1</span></div>
-      <div>🕛 Час: <span id="time">12 AM</span></div>
-      <div>⚡ Енергія: <span id="power">100</span>%</div>
+        <div>🌙 Ніч: <span id="night">1</span></div>
+        <div>🕛 Час: <span id="time">12 AM</span></div>
+        <div>⚡ Енергія: <span id="power">100</span>%</div>
     </div>
 
-    <div id="office">
-      <div class="door left-door" id="leftDoor"></div>
-      <div class="door right-door" id="rightDoor"></div>
+    <main id="office">
 
-      <div class="office-center">
-        <h1>П'ЯТЬ НОЧЕЙ В АТБ</h1>
-        <p id="status">Слухай звуки та перевіряй камери...</p>
-      </div>
+        <div id="leftDoor" class="door left-door"></div>
+        <div id="rightDoor" class="door right-door"></div>
 
-      <button class="control left" id="leftLightBtn">💡 Ліве світло</button>
-      <button class="control right" id="rightLightBtn">💡 Праве світло</button>
+        <div class="office-center">
+            <h1>П'ЯТЬ НОЧЕЙ В АТБ</h1>
+            <p id="status">Слухай звуки та перевіряй камери...</p>
+        </div>
 
-      <button class="door-btn left2" id="leftDoorBtn">🚪 Ліві двері</button>
-      <button class="door-btn right2" id="rightDoorBtn">🚪 Праві двері</button>
+        <div class="left-controls">
 
-      <button id="cameraBtn">📹 Відкрити камери</button>
-    </div>
+            <button id="leftLightBtn" class="control-button">
+                💡 Ліве світло
+            </button>
 
-    <div id="cameraPanel" class="hidden">
-      <div class="camera-header">
-        <h2>📹 КАМЕРИ</h2>
-        <button id="closeCameraBtn">✖ Закрити</button>
-      </div>
+            <button id="leftDoorBtn" class="control-button door-control">
+                🚪 Ліві двері
+            </button>
 
-      <div id="cameraView">
-        <div id="enemyVisual">👀</div>
-        <h2 id="cameraTitle">CAM 1 — Вхід</h2>
-        <p id="cameraText">Нікого не видно...</p>
-      </div>
+        </div>
 
-      <div class="camera-buttons">
-        <button data-cam="0">CAM 1</button>
-        <button data-cam="1">CAM 2</button>
-        <button data-cam="2">CAM 3</button>
-        <button data-cam="3">CAM 4</button>
-        <button data-cam="4">CAM 5</button>
-      </div>
-    </div>
+        <div class="right-controls">
 
-    <div id="messageScreen" class="hidden">
-      <h1 id="messageTitle">GAME OVER</h1>
-      <p id="messageText"></p>
-      <button id="restartBtn">🔄 Грати ще раз</button>
-    </div>
-  </div>
+            <button id="rightLightBtn" class="control-button">
+                💡 Праве світло
+            </button>
 
-  <script src="script.js"></script>
+            <button id="rightDoorBtn" class="control-button door-control">
+                🚪 Праві двері
+            </button>
+
+        </div>
+
+        <button id="cameraBtn">
+            📹 Відкрити камери
+        </button>
+
+    </main>
+
+
+    <section id="cameraPanel" class="hidden">
+
+        <div class="camera-header">
+
+            <div>
+                <div class="record-dot"></div>
+                <h2>SECURITY CAMERAS</h2>
+            </div>
+
+            <button id="closeCameraBtn">
+                ✖ Закрити
+            </button>
+
+        </div>
+
+        <div id="cameraView">
+
+            <div class="scanlines"></div>
+
+            <div id="cameraNoise"></div>
+
+            <div id="enemyVisual">
+                👀
+            </div>
+
+            <h2 id="cameraTitle">
+                CAM 1 — Вхід
+            </h2>
+
+            <p id="cameraText">
+                Нікого не видно...
+            </p>
+
+        </div>
+
+        <div class="camera-map">
+
+            <button class="cam-button active" data-cam="0">
+                CAM 1
+            </button>
+
+            <button class="cam-button" data-cam="1">
+                CAM 2
+            </button>
+
+            <button class="cam-button" data-cam="2">
+                CAM 3
+            </button>
+
+            <button class="cam-button" data-cam="3">
+                CAM 4
+            </button>
+
+            <button class="cam-button" data-cam="4">
+                CAM 5
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section id="messageScreen" class="hidden">
+
+        <h1 id="messageTitle">
+            GAME OVER
+        </h1>
+
+        <p id="messageText"></p>
+
+        <button id="restartBtn">
+            🔄 Грати ще раз
+        </button>
+
+    </section>
+
+
+    <section id="warningScreen" class="hidden">
+
+        <div class="warning-eyes">
+            👀
+        </div>
+
+        <h1>ЩОСЬ ПОРУЧ...</h1>
+
+    </section>
+
+</div>
+
+
+<script src="./script.js"></script>
+
 </body>
 </html>
