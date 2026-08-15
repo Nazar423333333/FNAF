@@ -7,21 +7,29 @@
 <title>П'ЯТЬ НОЧЕЙ В АТБ</title>
 
 <style>
+
+/* =========================================================
+   ОСНОВА
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
 }
 
 body{
     overflow:hidden;
-    background:#030405;
+
+    background:#000;
     color:white;
+
     font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -35,52 +43,65 @@ button{
 }
 
 /* =========================================================
-   MENU
+   ГОЛОВНЕ МЕНЮ
 ========================================================= */
 
 #menu,
 #nightMenu{
     position:fixed;
     inset:0;
-    z-index:1000;
+
+    z-index:5000;
 
     display:flex;
     flex-direction:column;
+
     justify-content:center;
     align-items:center;
 
     text-align:center;
 
     background:
-        radial-gradient(circle,#202020,#050505 65%,#000);
+        radial-gradient(
+            circle,
+            #242424,
+            #070707 60%,
+            #000
+        );
 }
 
 #menu h1{
     font-size:clamp(42px,7vw,95px);
+
     letter-spacing:4px;
 
     text-shadow:
-        0 0 8px white,
-        0 0 25px #d71920,
-        0 0 60px #d71920;
+        0 0 10px white,
+        0 0 30px #d71920,
+        0 0 70px #d71920;
 }
 
 #menu p{
-    margin-top:15px;
+    margin-top:18px;
+
     color:#aaa;
+
     font-size:20px;
 }
 
 .menuBtn{
-    margin-top:25px;
-    min-width:260px;
+    margin-top:24px;
 
-    padding:16px 28px;
+    min-width:280px;
+
+    padding:17px 30px;
 
     border:1px solid #555;
+
     border-radius:12px;
 
     background:#111;
+
     color:white;
 
     font-size:18px;
@@ -90,7 +111,8 @@ button{
 }
 
 .menuBtn:hover{
-    transform:scale(1.04);
+    transform:scale(1.05);
+
     background:#292929;
 }
 
@@ -99,33 +121,39 @@ button{
 }
 
 #playBtn:hover{
-    background:#2580ff;
+    background:#2780ff;
 }
 
 /* =========================================================
-   NIGHT MENU
+   ВИБІР НОЧІ
 ========================================================= */
 
 #nightMenu h2{
-    font-size:46px;
     margin-bottom:30px;
+
+    font-size:46px;
 }
 
 .nightButtons{
     display:flex;
+
     flex-wrap:wrap;
+
     justify-content:center;
+
     gap:12px;
 }
 
 .nightBtn{
-    width:115px;
+    width:120px;
     height:90px;
 
     border:1px solid #555;
+
     border-radius:12px;
 
     background:#151515;
+
     color:white;
 
     font-size:17px;
@@ -138,22 +166,26 @@ button{
 
 .nightBtn.locked{
     opacity:.3;
+
     cursor:not-allowed;
 }
 
 /* =========================================================
-   GAME
+   ГРА
 ========================================================= */
 
 #game{
     position:fixed;
+
     inset:0;
+
     overflow:hidden;
-    background:#050505;
+
+    background:#000;
 }
 
 /* =========================================================
-   TOP BAR
+   ВЕРХНЯ ПАНЕЛЬ
 ========================================================= */
 
 #topbar{
@@ -164,211 +196,153 @@ button{
 
     transform:translateX(-50%);
 
-    z-index:120;
+    z-index:500;
 
     width:min(900px,94%);
 
     padding:14px 22px;
 
     display:flex;
+
     justify-content:space-between;
     align-items:center;
 
     background:rgba(0,0,0,.88);
 
-    border:1px solid #444;
+    border:1px solid #555;
+
     border-radius:14px;
 
-    box-shadow:0 0 30px black;
+    box-shadow:
+        0 0 30px black;
 
     font-size:19px;
     font-weight:bold;
 }
 
 /* =========================================================
-   OFFICE
+   PNG ОФІС
 ========================================================= */
 
 #office{
     position:absolute;
+
     inset:0;
 
     overflow:hidden;
 
-    background:
+    /*
+        ВАЖЛИВО!
+
+        office.png повинен бути
+        поруч з index.html
+    */
+
+    background-image:
         linear-gradient(
-            90deg,
-            rgba(0,0,0,.95) 0%,
-            rgba(0,0,0,.38) 11%,
-            transparent 25%,
-            transparent 75%,
-            rgba(0,0,0,.38) 89%,
-            rgba(0,0,0,.95) 100%
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.08)
         ),
-        radial-gradient(
-            circle at 50% 55%,
-            rgba(100,110,120,.25),
-            transparent 34%
-        ),
-        linear-gradient(
-            180deg,
-            #06090b,
-            #101518 55%,
-            #040506
-        );
-}
+        url("office.png");
 
-#office::before{
-    content:"";
+    background-size:cover;
 
-    position:absolute;
+    background-position:center center;
 
-    left:50%;
-    bottom:-12%;
+    background-repeat:no-repeat;
 
-    transform:translateX(-50%);
-
-    width:62%;
-    height:37%;
-
-    z-index:4;
-
-    border-radius:50% 50% 0 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            #2c3032,
-            #111315 32%,
-            #050606
-        );
-
-    border-top:3px solid #34383b;
-
-    box-shadow:
-        0 -15px 60px black,
-        inset 0 10px 25px rgba(255,255,255,.04);
-}
-
-#office::after{
-    content:"АТБ • НІЧНА ОХОРОНА";
-
-    position:absolute;
-
-    left:50%;
-    top:18%;
-
-    transform:translateX(-50%);
-
-    z-index:15;
-
-    padding:9px 24px;
-
-    border:1px solid #30363a;
-    border-radius:7px;
-
-    background:#080a0b;
-    color:#8b969d;
-
-    font-size:14px;
-    letter-spacing:5px;
-
-    box-shadow:0 0 30px black;
+    background-color:#050505;
 }
 
 /* =========================================================
-   TITLE
+   СТАТУС
 ========================================================= */
 
-#title{
+#statusBox{
     position:absolute;
 
-    z-index:18;
-
-    top:36%;
     left:50%;
+    top:23%;
 
-    transform:translate(-50%,-50%);
+    transform:translateX(-50%);
 
-    width:min(58%,760px);
+    z-index:110;
+
+    width:min(600px,60%);
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    background:rgba(0,0,0,.72);
+
+    border:1px solid rgba(255,255,255,.16);
 
     text-align:center;
 
-    pointer-events:none;
-}
+    color:#ddd;
 
-#title h1{
-    font-size:clamp(30px,4.2vw,64px);
-    line-height:1.05;
-    letter-spacing:2px;
+    font-size:17px;
 
-    white-space:nowrap;
-
-    text-shadow:
-        0 0 8px white,
-        0 0 25px #d71920,
-        0 0 55px rgba(215,25,32,.55);
-}
-
-#status{
-    margin-top:26px;
-
-    color:#b5bcc0;
-
-    font-size:18px;
-
-    text-shadow:0 0 12px black;
+    box-shadow:0 0 20px black;
 }
 
 /* =========================================================
-   DOOR FRAME
+   ДВЕРНІ ПРОРІЗИ
+
+   Вони стоять поверх PNG,
+   приблизно там, де двері
+   намальовані на картинці.
 ========================================================= */
 
 .doorFrame{
     position:absolute;
 
-    top:155px;
+    top:20%;
 
-    width:clamp(130px,11vw,175px);
-    height:calc(100% - 155px);
+    width:15%;
 
-    z-index:24;
+    min-width:130px;
+
+    max-width:230px;
+
+    height:60%;
+
+    z-index:120;
 
     overflow:hidden;
 
     background:
         radial-gradient(
             ellipse at center,
-            #181818 0%,
-            #090909 60%,
-            #020202 100%
+            rgba(20,20,20,.85),
+            rgba(0,0,0,.97)
         );
 
-    border:5px solid #303030;
+    border:4px solid rgba(70,70,70,.9);
 
     box-shadow:
         inset 0 0 55px black,
-        0 0 30px black;
+        0 0 25px rgba(0,0,0,.8);
 }
 
 #leftDoorFrame{
-    left:0;
-    border-right:7px solid #444;
+    left:5%;
 }
 
 #rightDoorFrame{
-    right:0;
-    border-left:7px solid #444;
+    right:5%;
 }
 
 /* =========================================================
-   LIGHT INSIDE DOOR
+   СВІТЛО У ДВЕРЯХ
 ========================================================= */
 
 .doorFrame::after{
     content:"";
 
     position:absolute;
+
     inset:0;
 
     z-index:5;
@@ -381,17 +355,17 @@ button{
 
     background:
         radial-gradient(
-            ellipse at 50% 48%,
-            rgba(255,255,230,.98) 0%,
-            rgba(255,240,160,.88) 20%,
-            rgba(255,215,70,.65) 42%,
-            rgba(255,170,20,.24) 68%,
+            ellipse at center,
+            rgba(255,255,225,.98) 0%,
+            rgba(255,245,180,.90) 18%,
+            rgba(255,220,85,.70) 38%,
+            rgba(255,180,35,.35) 65%,
             transparent 95%
         );
 
     box-shadow:
-        inset 0 0 45px rgba(255,245,180,.6),
-        inset 0 0 95px rgba(255,205,40,.4);
+        inset 0 0 50px rgba(255,240,160,.55),
+        inset 0 0 110px rgba(255,190,40,.40);
 }
 
 .doorFrame.lightOn::after{
@@ -399,34 +373,35 @@ button{
 }
 
 /* =========================================================
-   MOB INSIDE DOOR
+   МОБ У ДВЕРЯХ
 ========================================================= */
 
 .doorEnemy{
     position:absolute;
 
     left:50%;
-    top:50%;
+    top:52%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.65);
 
     z-index:10;
-
-    font-size:105px;
 
     opacity:0;
 
     pointer-events:none;
 
-    transform:
-        translate(-50%,-50%)
-        scale(.68);
+    font-size:clamp(75px,8vw,130px);
 
     transition:
-        opacity .12s,
-        transform .12s;
+        opacity .1s,
+        transform .1s;
 
     filter:
-        drop-shadow(0 0 15px red)
-        drop-shadow(0 0 35px black);
+        drop-shadow(0 0 12px white)
+        drop-shadow(0 0 28px red)
+        drop-shadow(0 0 45px black);
 }
 
 .doorEnemy.visible{
@@ -438,7 +413,7 @@ button{
 }
 
 /* =========================================================
-   DOORS
+   МЕТАЛЕВІ ДВЕРІ
 ========================================================= */
 
 .door{
@@ -455,35 +430,37 @@ button{
     background:
         repeating-linear-gradient(
             0deg,
-            #151515 0px,
-            #151515 32px,
-            #444 33px,
-            #777 36px,
-            #252525 40px
+            #111 0px,
+            #111 30px,
+            #3a3a3a 31px,
+            #777 34px,
+            #222 39px
         );
 
     border:3px solid #555;
 
     box-shadow:
-        inset 0 0 30px black,
+        inset 0 0 35px black,
         0 0 40px black;
 
-    transform:translateY(-102%);
+    transform:translateY(-103%);
 
-    transition:transform .36s ease;
+    transition:
+        transform .35s ease;
 }
 
 .door::before{
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background:
         repeating-linear-gradient(
             90deg,
-            transparent 0 48px,
-            rgba(255,255,255,.07) 49px 51px
+            transparent 0 44px,
+            rgba(255,255,255,.08) 45px 48px
         );
 }
 
@@ -495,20 +472,20 @@ button{
     left:50%;
     top:8%;
 
-    width:62%;
-    height:5px;
-
     transform:translateX(-50%);
 
-    background:#858585;
+    width:65%;
+    height:5px;
+
+    background:#888;
 
     box-shadow:
-        0 70px #858585,
-        0 140px #858585,
-        0 210px #858585,
-        0 280px #858585,
-        0 350px #858585,
-        0 420px #858585;
+        0 70px #888,
+        0 140px #888,
+        0 210px #888,
+        0 280px #888,
+        0 350px #888,
+        0 420px #888;
 }
 
 .door.closed{
@@ -516,7 +493,7 @@ button{
 }
 
 /* =========================================================
-   OFFICE LIGHT
+   ЗАГАЛЬНЕ СВІТЛО ЗЛІВА / СПРАВА
 ========================================================= */
 
 .lightEffect{
@@ -527,13 +504,13 @@ button{
     width:38%;
     height:100%;
 
-    z-index:14;
+    z-index:90;
 
     opacity:0;
 
     pointer-events:none;
 
-    transition:opacity .15s;
+    transition:opacity .12s;
 }
 
 #leftLightEffect{
@@ -542,10 +519,9 @@ button{
     background:
         radial-gradient(
             ellipse at left center,
-            rgba(255,250,200,.65),
-            rgba(255,220,70,.19) 36%,
-            rgba(255,200,40,.06) 60%,
-            transparent 82%
+            rgba(255,245,170,.52),
+            rgba(255,220,60,.14) 42%,
+            transparent 76%
         );
 }
 
@@ -555,10 +531,9 @@ button{
     background:
         radial-gradient(
             ellipse at right center,
-            rgba(255,250,200,.65),
-            rgba(255,220,70,.19) 36%,
-            rgba(255,200,40,.06) 60%,
-            transparent 82%
+            rgba(255,245,170,.52),
+            rgba(255,220,60,.14) 42%,
+            transparent 76%
         );
 }
 
@@ -567,92 +542,105 @@ button{
 }
 
 /* =========================================================
-   CONTROLS
+   КНОПКИ ЗЛІВА / СПРАВА
 ========================================================= */
 
 .sideControls{
     position:absolute;
 
-    top:48%;
+    top:47%;
 
-    z-index:100;
+    z-index:300;
 
     display:flex;
+
     flex-direction:column;
 
     gap:12px;
 }
 
 #leftControls{
-    left:calc(clamp(130px,11vw,175px) + 18px);
+    left:21%;
 }
 
 #rightControls{
-    right:calc(clamp(130px,11vw,175px) + 18px);
+    right:21%;
 }
 
 .controlBtn{
-    width:180px;
+    width:175px;
 
-    padding:15px;
+    padding:14px 12px;
 
-    border:1px solid #555;
-    border-radius:12px;
+    border:1px solid #666;
 
-    background:rgba(15,15,15,.95);
+    border-radius:11px;
+
+    background:rgba(10,10,10,.92);
 
     color:white;
 
+    font-size:15px;
     font-weight:bold;
-    font-size:16px;
 
-    box-shadow:0 0 20px black;
+    box-shadow:
+        0 0 18px black;
 
     transition:.15s;
 }
 
 .controlBtn:hover{
+    transform:scale(1.03);
+
     background:#303030;
 }
 
+/* СВІТЛО */
+
 .controlBtn.lightOn{
     background:#ffd84a;
+
     color:#111;
 
     border-color:white;
 
     box-shadow:
-        0 0 15px white,
+        0 0 12px white,
         0 0 35px #ffd84a;
 }
 
+/* ДВЕРІ */
+
 .controlBtn.doorOn{
-    background:#b51414;
+    background:#b51515;
+
+    color:white;
 
     border-color:#ff5555;
 
     box-shadow:
         0 0 15px red,
-        0 0 35px rgba(255,0,0,.65);
+        0 0 35px rgba(255,0,0,.7);
 }
 
 /* =========================================================
-   CAMERA BUTTON
+   КНОПКА КАМЕР
 ========================================================= */
 
 #cameraBtn{
     position:absolute;
 
     left:50%;
-    bottom:30px;
+    bottom:25px;
 
     transform:translateX(-50%);
 
-    z-index:100;
+    z-index:350;
 
-    padding:18px 36px;
+    padding:17px 35px;
 
     border:0;
+
     border-radius:14px;
 
     background:#086cff;
@@ -663,31 +651,63 @@ button{
     font-weight:bold;
 
     box-shadow:
-        0 0 25px rgba(0,100,255,.55);
+        0 0 30px rgba(0,100,255,.55);
+
+    transition:.2s;
 }
 
 #cameraBtn:hover{
-    background:#2780ff;
+    transform:
+        translateX(-50%)
+        scale(1.04);
+
+    background:#277fff;
 }
 
 /* =========================================================
-   USAGE
+   SOUND
+========================================================= */
+
+#soundBtn{
+    position:absolute;
+
+    top:88px;
+    left:22px;
+
+    z-index:500;
+
+    padding:10px 14px;
+
+    border:1px solid #555;
+
+    border-radius:9px;
+
+    background:rgba(0,0,0,.82);
+
+    color:white;
+
+    font-weight:bold;
+}
+
+/* =========================================================
+   POWER USAGE
 ========================================================= */
 
 #usage{
     position:absolute;
 
-    right:25px;
-    top:90px;
+    top:88px;
+    right:22px;
 
-    z-index:110;
+    z-index:500;
 
     padding:10px 13px;
 
-    background:rgba(0,0,0,.75);
+    border:1px solid #444;
 
-    border:1px solid #333;
     border-radius:8px;
+
+    background:rgba(0,0,0,.8);
 }
 
 .usageBar{
@@ -706,31 +726,8 @@ button{
 .usageBar.on{
     background:#63ff4d;
 
-    box-shadow:0 0 8px #63ff4d;
-}
-
-/* =========================================================
-   SOUND BUTTON
-========================================================= */
-
-#soundBtn{
-    position:absolute;
-
-    top:88px;
-    left:25px;
-
-    z-index:110;
-
-    padding:10px 14px;
-
-    border:1px solid #555;
-    border-radius:9px;
-
-    background:rgba(0,0,0,.75);
-
-    color:white;
-
-    font-weight:bold;
+    box-shadow:
+        0 0 8px #63ff4d;
 }
 
 /* =========================================================
@@ -742,7 +739,7 @@ button{
 
     inset:0;
 
-    z-index:200;
+    z-index:1000;
 
     padding:20px;
 
@@ -754,8 +751,9 @@ button{
 
     display:flex;
 
-    justify-content:space-between;
     align-items:center;
+
+    justify-content:space-between;
 
     border-bottom:1px solid #333;
 }
@@ -768,6 +766,7 @@ button{
     padding:12px 18px;
 
     border:0;
+
     border-radius:10px;
 
     background:#a00;
@@ -791,43 +790,61 @@ button{
     overflow:hidden;
 
     border:3px solid #333;
+
     border-radius:10px;
 
     background:
         radial-gradient(
-            circle at center,
-            #3a3d3f,
-            #111 58%,
+            circle,
+            #424242,
+            #151515 55%,
             #020202
         );
 }
+
+/* СМУГИ CCTV */
 
 #cameraView::after{
     content:"";
 
     position:absolute;
+
     inset:0;
 
-    z-index:15;
+    z-index:30;
 
     pointer-events:none;
 
     background:
         repeating-linear-gradient(
             0deg,
-            transparent 0,
+            transparent 0px,
             transparent 3px,
             rgba(255,255,255,.05) 4px
         );
 
-    animation:cameraNoise .15s infinite;
+    animation:
+        cameraNoise .14s infinite;
 }
 
 @keyframes cameraNoise{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(2px)}
-    100%{transform:translateY(-1px)}
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(2px);
+    }
+
+    100%{
+        transform:translateY(-1px);
+    }
 }
+
+/* =========================================================
+   CAMERA SCENE
+========================================================= */
 
 #cameraScene{
     position:absolute;
@@ -835,52 +852,54 @@ button{
     inset:0;
 
     display:flex;
-    align-items:center;
+
     justify-content:center;
+    align-items:center;
 
-    padding-bottom:120px;
+    padding-bottom:130px;
 
-    color:#aeb5b9;
+    color:#adb5b9;
 
-    opacity:.42;
-
-    font-size:clamp(24px,4vw,55px);
-
-    letter-spacing:8px;
+    opacity:.38;
 
     text-align:center;
+
+    font-size:clamp(25px,4vw,56px);
+
+    letter-spacing:8px;
 }
 
 #cameraRoomIcon{
     position:absolute;
 
-    left:50%;
     top:43%;
+    left:50%;
 
     transform:translate(-50%,-50%);
 
-    font-size:155px;
+    font-size:160px;
 
-    opacity:.2;
+    opacity:.18;
 }
 
 /* =========================================================
-   CAMERA ENEMIES
+   МОБИ НА КАМЕРАХ
 ========================================================= */
 
 .enemy{
     position:absolute;
 
-    top:47%;
+    top:46%;
 
-    z-index:10;
+    z-index:20;
 
-    font-size:130px;
+    font-size:135px;
 
     opacity:0;
 
     filter:
-        drop-shadow(0 0 25px red);
+        drop-shadow(0 0 20px red)
+        drop-shadow(0 0 35px black);
 }
 
 .enemy.visible{
@@ -897,6 +916,7 @@ button{
 
 #enemy3{
     left:50%;
+
     transform:translateX(-50%);
 }
 
@@ -910,20 +930,22 @@ button{
     left:25px;
     bottom:25px;
 
-    z-index:30;
+    z-index:50;
 
     min-width:280px;
 
     padding:15px;
 
-    border:1px solid #333;
-    border-radius:10px;
+    background:rgba(0,0,0,.82);
 
-    background:rgba(0,0,0,.78);
+    border:1px solid #444;
+
+    border-radius:10px;
 }
 
 #cameraInfo p{
     margin-top:8px;
+
     color:#aaa;
 }
 
@@ -937,14 +959,15 @@ button{
     right:25px;
     bottom:25px;
 
-    z-index:30;
+    z-index:50;
 
     width:290px;
     height:230px;
 
-    background:rgba(0,0,0,.9);
+    background:rgba(0,0,0,.92);
 
     border:1px solid #555;
+
     border-radius:12px;
 
     box-shadow:0 0 30px black;
@@ -958,6 +981,7 @@ button{
     padding:9px;
 
     border:1px solid #666;
+
     border-radius:7px;
 
     background:#151515;
@@ -974,7 +998,8 @@ button{
 .camBtn.active{
     background:#086cff;
 
-    box-shadow:0 0 15px #086cff;
+    box-shadow:
+        0 0 15px #086cff;
 }
 
 .camBtn[data-cam="0"]{
@@ -1016,12 +1041,13 @@ button{
 
     inset:0;
 
-    z-index:99999;
+    z-index:10000;
 
     display:none;
 
-    align-items:center;
     justify-content:center;
+    align-items:center;
+
     flex-direction:column;
 
     overflow:hidden;
@@ -1030,7 +1056,7 @@ button{
         radial-gradient(
             circle,
             #650000,
-            #150000 45%,
+            #170000 45%,
             #000 85%
         );
 }
@@ -1052,7 +1078,8 @@ button{
         drop-shadow(0 0 30px red)
         drop-shadow(0 0 65px white);
 
-    animation:scareZoom .55s forwards;
+    animation:
+        scareZoom .55s forwards;
 }
 
 #jumpscareText{
@@ -1064,9 +1091,7 @@ button{
 
     font-weight:900;
 
-    color:white;
-
-    letter-spacing:8px;
+    letter-spacing:7px;
 
     text-shadow:
         0 0 15px red,
@@ -1076,40 +1101,70 @@ button{
 @keyframes scareZoom{
 
     0%{
-        transform:scale(.1) rotate(-10deg);
+        transform:
+            scale(.1)
+            rotate(-8deg);
     }
 
     40%{
-        transform:scale(1.55) rotate(8deg);
+        transform:
+            scale(1.55)
+            rotate(7deg);
     }
 
     65%{
-        transform:scale(.9) rotate(-5deg);
+        transform:
+            scale(.9)
+            rotate(-4deg);
     }
 
     100%{
-        transform:scale(1.2) rotate(0);
+        transform:
+            scale(1.2)
+            rotate(0);
     }
 }
 
 @keyframes scareShake{
 
-    0%{transform:translate(0,0)}
-    25%{transform:translate(-14px,7px)}
-    50%{transform:translate(12px,-8px)}
-    75%{transform:translate(-8px,-6px)}
-    100%{transform:translate(0,0)}
+    0%{
+        transform:translate(0,0);
+    }
+
+    25%{
+        transform:translate(-14px,7px);
+    }
+
+    50%{
+        transform:translate(12px,-8px);
+    }
+
+    75%{
+        transform:translate(-8px,-6px);
+    }
+
+    100%{
+        transform:translate(0,0);
+    }
 }
 
 @keyframes scareFlash{
 
-    0%{filter:brightness(.8)}
-    50%{filter:brightness(2.4)}
-    100%{filter:brightness(.5)}
+    0%{
+        filter:brightness(.8);
+    }
+
+    50%{
+        filter:brightness(2.3);
+    }
+
+    100%{
+        filter:brightness(.5);
+    }
 }
 
 /* =========================================================
-   END
+   GAME OVER / WIN
 ========================================================= */
 
 #endScreen{
@@ -1117,16 +1172,18 @@ button{
 
     inset:0;
 
-    z-index:500;
+    z-index:2000;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
     align-items:center;
 
-    background:#000;
-
     text-align:center;
+
+    background:#000;
 }
 
 #endTitle{
@@ -1157,14 +1214,15 @@ button{
     padding:16px 25px;
 
     border:0;
+
     border-radius:10px;
 
     background:#086cff;
 
     color:white;
 
-    font-weight:bold;
     font-size:16px;
+    font-weight:bold;
 }
 
 .endBtn.gray{
@@ -1174,20 +1232,84 @@ button{
 }
 
 /* =========================================================
-   RESPONSIVE
+   МЕНШІ ЕКРАНИ
 ========================================================= */
 
-@media(max-width:1000px){
+@media(max-width:1100px){
+
+    .doorFrame{
+        width:17%;
+    }
+
+    #leftDoorFrame{
+        left:2%;
+    }
+
+    #rightDoorFrame{
+        right:2%;
+    }
+
+    #leftControls{
+        left:20%;
+    }
+
+    #rightControls{
+        right:20%;
+    }
 
     .controlBtn{
-        width:135px;
+        width:145px;
+
         padding:11px;
+
+        font-size:13px;
+    }
+}
+
+@media(max-width:750px){
+
+    #topbar{
         font-size:13px;
     }
 
-    #title h1{
-        white-space:normal;
-        font-size:clamp(28px,5vw,52px);
+    #usage{
+        display:none;
+    }
+
+    .doorFrame{
+        width:22%;
+    }
+
+    #leftDoorFrame{
+        left:0;
+    }
+
+    #rightDoorFrame{
+        right:0;
+    }
+
+    #leftControls{
+        left:23%;
+    }
+
+    #rightControls{
+        right:23%;
+    }
+
+    .controlBtn{
+        width:105px;
+
+        padding:9px;
+
+        font-size:10px;
+    }
+
+    #statusBox{
+        top:28%;
+
+        width:55%;
+
+        font-size:12px;
     }
 }
 
@@ -1197,7 +1319,7 @@ button{
 <body>
 
 <!-- ======================================================
-     MENU
+     МЕНЮ
 ====================================================== -->
 
 <section id="menu">
@@ -1227,7 +1349,7 @@ button{
 </section>
 
 <!-- ======================================================
-     NIGHT MENU
+     НОЧІ
 ====================================================== -->
 
 <section
@@ -1241,23 +1363,38 @@ button{
 
     <div class="nightButtons">
 
-        <button class="nightBtn" data-night="1">
+        <button
+            class="nightBtn"
+            data-night="1"
+        >
             🌙 Ніч 1
         </button>
 
-        <button class="nightBtn" data-night="2">
+        <button
+            class="nightBtn"
+            data-night="2"
+        >
             🌙 Ніч 2
         </button>
 
-        <button class="nightBtn" data-night="3">
+        <button
+            class="nightBtn"
+            data-night="3"
+        >
             🌙 Ніч 3
         </button>
 
-        <button class="nightBtn" data-night="4">
+        <button
+            class="nightBtn"
+            data-night="4"
+        >
             🌙 Ніч 4
         </button>
 
-        <button class="nightBtn" data-night="5">
+        <button
+            class="nightBtn"
+            data-night="5"
+        >
             🌙 Ніч 5
         </button>
 
@@ -1273,7 +1410,7 @@ button{
 </section>
 
 <!-- ======================================================
-     GAME
+     ГРА
 ====================================================== -->
 
 <section
@@ -1317,7 +1454,19 @@ button{
 
     </div>
 
+    <!-- ==================================================
+         PNG OFFICE
+    ================================================== -->
+
     <main id="office">
+
+        <div id="statusBox">
+            <span id="status">
+                Перевіряй камери та бережи енергію...
+            </span>
+        </div>
+
+        <!-- ЖОВТЕ СВІТЛО -->
 
         <div
             id="leftLightEffect"
@@ -1329,14 +1478,15 @@ button{
             class="lightEffect"
         ></div>
 
-        <!-- LEFT DOOR -->
+        <!-- ==================================================
+             ЛІВІ ДВЕРІ
+        ================================================== -->
 
         <div
             id="leftDoorFrame"
             class="doorFrame"
         >
 
-            <!-- МОБ ТЕПЕР ВСЕРЕДИНІ ДВЕРЕЙ -->
             <div
                 id="leftDoorEnemy"
                 class="doorEnemy"
@@ -1351,14 +1501,15 @@ button{
 
         </div>
 
-        <!-- RIGHT DOOR -->
+        <!-- ==================================================
+             ПРАВІ ДВЕРІ
+        ================================================== -->
 
         <div
             id="rightDoorFrame"
             class="doorFrame"
         >
 
-            <!-- МОБ ТЕПЕР ВСЕРЕДИНІ ДВЕРЕЙ -->
             <div
                 id="rightDoorEnemy"
                 class="doorEnemy"
@@ -1373,19 +1524,9 @@ button{
 
         </div>
 
-        <div id="title">
-
-            <h1>
-                П'ЯТЬ НОЧЕЙ В АТБ
-            </h1>
-
-            <p id="status">
-                Перевіряй камери та бережи енергію...
-            </p>
-
-        </div>
-
-        <!-- LEFT CONTROLS -->
+        <!-- ==================================================
+             ЛІВІ КНОПКИ
+        ================================================== -->
 
         <div
             id="leftControls"
@@ -1408,7 +1549,9 @@ button{
 
         </div>
 
-        <!-- RIGHT CONTROLS -->
+        <!-- ==================================================
+             ПРАВІ КНОПКИ
+        ================================================== -->
 
         <div
             id="rightControls"
@@ -1438,7 +1581,7 @@ button{
     </main>
 
     <!-- ==================================================
-         CAMERAS
+         КАМЕРИ
     ================================================== -->
 
     <section
@@ -1503,27 +1646,45 @@ button{
 
             <div id="cameraMap">
 
-                <button class="camBtn active" data-cam="0">
+                <button
+                    class="camBtn active"
+                    data-cam="0"
+                >
                     CAM 1
                 </button>
 
-                <button class="camBtn" data-cam="1">
+                <button
+                    class="camBtn"
+                    data-cam="1"
+                >
                     CAM 2
                 </button>
 
-                <button class="camBtn" data-cam="2">
+                <button
+                    class="camBtn"
+                    data-cam="2"
+                >
                     CAM 3
                 </button>
 
-                <button class="camBtn" data-cam="3">
+                <button
+                    class="camBtn"
+                    data-cam="3"
+                >
                     CAM 4
                 </button>
 
-                <button class="camBtn" data-cam="4">
+                <button
+                    class="camBtn"
+                    data-cam="4"
+                >
                     CAM 5
                 </button>
 
-                <button class="camBtn" data-cam="5">
+                <button
+                    class="camBtn"
+                    data-cam="5"
+                >
                     CAM 6
                 </button>
 
@@ -1571,7 +1732,7 @@ button{
 </section>
 
 <!-- ======================================================
-     JUMPSCARE
+     СКРИМЕР
 ====================================================== -->
 
 <div id="jumpscare">
@@ -1760,7 +1921,7 @@ function getAudioContext(){
 function beep(
     frequency = 400,
     duration = 100,
-    volume = .08,
+    volume = .07,
     type = "square"
 ){
 
@@ -1821,9 +1982,9 @@ function beep(
 function doorSound(){
 
     beep(
-        110,
-        250,
-        .12,
+        105,
+        260,
+        .11,
         "sawtooth"
     );
 }
@@ -1831,9 +1992,9 @@ function doorSound(){
 function lightSound(){
 
     beep(
-        700,
-        75,
-        .06,
+        680,
+        80,
+        .055,
         "square"
     );
 }
@@ -1842,8 +2003,8 @@ function cameraSound(){
 
     beep(
         270,
-        80,
-        .06,
+        70,
+        .055,
         "square"
     );
 }
@@ -1851,9 +2012,9 @@ function cameraSound(){
 function hitSound(){
 
     beep(
-        70,
+        75,
         300,
-        .15,
+        .12,
         "sawtooth"
     );
 }
@@ -1861,9 +2022,9 @@ function hitSound(){
 function jumpscareSound(){
 
     beep(
-        80,
-        900,
-        .18,
+        85,
+        850,
+        .16,
         "sawtooth"
     );
 
@@ -1871,36 +2032,49 @@ function jumpscareSound(){
         function(){
 
             beep(
-                700,
-                500,
-                .12,
+                720,
+                420,
+                .10,
                 "square"
             );
 
         },
-        80
+        70
     );
 }
 
 function winSound(){
 
     beep(
-        600,
+        550,
         150,
-        .08
+        .07
     );
 
     setTimeout(
         function(){
 
             beep(
-                800,
-                400,
-                .09
+                700,
+                150,
+                .07
             );
 
         },
-        170
+        160
+    );
+
+    setTimeout(
+        function(){
+
+            beep(
+                900,
+                350,
+                .08
+            );
+
+        },
+        320
     );
 }
 
@@ -1959,9 +2133,9 @@ const cameraScenes = [
 
     "🚪 ВХІД • ВІТРИНИ • ТУРНІКЕТ",
 
-    "🛒 КАСИ • ТОРГОВИЙ ЗАЛ",
+    "🛒 КАСИ • ВІЗКИ • ТОРГОВИЙ ЗАЛ",
 
-    "📦 СКЛАД • КОРОБКИ",
+    "📦 КОРОБКИ • СКЛАД • СТЕЛАЖІ",
 
     "⬅️ ЛІВИЙ КОРИДОР",
 
@@ -1971,7 +2145,7 @@ const cameraScenes = [
 ];
 
 /* =========================================================
-   ENEMY ROUTES
+   МАРШРУТИ ВОРОГІВ
 ========================================================= */
 
 const enemy1Route = [
@@ -2055,8 +2229,6 @@ let timeTimer =
 let enemyTimer =
     null;
 
-/* ТАЙМЕРИ АТАКИ */
-
 let enemy1AttackTimer =
     null;
 
@@ -2122,13 +2294,13 @@ function updateNightButtons(){
     nightButtons.forEach(
         function(button){
 
-            const n =
+            const night =
                 Number(
                     button.dataset.night
                 );
 
             if(
-                n <=
+                night <=
                 unlockedNight
             ){
 
@@ -2141,7 +2313,7 @@ function updateNightButtons(){
 
                 button.textContent =
                     "🌙 Ніч " +
-                    n;
+                    night;
 
             }else{
 
@@ -2154,7 +2326,7 @@ function updateNightButtons(){
 
                 button.textContent =
                     "🔒 Ніч " +
-                    n;
+                    night;
             }
         }
     );
@@ -2376,6 +2548,12 @@ function resetOffice(){
 
     rightDoorBtn.textContent =
         "🚪 Праві двері";
+
+    leftLightBtn.textContent =
+        "💡 Ліве світло";
+
+    rightLightBtn.textContent =
+        "💡 Праве світло";
 }
 
 /* =========================================================
@@ -2491,8 +2669,6 @@ function(){
         leftLightOn
     );
 
-    /* СВІТЛО ПРЯМО У ДВЕРЯХ */
-
     leftDoorFrame.classList.toggle(
         "lightOn",
         leftLightOn
@@ -2533,8 +2709,6 @@ function(){
         "on",
         rightLightOn
     );
-
-    /* СВІТЛО ПРЯМО У ДВЕРЯХ */
 
     rightDoorFrame.classList.toggle(
         "lightOn",
@@ -2578,7 +2752,7 @@ function enemy3Position(){
 }
 
 /* =========================================================
-   MOB VISIBLE IN DOOR
+   MOB У ДВЕРЯХ
 ========================================================= */
 
 function updateDoorEnemies(){
@@ -2601,7 +2775,7 @@ function updateDoorEnemies(){
         e3 === "right";
 
     /*
-        ЯКИЙ МОБ СТОЇТЬ ЗЛІВА
+        ЯКИЙ МОБ ЗЛІВА
     */
 
     if(
@@ -2618,7 +2792,7 @@ function updateDoorEnemies(){
     }
 
     /*
-        ЯКИЙ МОБ СТОЇТЬ СПРАВА
+        ЯКИЙ МОБ СПРАВА
     */
 
     if(
@@ -2635,10 +2809,9 @@ function updateDoorEnemies(){
     }
 
     /*
-        МОБ ВИДИМИЙ:
-        1. ВІН БІЛЯ ДВЕРЕЙ
-        2. СВІТЛО УВІМКНЕНО
-        3. ДВЕРІ ВІДКРИТІ
+        ПОКАЗУЄМО МОБА,
+        ЯКЩО УВІМКНЕНЕ СВІТЛО
+        І ДВЕРІ ВІДКРИТІ.
     */
 
     leftDoorEnemy.classList.toggle(
@@ -2697,7 +2870,7 @@ function updateDoorEnemies(){
 }
 
 /* =========================================================
-   CAMERA OPEN/CLOSE
+   CAMERA OPEN
 ========================================================= */
 
 cameraBtn.onclick =
@@ -2791,7 +2964,7 @@ function selectCamera(cam){
 }
 
 /* =========================================================
-   RENDER CAMERA
+   CAMERA RENDER
 ========================================================= */
 
 function renderCamera(){
@@ -2823,7 +2996,7 @@ function renderCamera(){
         "visible"
     );
 
-    let amount =
+    let count =
         0;
 
     if(
@@ -2835,7 +3008,7 @@ function renderCamera(){
             "visible"
         );
 
-        amount++;
+        count++;
     }
 
     if(
@@ -2847,7 +3020,7 @@ function renderCamera(){
             "visible"
         );
 
-        amount++;
+        count++;
     }
 
     if(
@@ -2859,29 +3032,29 @@ function renderCamera(){
             "visible"
         );
 
-        amount++;
+        count++;
     }
 
     if(
-        amount === 0
+        count === 0
     ){
 
         cameraText.textContent =
             "Нікого не видно...";
 
     }else if(
-        amount === 1
+        count === 1
     ){
 
         cameraText.textContent =
             "⚠️ ВОРОГ НА КАМЕРІ!";
 
     }else if(
-        amount === 2
+        count === 2
     ){
 
         cameraText.textContent =
-            "🚨 ДВА ВОРОГИ!";
+            "🚨 ДВА ВОРОГИ НА КАМЕРІ!";
 
     }else{
 
@@ -2929,7 +3102,7 @@ function moveEnemies(){
 
     if(
         Math.random() <
-        chance * .8 &&
+        chance * .80 &&
 
         enemy3Step <
         enemy3Route.length - 1
@@ -2938,15 +3111,9 @@ function moveEnemies(){
         enemy3Step++;
     }
 
-    /*
-        ВАЖЛИВО:
-        ТЕПЕР МОБ НЕ АТАКУЄ МИТТЄВО.
-        СПОЧАТКУ ВІН СТОЇТЬ У ДВЕРЯХ.
-    */
+    updateDoorEnemies();
 
     checkEnemyAttack();
-
-    updateDoorEnemies();
 
     if(camerasOpen){
 
@@ -2955,7 +3122,7 @@ function moveEnemies(){
 }
 
 /* =========================================================
-   ATTACK DELAY
+   ATTACK WAIT
 ========================================================= */
 
 function checkEnemyAttack(){
@@ -2964,12 +3131,12 @@ function checkEnemyAttack(){
         return;
     }
 
-    /* =========================
-       👀 LEFT MOB
-    ========================= */
+    /* 👀 ЛІВИЙ */
 
     if(
-        enemy1Position() === "left" &&
+        enemy1Position() ===
+        "left" &&
+
         !enemy1AttackTimer
     ){
 
@@ -2987,7 +3154,8 @@ function checkEnemyAttack(){
 
                     if(
                         running &&
-                        enemy1Position() === "left"
+                        enemy1Position() ===
+                        "left"
                     ){
 
                         attemptAttack(
@@ -2998,16 +3166,16 @@ function checkEnemyAttack(){
                     }
 
                 },
-                2600
+                3000
             );
     }
 
-    /* =========================
-       🐺 RIGHT MOB
-    ========================= */
+    /* 🐺 ПРАВИЙ */
 
     if(
-        enemy2Position() === "right" &&
+        enemy2Position() ===
+        "right" &&
+
         !enemy2AttackTimer
     ){
 
@@ -3025,7 +3193,8 @@ function checkEnemyAttack(){
 
                     if(
                         running &&
-                        enemy2Position() === "right"
+                        enemy2Position() ===
+                        "right"
                     ){
 
                         attemptAttack(
@@ -3036,13 +3205,11 @@ function checkEnemyAttack(){
                     }
 
                 },
-                2600
+                3000
             );
     }
 
-    /* =========================
-       🦆 DUCK
-    ========================= */
+    /* 🦆 */
 
     if(
         enemy3Position() ===
@@ -3079,7 +3246,7 @@ function checkEnemyAttack(){
                     }
 
                 },
-                2600
+                3000
             );
     }
 }
@@ -3098,23 +3265,23 @@ function attemptAttack(
         return;
     }
 
-    const closed =
+    const doorClosed =
         side === "left"
             ? leftDoorClosed
             : rightDoorClosed;
 
     /*
-        ЯКЩО ТИ ВСТИГ ЗАКРИТИ ДВЕРІ
+        ДВЕРІ ЗАКРИТІ
     */
 
-    if(closed){
+    if(doorClosed){
 
         hitSound();
 
         statusText.textContent =
             side === "left"
-                ? "💥 ВОРОГ УДАРИВ У ЛІВІ ДВЕРІ!"
-                : "💥 ВОРОГ УДАРИВ У ПРАВІ ДВЕРІ!";
+                ? "💥 Ворог ударив у ліві двері!"
+                : "💥 Ворог ударив у праві двері!";
 
         resetEnemy(
             enemyNumber
@@ -3125,7 +3292,6 @@ function attemptAttack(
 
     /*
         ДВЕРІ ВІДКРИТІ
-        -> СКРИМЕР
     */
 
     showJumpscare(
@@ -3292,6 +3458,7 @@ function updateUsage(){
 
             bar.classList.toggle(
                 "on",
+
                 index < usage
             );
         }
@@ -3409,7 +3576,12 @@ function powerOut(){
 
     resetOffice();
 
-    closeCamera();
+    camerasOpen =
+        false;
+
+    cameraPanel.classList.add(
+        "hidden"
+    );
 
     statusText.textContent =
         "⚡ ЕНЕРГІЯ ЗАКІНЧИЛАСЯ...";
@@ -3426,7 +3598,7 @@ function powerOut(){
             }
 
         },
-        2200
+        2300
     );
 }
 
@@ -3485,12 +3657,12 @@ function winGame(){
 
     stopTimers();
 
+    camerasOpen =
+        false;
+
     cameraPanel.classList.add(
         "hidden"
     );
-
-    camerasOpen =
-        false;
 
     winSound();
 
@@ -3707,7 +3879,6 @@ document.addEventListener(
             E = ПРАВІ ДВЕРІ
 
             C = КАМЕРИ
-            ESC = ЗАКРИТИ КАМЕРИ
         */
 
         if(
@@ -3753,9 +3924,7 @@ document.addEventListener(
         }
 
         if(
-            event.key ===
-            "Escape" &&
-
+            event.key === "Escape" &&
             camerasOpen
         ){
 
@@ -3771,7 +3940,7 @@ document.addEventListener(
 updateNightButtons();
 
 console.log(
-    "П'ЯТЬ НОЧЕЙ В АТБ — MOB IN DOOR FIX"
+    "П'ЯТЬ НОЧЕЙ В АТБ — PNG OFFICE VERSION"
 );
 
 </script>
