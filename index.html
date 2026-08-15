@@ -13,8 +13,7 @@
     padding:0;
 }
 
-html,
-body{
+html,body{
     width:100%;
     height:100%;
 }
@@ -22,7 +21,7 @@ body{
 body{
     overflow:hidden;
     background:#050505;
-    color:#fff;
+    color:white;
     font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -61,7 +60,7 @@ button{
     letter-spacing:4px;
 
     text-shadow:
-        0 0 8px #fff,
+        0 0 8px white,
         0 0 25px #d71920,
         0 0 60px #d71920;
 }
@@ -98,6 +97,14 @@ button{
 #playBtn{
     background:#086cff;
 }
+
+#playBtn:hover{
+    background:#2580ff;
+}
+
+/* =========================
+   NIGHT SELECT
+========================= */
 
 #nightMenu h2{
     font-size:46px;
@@ -141,6 +148,7 @@ button{
 #game{
     position:fixed;
     inset:0;
+
     overflow:hidden;
 
     background:#050505;
@@ -173,7 +181,7 @@ button{
     border:1px solid #444;
     border-radius:14px;
 
-    box-shadow:0 0 30px #000;
+    box-shadow:0 0 30px black;
 
     font-size:19px;
     font-weight:bold;
@@ -193,10 +201,10 @@ button{
         linear-gradient(
             90deg,
             rgba(0,0,0,.95) 0%,
-            rgba(0,0,0,.38) 12%,
-            transparent 22%,
-            transparent 78%,
-            rgba(0,0,0,.38) 88%,
+            rgba(0,0,0,.45) 12%,
+            transparent 23%,
+            transparent 77%,
+            rgba(0,0,0,.45) 88%,
             rgba(0,0,0,.95) 100%
         ),
         radial-gradient(
@@ -240,7 +248,7 @@ button{
     border-top:3px solid #34383b;
 
     box-shadow:
-        0 -15px 60px #000,
+        0 -15px 60px black,
         inset 0 10px 25px rgba(255,255,255,.04);
 }
 
@@ -267,7 +275,7 @@ button{
     font-size:14px;
     letter-spacing:5px;
 
-    box-shadow:0 0 30px #000;
+    box-shadow:0 0 30px black;
 }
 
 /* =========================
@@ -284,13 +292,15 @@ button{
 
     transform:translate(-50%,-50%);
 
-    width:60%;
+    width:58%;
 
     text-align:center;
+
+    pointer-events:none;
 }
 
 #title h1{
-    font-size:clamp(38px,5vw,72px);
+    font-size:clamp(34px,4.5vw,68px);
 
     line-height:1.05;
     letter-spacing:2px;
@@ -298,7 +308,7 @@ button{
     white-space:nowrap;
 
     text-shadow:
-        0 0 8px #fff,
+        0 0 8px white,
         0 0 25px #d71920,
         0 0 55px rgba(215,25,32,.55);
 }
@@ -312,7 +322,7 @@ button{
 }
 
 /* =========================
-   DOOR FRAMES
+   DOOR FRAME
 ========================= */
 
 .doorFrame{
@@ -337,19 +347,17 @@ button{
     border:5px solid #303030;
 
     box-shadow:
-        inset 0 0 45px #000,
-        0 0 30px #000;
+        inset 0 0 45px black,
+        0 0 30px black;
 }
 
 #leftDoorFrame{
     left:0;
-
     border-right:7px solid #444;
 }
 
 #rightDoorFrame{
     right:0;
-
     border-left:7px solid #444;
 }
 
@@ -381,8 +389,8 @@ button{
     border:3px solid #555;
 
     box-shadow:
-        inset 0 0 30px #000,
-        0 0 40px #000;
+        inset 0 0 30px black,
+        0 0 40px black;
 
     transform:translateY(-102%);
 
@@ -403,12 +411,35 @@ button{
         );
 }
 
+.door::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:8%;
+
+    width:60%;
+    height:5px;
+
+    transform:translateX(-50%);
+
+    background:#858585;
+
+    box-shadow:
+        0 70px #858585,
+        0 140px #858585,
+        0 210px #858585,
+        0 280px #858585,
+        0 350px #858585;
+}
+
 .door.closed{
     transform:translateY(0);
 }
 
 /* =========================
-   LIGHTS
+   LIGHT
 ========================= */
 
 .lightEffect{
@@ -459,7 +490,7 @@ button{
 }
 
 /* =========================
-   ENEMIES NEAR DOORS
+   DOOR ENEMIES
 ========================= */
 
 .doorEnemy{
@@ -469,13 +500,15 @@ button{
 
     z-index:26;
 
-    font-size:105px;
+    font-size:100px;
 
     opacity:0;
 
     pointer-events:none;
 
-    transform:translateY(-50%) scale(.7);
+    transform:
+        translateY(-50%)
+        scale(.7);
 
     transition:
         opacity .12s,
@@ -483,15 +516,15 @@ button{
 
     filter:
         drop-shadow(0 0 15px red)
-        drop-shadow(0 0 35px #000);
+        drop-shadow(0 0 35px black);
 }
 
 #leftDoorEnemy{
-    left:8%;
+    left:5%;
 }
 
 #rightDoorEnemy{
-    right:8%;
+    right:5%;
 }
 
 .doorEnemy.visible{
@@ -503,7 +536,7 @@ button{
 }
 
 /* =========================
-   SIDE CONTROLS
+   CONTROLS
 ========================= */
 
 .sideControls{
@@ -528,7 +561,7 @@ button{
 }
 
 .controlBtn{
-    width:185px;
+    width:180px;
 
     padding:15px;
 
@@ -542,7 +575,7 @@ button{
     font-weight:bold;
     font-size:16px;
 
-    box-shadow:0 0 20px #000;
+    box-shadow:0 0 20px black;
 
     transition:.15s;
 }
@@ -555,10 +588,10 @@ button{
     background:#ffd84a;
     color:#111;
 
-    border-color:#fff;
+    border-color:white;
 
     box-shadow:
-        0 0 15px #fff,
+        0 0 15px white,
         0 0 35px #ffd84a;
 }
 
@@ -600,10 +633,13 @@ button{
 
     box-shadow:
         0 0 25px rgba(0,100,255,.55);
+
+    transition:.2s;
 }
 
 #cameraBtn:hover{
     background:#2780ff;
+    transform:translateX(-50%) scale(1.04);
 }
 
 /* =========================
@@ -696,6 +732,10 @@ button{
     border-bottom:1px solid #333;
 }
 
+.cameraHeader h2{
+    letter-spacing:2px;
+}
+
 #closeCameraBtn{
     padding:12px 18px;
 
@@ -708,6 +748,10 @@ button{
 
     font-weight:bold;
 }
+
+/* =========================
+   CAMERA VIEW
+========================= */
 
 #cameraView{
     position:relative;
@@ -730,6 +774,24 @@ button{
         );
 }
 
+#cameraView::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:14;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.025),
+            rgba(0,0,0,.35)
+        );
+}
+
 #cameraView::after{
     content:"";
 
@@ -746,8 +808,24 @@ button{
             0deg,
             transparent 0,
             transparent 3px,
-            rgba(255,255,255,.04) 4px
+            rgba(255,255,255,.05) 4px
         );
+
+    animation:cameraNoise .15s infinite;
+}
+
+@keyframes cameraNoise{
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(2px);
+    }
+
+    100%{
+        transform:translateY(-1px);
+    }
 }
 
 #cameraScene{
@@ -763,9 +841,9 @@ button{
 
     color:#aeb5b9;
 
-    opacity:.45;
+    opacity:.42;
 
-    font-size:clamp(25px,4vw,55px);
+    font-size:clamp(24px,4vw,55px);
 
     letter-spacing:8px;
 
@@ -785,16 +863,24 @@ button{
     opacity:.2;
 }
 
+/* =========================
+   CAMERA ENEMIES
+========================= */
+
 .enemy{
     position:absolute;
 
-    top:48%;
+    top:47%;
 
     z-index:10;
 
     font-size:130px;
 
     opacity:0;
+
+    transition:
+        opacity .15s,
+        transform .15s;
 
     filter:
         drop-shadow(0 0 25px red);
@@ -805,11 +891,11 @@ button{
 }
 
 #enemy1{
-    left:23%;
+    left:22%;
 }
 
 #enemy2{
-    right:23%;
+    right:22%;
 }
 
 #enemy3{
@@ -830,11 +916,18 @@ button{
 
     z-index:30;
 
+    min-width:280px;
+
     padding:15px;
 
+    border:1px solid #333;
     border-radius:10px;
 
-    background:rgba(0,0,0,.75);
+    background:rgba(0,0,0,.78);
+}
+
+#cameraInfo h2{
+    font-size:26px;
 }
 
 #cameraInfo p{
@@ -861,6 +954,8 @@ button{
 
     border:1px solid #555;
     border-radius:12px;
+
+    box-shadow:0 0 30px black;
 }
 
 .camBtn{
@@ -880,8 +975,15 @@ button{
     font-weight:bold;
 }
 
+.camBtn:hover{
+    background:#333;
+}
+
 .camBtn.active{
     background:#086cff;
+
+    box-shadow:
+        0 0 15px #086cff;
 }
 
 .camBtn[data-cam="0"]{
@@ -933,7 +1035,8 @@ button{
 
     background:rgba(90,0,0,.95);
 
-    animation:warningFlash .15s infinite;
+    animation:
+        warningFlash .15s infinite;
 }
 
 #warningIcon{
@@ -949,6 +1052,141 @@ button{
 @keyframes warningFlash{
     50%{
         background:#000;
+    }
+}
+
+/* =========================
+   JUMPSCARE
+========================= */
+
+#jumpscare{
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle,
+            #690000 0%,
+            #1a0000 45%,
+            #000 85%
+        );
+}
+
+#jumpscare.active{
+    display:flex;
+
+    animation:
+        scareFlash .065s infinite,
+        scareShake .055s infinite;
+}
+
+#jumpscareFace{
+    font-size:min(53vw,520px);
+
+    line-height:1;
+
+    filter:
+        drop-shadow(0 0 30px red)
+        drop-shadow(0 0 65px white);
+
+    animation:
+        scareZoom .55s forwards;
+}
+
+#jumpscareText{
+    position:absolute;
+
+    bottom:7%;
+
+    font-size:clamp(35px,7vw,95px);
+
+    font-weight:900;
+
+    color:white;
+
+    letter-spacing:8px;
+
+    text-shadow:
+        0 0 15px red,
+        0 0 40px red;
+}
+
+@keyframes scareZoom{
+    0%{
+        transform:
+            scale(.1)
+            rotate(-10deg);
+    }
+
+    35%{
+        transform:
+            scale(1.55)
+            rotate(8deg);
+    }
+
+    55%{
+        transform:
+            scale(.9)
+            rotate(-5deg);
+    }
+
+    75%{
+        transform:
+            scale(1.4)
+            rotate(5deg);
+    }
+
+    100%{
+        transform:
+            scale(1.15)
+            rotate(0deg);
+    }
+}
+
+@keyframes scareShake{
+    0%{
+        transform:translate(0,0);
+    }
+
+    25%{
+        transform:translate(-14px,7px);
+    }
+
+    50%{
+        transform:translate(12px,-8px);
+    }
+
+    75%{
+        transform:translate(-8px,-6px);
+    }
+
+    100%{
+        transform:translate(0,0);
+    }
+}
+
+@keyframes scareFlash{
+    0%{
+        filter:brightness(.8);
+    }
+
+    50%{
+        filter:brightness(2.5);
+    }
+
+    100%{
+        filter:brightness(.5);
     }
 }
 
@@ -1022,18 +1260,18 @@ button{
    MOBILE
 ========================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
     .doorFrame{
-        width:19%;
+        width:18%;
     }
 
     #leftControls{
-        left:20%;
+        left:19%;
     }
 
     #rightControls{
-        right:20%;
+        right:19%;
     }
 
     .controlBtn{
@@ -1047,6 +1285,7 @@ button{
     }
 
     #title h1{
+        white-space:normal;
         font-size:clamp(30px,5vw,55px);
     }
 }
@@ -1054,40 +1293,48 @@ button{
 @media(max-width:650px){
 
     .doorFrame{
-        width:23%;
+        width:22%;
     }
 
     #leftControls{
-        left:24%;
+        left:23%;
     }
 
     #rightControls{
-        right:24%;
+        right:23%;
     }
 
     .controlBtn{
-        width:110px;
+        width:105px;
         padding:9px;
-        font-size:11px;
+        font-size:10px;
     }
 
     #topbar{
-        font-size:13px;
+        font-size:12px;
     }
 
-    #title{
-        width:50%;
+    #usage{
+        right:6px;
     }
 
-    #title h1{
-        white-space:normal;
-        font-size:32px;
+    #soundBtn{
+        left:6px;
+    }
+
+    #cameraMap{
+        transform:scale(.8);
+        transform-origin:right bottom;
     }
 }
 </style>
 </head>
 
 <body>
+
+<!-- =========================
+     MENU
+========================= -->
 
 <section id="menu">
 
@@ -1115,6 +1362,10 @@ button{
 
 </section>
 
+<!-- =========================
+     NIGHT SELECT
+========================= -->
+
 <section
     id="nightMenu"
     class="hidden"
@@ -1126,23 +1377,38 @@ button{
 
     <div class="nightButtons">
 
-        <button class="nightBtn" data-night="1">
+        <button
+            class="nightBtn"
+            data-night="1"
+        >
             🌙 Ніч 1
         </button>
 
-        <button class="nightBtn" data-night="2">
+        <button
+            class="nightBtn"
+            data-night="2"
+        >
             🌙 Ніч 2
         </button>
 
-        <button class="nightBtn" data-night="3">
+        <button
+            class="nightBtn"
+            data-night="3"
+        >
             🌙 Ніч 3
         </button>
 
-        <button class="nightBtn" data-night="4">
+        <button
+            class="nightBtn"
+            data-night="4"
+        >
             🌙 Ніч 4
         </button>
 
-        <button class="nightBtn" data-night="5">
+        <button
+            class="nightBtn"
+            data-night="5"
+        >
             🌙 Ніч 5
         </button>
 
@@ -1156,6 +1422,10 @@ button{
     </button>
 
 </section>
+
+<!-- =========================
+     GAME
+========================= -->
 
 <section
     id="game"
@@ -1198,6 +1468,8 @@ button{
 
     </div>
 
+    <!-- OFFICE -->
+
     <main id="office">
 
         <div
@@ -1224,25 +1496,35 @@ button{
             🐺
         </div>
 
+        <!-- LEFT DOOR -->
+
         <div
             id="leftDoorFrame"
             class="doorFrame"
         >
+
             <div
                 id="leftDoor"
                 class="door"
             ></div>
+
         </div>
+
+        <!-- RIGHT DOOR -->
 
         <div
             id="rightDoorFrame"
             class="doorFrame"
         >
+
             <div
                 id="rightDoor"
                 class="door"
             ></div>
+
         </div>
+
+        <!-- TITLE -->
 
         <div id="title">
 
@@ -1255,6 +1537,8 @@ button{
             </p>
 
         </div>
+
+        <!-- LEFT CONTROLS -->
 
         <div
             id="leftControls"
@@ -1276,6 +1560,8 @@ button{
             </button>
 
         </div>
+
+        <!-- RIGHT CONTROLS -->
 
         <div
             id="rightControls"
@@ -1303,6 +1589,10 @@ button{
         </button>
 
     </main>
+
+    <!-- =========================
+         CAMERAS
+    ========================= -->
 
     <section
         id="cameraPanel"
@@ -1414,6 +1704,8 @@ button{
 
     </section>
 
+    <!-- WARNING -->
+
     <section
         id="warning"
         class="hidden"
@@ -1428,6 +1720,8 @@ button{
         </h2>
 
     </section>
+
+    <!-- END -->
 
     <section
         id="endScreen"
@@ -1462,7 +1756,27 @@ button{
 
 </section>
 
+<!-- =========================
+     JUMPSCARE
+========================= -->
+
+<div id="jumpscare">
+
+    <div id="jumpscareFace">
+        👀
+    </div>
+
+    <div id="jumpscareText">
+        ААА!
+    </div>
+
+</div>
+
 <script>
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const $ = id =>
     document.getElementById(id);
@@ -1549,6 +1863,12 @@ const warning =
 const warningIcon =
     $("warningIcon");
 
+const jumpscare =
+    $("jumpscare");
+
+const jumpscareFace =
+    $("jumpscareFace");
+
 const endScreen =
     $("endScreen");
 
@@ -1565,15 +1885,44 @@ const menuBtn =
     $("menuBtn");
 
 
+/* =========================
+   SOUND
+========================= */
+
 let soundEnabled = true;
 
 let audioContext = null;
 
 
+function getAudioContext(){
+
+    if(!audioContext){
+
+        const AudioCtx =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        audioContext =
+            new AudioCtx();
+    }
+
+    if(
+        audioContext.state ===
+        "suspended"
+    ){
+
+        audioContext.resume();
+    }
+
+    return audioContext;
+}
+
+
 function beep(
     frequency = 400,
     duration = 100,
-    volume = .08
+    volume = .08,
+    type = "square"
 ){
 
     if(!soundEnabled){
@@ -1582,56 +1931,47 @@ function beep(
 
     try{
 
-        const AudioCtx =
-            window.AudioContext ||
-            window.webkitAudioContext;
-
-        if(!audioContext){
-
-            audioContext =
-                new AudioCtx();
-        }
-
-        if(
-            audioContext.state === "suspended"
-        ){
-            audioContext.resume();
-        }
+        const ctx =
+            getAudioContext();
 
         const oscillator =
-            audioContext.createOscillator();
+            ctx.createOscillator();
 
         const gain =
-            audioContext.createGain();
+            ctx.createGain();
 
         oscillator.type =
-            "square";
+            type;
 
-        oscillator.frequency.value =
-            frequency;
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            ctx.currentTime
+        );
 
-        gain.gain.value =
-            volume;
+        gain.gain.setValueAtTime(
+            volume,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime +
+            duration / 1000
+        );
 
         oscillator.connect(
             gain
         );
 
         gain.connect(
-            audioContext.destination
+            ctx.destination
         );
 
         oscillator.start();
 
-        setTimeout(
-            function(){
-
-                try{
-                    oscillator.stop();
-                }catch(e){}
-
-            },
-            duration
+        oscillator.stop(
+            ctx.currentTime +
+            duration / 1000
         );
 
     }catch(error){
@@ -1645,27 +1985,207 @@ function beep(
 
 
 function doorSound(){
-    beep(115,220,.12);
+
+    beep(
+        110,
+        250,
+        .12,
+        "sawtooth"
+    );
 }
+
 
 function lightSound(){
-    beep(650,70,.06);
+
+    beep(
+        700,
+        70,
+        .05,
+        "square"
+    );
 }
+
 
 function cameraSound(){
-    beep(270,85,.07);
+
+    beep(
+        280,
+        45,
+        .06,
+        "square"
+    );
+
+    setTimeout(
+        function(){
+
+            beep(
+                180,
+                60,
+                .05,
+                "square"
+            );
+
+        },
+        50
+    );
 }
+
 
 function hitSound(){
-    beep(75,300,.15);
+
+    beep(
+        70,
+        300,
+        .15,
+        "sawtooth"
+    );
 }
 
-function warningSound(){
-    beep(55,600,.18);
-}
 
 function winSound(){
-    beep(800,450,.1);
+
+    beep(
+        500,
+        150,
+        .08
+    );
+
+    setTimeout(
+        function(){
+
+            beep(
+                650,
+                150,
+                .08
+            );
+
+        },
+        170
+    );
+
+    setTimeout(
+        function(){
+
+            beep(
+                850,
+                400,
+                .1
+            );
+
+        },
+        340
+    );
+}
+
+
+function jumpscareSound(){
+
+    if(!soundEnabled){
+        return;
+    }
+
+    try{
+
+        const ctx =
+            getAudioContext();
+
+        const oscillator =
+            ctx.createOscillator();
+
+        const oscillator2 =
+            ctx.createOscillator();
+
+        const gain =
+            ctx.createGain();
+
+        const gain2 =
+            ctx.createGain();
+
+        oscillator.type =
+            "sawtooth";
+
+        oscillator2.type =
+            "square";
+
+        oscillator.frequency.setValueAtTime(
+            170,
+            ctx.currentTime
+        );
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            850,
+            ctx.currentTime + .2
+        );
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            90,
+            ctx.currentTime + .9
+        );
+
+        oscillator2.frequency.setValueAtTime(
+            80,
+            ctx.currentTime
+        );
+
+        oscillator2.frequency.exponentialRampToValueAtTime(
+            500,
+            ctx.currentTime + .4
+        );
+
+        gain.gain.setValueAtTime(
+            .16,
+            ctx.currentTime
+        );
+
+        gain2.gain.setValueAtTime(
+            .08,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime + .95
+        );
+
+        gain2.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime + .95
+        );
+
+        oscillator.connect(
+            gain
+        );
+
+        oscillator2.connect(
+            gain2
+        );
+
+        gain.connect(
+            ctx.destination
+        );
+
+        gain2.connect(
+            ctx.destination
+        );
+
+        oscillator.start();
+        oscillator2.start();
+
+        oscillator.stop(
+            ctx.currentTime + .95
+        );
+
+        oscillator2.stop(
+            ctx.currentTime + .95
+        );
+
+    }catch(error){
+
+        console.log(
+            "Jumpscare sound error:",
+            error
+        );
+    }
 }
 
 
@@ -1682,39 +2202,130 @@ soundBtn.addEventListener(
                 : "🔇 БЕЗ ЗВУКУ";
 
         if(soundEnabled){
+
             lightSound();
         }
     }
 );
 
 
+/* =========================
+   CAMERA DATA
+========================= */
+
 const cameraNames = [
+
     "CAM 1 — Вхід",
+
     "CAM 2 — Торговий зал",
+
     "CAM 3 — Склад",
+
     "CAM 4 — Лівий коридор",
+
     "CAM 5 — Правий коридор",
+
     "CAM 6 — Біля офісу"
 ];
 
+
 const cameraIcons = [
+
     "🚪",
+
     "🛒",
+
     "📦",
+
     "⬅️",
+
     "➡️",
+
     "🚨"
 ];
 
+
 const cameraScenes = [
+
     "🚪 ВХІД • ВІТРИНИ • ТУРНІКЕТ",
+
     "🛒 КАСИ • ВІЗКИ • ТОРГОВИЙ ЗАЛ",
-    "📦 КОРОБКИ • СКЛАД • СТЕЛАЖІ",
-    "⬅️ ЛІВИЙ КОРИДОР • СЛУЖБОВІ ДВЕРІ",
-    "➡️ ПРАВИЙ КОРИДОР • ХОЛОДИЛЬНИКИ",
-    "🚨 ОФІС ОХОРОНИ • ЗАПАСНИЙ ВИХІД"
+
+    "📦 СКЛАД • КОРОБКИ • СТЕЛАЖІ",
+
+    "⬅️ ЛІВИЙ КОРИДОР",
+
+    "➡️ ПРАВИЙ КОРИДОР",
+
+    "🚨 БІЛЯ ОФІСУ"
 ];
 
+
+/* =========================
+   ENEMY ROUTES
+========================= */
+
+/*
+
+👀
+CAM 1
+↓
+CAM 2
+↓
+CAM 4
+↓
+CAM 6
+↓
+LEFT DOOR
+
+🐺
+CAM 3
+↓
+CAM 2
+↓
+CAM 5
+↓
+CAM 6
+↓
+RIGHT DOOR
+
+🦆
+CAM 1
+↓
+CAM 3
+↓
+CAM 4 / CAM 5
+↓
+CAM 6
+↓
+DOOR
+
+*/
+
+const enemy1Route = [
+    0,
+    1,
+    3,
+    5,
+    "left"
+];
+
+
+const enemy2Route = [
+    2,
+    1,
+    4,
+    5,
+    "right"
+];
+
+
+let enemy3Route = [];
+
+
+/* =========================
+   GAME VARIABLES
+========================= */
 
 let unlockedNight =
     Number(
@@ -1723,40 +2334,82 @@ let unlockedNight =
         ) || "1"
     );
 
-let currentNight = 1;
 
-let running = false;
+let currentNight =
+    1;
 
-let power = 100;
 
-let hour = 0;
+let running =
+    false;
 
-let leftDoorClosed = false;
 
-let rightDoorClosed = false;
+let power =
+    100;
 
-let leftLightOn = false;
 
-let rightLightOn = false;
+let hour =
+    0;
 
-let camerasOpen = false;
 
-let selectedCamera = 0;
+let leftDoorClosed =
+    false;
 
-let enemy1 = 0;
 
-let enemy2 = 2;
+let rightDoorClosed =
+    false;
 
-let enemy3 = 1;
 
-let enemy3Side = "left";
+let leftLightOn =
+    false;
 
-let powerTimer = null;
 
-let timeTimer = null;
+let rightLightOn =
+    false;
 
-let enemyTimer = null;
 
+let camerasOpen =
+    false;
+
+
+let selectedCamera =
+    0;
+
+
+let enemy1Step =
+    0;
+
+
+let enemy2Step =
+    0;
+
+
+let enemy3Step =
+    0;
+
+
+let enemy3Side =
+    "left";
+
+
+let powerTimer =
+    null;
+
+
+let timeTimer =
+    null;
+
+
+let enemyTimer =
+    null;
+
+
+let scareRunning =
+    false;
+
+
+/* =========================
+   MENU
+========================= */
 
 playBtn.addEventListener(
     "click",
@@ -1794,7 +2447,8 @@ resetProgressBtn.addEventListener(
     "click",
     function(){
 
-        unlockedNight = 1;
+        unlockedNight =
+            1;
 
         localStorage.setItem(
             "atbNight",
@@ -1815,34 +2469,39 @@ function updateNightButtons(){
     nightButtons.forEach(
         function(button){
 
-            const n =
+            const night =
                 Number(
                     button.dataset.night
                 );
 
             if(
-                n <= unlockedNight
+                night <=
+                unlockedNight
             ){
 
-                button.disabled = false;
+                button.disabled =
+                    false;
 
                 button.classList.remove(
                     "locked"
                 );
 
                 button.textContent =
-                    "🌙 Ніч " + n;
+                    "🌙 Ніч " +
+                    night;
 
             }else{
 
-                button.disabled = true;
+                button.disabled =
+                    true;
 
                 button.classList.add(
                     "locked"
                 );
 
                 button.textContent =
-                    "🔒 Ніч " + n;
+                    "🔒 Ніч " +
+                    night;
             }
         }
     );
@@ -1862,7 +2521,8 @@ nightButtons.forEach(
                     );
 
                 if(
-                    night <= unlockedNight
+                    night <=
+                    unlockedNight
                 ){
 
                     startGame(
@@ -1875,35 +2535,73 @@ nightButtons.forEach(
 );
 
 
+/* =========================
+   START GAME
+========================= */
+
 function startGame(night){
 
     stopTimers();
 
-    currentNight = night;
+    scareRunning =
+        false;
 
-    power = 100;
+    jumpscare.classList.remove(
+        "active"
+    );
 
-    hour = 0;
 
-    running = true;
+    currentNight =
+        night;
 
-    leftDoorClosed = false;
 
-    rightDoorClosed = false;
+    running =
+        true;
 
-    leftLightOn = false;
 
-    rightLightOn = false;
+    power =
+        100;
 
-    camerasOpen = false;
 
-    selectedCamera = 0;
+    hour =
+        0;
 
-    enemy1 = 0;
 
-    enemy2 = 2;
+    leftDoorClosed =
+        false;
 
-    enemy3 = 1;
+
+    rightDoorClosed =
+        false;
+
+
+    leftLightOn =
+        false;
+
+
+    rightLightOn =
+        false;
+
+
+    camerasOpen =
+        false;
+
+
+    selectedCamera =
+        0;
+
+
+    enemy1Step =
+        0;
+
+
+    enemy2Step =
+        0;
+
+
+    enemy3Step =
+        0;
+
 
     enemy3Side =
         Math.random() < .5
@@ -1911,29 +2609,99 @@ function startGame(night){
             : "right";
 
 
+    createDuckRoute();
+
+
     menu.classList.add(
         "hidden"
     );
+
 
     nightMenu.classList.add(
         "hidden"
     );
 
+
     game.classList.remove(
         "hidden"
     );
+
 
     cameraPanel.classList.add(
         "hidden"
     );
 
+
     warning.classList.add(
         "hidden"
     );
 
+
     endScreen.classList.add(
         "hidden"
     );
+
+
+    resetOffice();
+
+
+    nightLabel.textContent =
+        currentNight;
+
+
+    timeLabel.textContent =
+        "12 AM";
+
+
+    powerLabel.textContent =
+        "100";
+
+
+    powerLabel.style.color =
+        "white";
+
+
+    statusText.textContent =
+        "📹 Стеж за ворогами через камери.";
+
+
+    selectCamera(
+        0
+    );
+
+
+    updateDoorEnemies();
+
+
+    updateUsage();
+
+
+    startTimers();
+}
+
+
+function createDuckRoute(){
+
+    enemy3Route =
+        enemy3Side === "left"
+            ? [
+                0,
+                2,
+                3,
+                5,
+                "left"
+            ]
+            : [
+                0,
+                2,
+                4,
+                5,
+                "right"
+            ];
+}
+
+
+function resetOffice(){
 
     leftDoor.classList.remove(
         "closed"
@@ -1943,6 +2711,7 @@ function startGame(night){
         "closed"
     );
 
+
     leftDoorBtn.classList.remove(
         "doorOn"
     );
@@ -1950,6 +2719,7 @@ function startGame(night){
     rightDoorBtn.classList.remove(
         "doorOn"
     );
+
 
     leftLightBtn.classList.remove(
         "lightOn"
@@ -1959,6 +2729,7 @@ function startGame(night){
         "lightOn"
     );
 
+
     leftLightEffect.classList.remove(
         "on"
     );
@@ -1966,6 +2737,7 @@ function startGame(night){
     rightLightEffect.classList.remove(
         "on"
     );
+
 
     leftDoorEnemy.classList.remove(
         "visible"
@@ -1975,42 +2747,27 @@ function startGame(night){
         "visible"
     );
 
+
     leftDoorBtn.textContent =
         "🚪 Ліві двері";
+
 
     rightDoorBtn.textContent =
         "🚪 Праві двері";
 
+
     leftLightBtn.textContent =
         "💡 Ліве світло";
 
+
     rightLightBtn.textContent =
         "💡 Праве світло";
-
-    nightLabel.textContent =
-        currentNight;
-
-    timeLabel.textContent =
-        "12 AM";
-
-    powerLabel.textContent =
-        "100";
-
-    powerLabel.style.color =
-        "white";
-
-    statusText.textContent =
-        "Перевіряй камери та бережи енергію...";
-
-    selectCamera(0);
-
-    updateDoorEnemies();
-
-    updateUsage();
-
-    startTimers();
 }
 
+
+/* =========================
+   DOORS
+========================= */
 
 leftDoorBtn.addEventListener(
     "click",
@@ -2020,33 +2777,41 @@ leftDoorBtn.addEventListener(
             !running ||
             power <= 0
         ){
+
             return;
         }
+
 
         leftDoorClosed =
             !leftDoorClosed;
 
+
         doorSound();
+
 
         leftDoor.classList.toggle(
             "closed",
             leftDoorClosed
         );
 
+
         leftDoorBtn.classList.toggle(
             "doorOn",
             leftDoorClosed
         );
+
 
         leftDoorBtn.textContent =
             leftDoorClosed
                 ? "🔓 ВІДКРИТИ ЛІВІ"
                 : "🚪 Ліві двері";
 
+
         statusText.textContent =
             leftDoorClosed
                 ? "🔒 Ліві двері закрито."
                 : "🚪 Ліві двері відкрито.";
+
 
         updateUsage();
     }
@@ -2061,38 +2826,50 @@ rightDoorBtn.addEventListener(
             !running ||
             power <= 0
         ){
+
             return;
         }
+
 
         rightDoorClosed =
             !rightDoorClosed;
 
+
         doorSound();
+
 
         rightDoor.classList.toggle(
             "closed",
             rightDoorClosed
         );
 
+
         rightDoorBtn.classList.toggle(
             "doorOn",
             rightDoorClosed
         );
+
 
         rightDoorBtn.textContent =
             rightDoorClosed
                 ? "🔓 ВІДКРИТИ ПРАВІ"
                 : "🚪 Праві двері";
 
+
         statusText.textContent =
             rightDoorClosed
                 ? "🔒 Праві двері закрито."
                 : "🚪 Праві двері відкрито.";
 
+
         updateUsage();
     }
 );
 
+
+/* =========================
+   LIGHTS
+========================= */
 
 leftLightBtn.addEventListener(
     "click",
@@ -2102,50 +2879,39 @@ leftLightBtn.addEventListener(
             !running ||
             power <= 0
         ){
+
             return;
         }
+
 
         leftLightOn =
             !leftLightOn;
 
+
         lightSound();
+
 
         leftLightBtn.classList.toggle(
             "lightOn",
             leftLightOn
         );
 
+
         leftLightEffect.classList.toggle(
             "on",
             leftLightOn
         );
 
+
         updateDoorEnemies();
 
-        if(leftLightOn){
 
-            if(
-                enemy1 >= 5 ||
-                (
-                    enemy3 >= 5 &&
-                    enemy3Side === "left"
-                )
-            ){
-
-                statusText.textContent =
-                    "⚠️ ХТОСЬ ЗЛІВА!";
-
-            }else{
-
-                statusText.textContent =
-                    "💡 Зліва нікого.";
-            }
-
-        }else{
+        if(!leftLightOn){
 
             statusText.textContent =
                 "Ліве світло вимкнено.";
         }
+
 
         updateUsage();
     }
@@ -2160,111 +2926,189 @@ rightLightBtn.addEventListener(
             !running ||
             power <= 0
         ){
+
             return;
         }
+
 
         rightLightOn =
             !rightLightOn;
 
+
         lightSound();
+
 
         rightLightBtn.classList.toggle(
             "lightOn",
             rightLightOn
         );
 
+
         rightLightEffect.classList.toggle(
             "on",
             rightLightOn
         );
 
+
         updateDoorEnemies();
 
-        if(rightLightOn){
 
-            if(
-                enemy2 >= 5 ||
-                (
-                    enemy3 >= 5 &&
-                    enemy3Side === "right"
-                )
-            ){
-
-                statusText.textContent =
-                    "⚠️ ХТОСЬ СПРАВА!";
-
-            }else{
-
-                statusText.textContent =
-                    "💡 Справа нікого.";
-            }
-
-        }else{
+        if(!rightLightOn){
 
             statusText.textContent =
                 "Праве світло вимкнено.";
         }
+
 
         updateUsage();
     }
 );
 
 
+/* =========================
+   CURRENT ENEMY POSITIONS
+========================= */
+
+function enemy1Position(){
+
+    return enemy1Route[
+        enemy1Step
+    ];
+}
+
+
+function enemy2Position(){
+
+    return enemy2Route[
+        enemy2Step
+    ];
+}
+
+
+function enemy3Position(){
+
+    return enemy3Route[
+        enemy3Step
+    ];
+}
+
+
+/* =========================
+   ENEMIES AT DOORS
+========================= */
+
 function updateDoorEnemies(){
 
-    const leftVisible =
-        leftLightOn &&
-        (
-            enemy1 >= 5 ||
-            (
-                enemy3 >= 5 &&
-                enemy3Side === "left"
-            )
-        );
+    const enemy1Pos =
+        enemy1Position();
 
-    const rightVisible =
-        rightLightOn &&
-        (
-            enemy2 >= 5 ||
-            (
-                enemy3 >= 5 &&
-                enemy3Side === "right"
-            )
-        );
+
+    const enemy2Pos =
+        enemy2Position();
+
+
+    const enemy3Pos =
+        enemy3Position();
+
+
+    const leftEnemyExists =
+
+        enemy1Pos === "left" ||
+
+        enemy3Pos === "left";
+
+
+    const rightEnemyExists =
+
+        enemy2Pos === "right" ||
+
+        enemy3Pos === "right";
+
 
     if(
-        enemy3 >= 5 &&
-        enemy3Side === "left"
+        enemy3Pos ===
+        "left"
     ){
+
         leftDoorEnemy.textContent =
             "🦆";
+
     }else{
+
         leftDoorEnemy.textContent =
             "👀";
     }
 
+
     if(
-        enemy3 >= 5 &&
-        enemy3Side === "right"
+        enemy3Pos ===
+        "right"
     ){
+
         rightDoorEnemy.textContent =
             "🦆";
+
     }else{
+
         rightDoorEnemy.textContent =
             "🐺";
     }
 
+
     leftDoorEnemy.classList.toggle(
         "visible",
-        leftVisible
+
+        leftLightOn &&
+        leftEnemyExists
     );
+
 
     rightDoorEnemy.classList.toggle(
         "visible",
-        rightVisible
+
+        rightLightOn &&
+        rightEnemyExists
     );
+
+
+    if(
+        leftLightOn &&
+        leftEnemyExists
+    ){
+
+        statusText.textContent =
+            "🚨 ХТОСЬ БІЛЯ ЛІВИХ ДВЕРЕЙ!";
+
+    }else if(
+        leftLightOn
+    ){
+
+        statusText.textContent =
+            "💡 Зліва нікого.";
+    }
+
+
+    if(
+        rightLightOn &&
+        rightEnemyExists
+    ){
+
+        statusText.textContent =
+            "🚨 ХТОСЬ БІЛЯ ПРАВИХ ДВЕРЕЙ!";
+
+    }else if(
+        rightLightOn
+    ){
+
+        statusText.textContent =
+            "💡 Справа нікого.";
+    }
 }
 
+
+/* =========================
+   CAMERAS
+========================= */
 
 cameraBtn.addEventListener(
     "click",
@@ -2274,18 +3118,25 @@ cameraBtn.addEventListener(
             !running ||
             power <= 0
         ){
+
             return;
         }
 
-        camerasOpen = true;
+
+        camerasOpen =
+            true;
+
 
         cameraSound();
+
 
         cameraPanel.classList.remove(
             "hidden"
         );
 
+
         renderCamera();
+
 
         updateUsage();
     }
@@ -2304,14 +3155,19 @@ closeCameraBtn.addEventListener(
 function closeCamera(){
 
     if(camerasOpen){
+
         cameraSound();
     }
 
-    camerasOpen = false;
+
+    camerasOpen =
+        false;
+
 
     cameraPanel.classList.add(
         "hidden"
     );
+
 
     updateUsage();
 }
@@ -2326,6 +3182,7 @@ cameraButtons.forEach(
 
                 cameraSound();
 
+
                 selectCamera(
                     Number(
                         button.dataset.cam
@@ -2339,23 +3196,32 @@ cameraButtons.forEach(
 
 function selectCamera(cam){
 
-    selectedCamera = cam;
+    selectedCamera =
+        cam;
+
 
     cameraButtons.forEach(
         function(button){
 
             button.classList.toggle(
                 "active",
+
                 Number(
                     button.dataset.cam
-                ) === selectedCamera
+                ) ===
+                selectedCamera
             );
         }
     );
 
+
     renderCamera();
 }
 
+
+/* =========================
+   CAMERA 2.0
+========================= */
 
 function renderCamera(){
 
@@ -2364,32 +3230,41 @@ function renderCamera(){
             selectedCamera
         ];
 
+
     cameraRoomIcon.textContent =
         cameraIcons[
             selectedCamera
         ];
+
 
     cameraScene.textContent =
         cameraScenes[
             selectedCamera
         ];
 
+
     enemy1El.classList.remove(
         "visible"
     );
+
 
     enemy2El.classList.remove(
         "visible"
     );
 
+
     enemy3El.classList.remove(
         "visible"
     );
 
-    let amount = 0;
+
+    let amount =
+        0;
+
 
     if(
-        enemy1 === selectedCamera
+        enemy1Position() ===
+        selectedCamera
     ){
 
         enemy1El.classList.add(
@@ -2399,8 +3274,10 @@ function renderCamera(){
         amount++;
     }
 
+
     if(
-        enemy2 === selectedCamera
+        enemy2Position() ===
+        selectedCamera
     ){
 
         enemy2El.classList.add(
@@ -2410,8 +3287,10 @@ function renderCamera(){
         amount++;
     }
 
+
     if(
-        enemy3 === selectedCamera
+        enemy3Position() ===
+        selectedCamera
     ){
 
         enemy3El.classList.add(
@@ -2420,6 +3299,7 @@ function renderCamera(){
 
         amount++;
     }
+
 
     if(
         amount === 0
@@ -2433,100 +3313,473 @@ function renderCamera(){
     ){
 
         cameraText.textContent =
-            "⚠️ На камері хтось є...";
+            "⚠️ ВОРОГ НА КАМЕРІ!";
+
+    }else if(
+        amount === 2
+    ){
+
+        cameraText.textContent =
+            "🚨 ДВА ВОРОГИ НА КАМЕРІ!";
 
     }else{
 
         cameraText.textContent =
-            "🚨 Тут кілька ворогів!";
+            "🚨 ВСІ ВОРОГИ ТУТ!";
     }
 }
 
 
-function updateUsage(){
+/* =========================
+   MOVE ENEMIES
+========================= */
 
-    let usage = 1;
+function moveEnemies(){
 
-    if(leftDoorClosed){
-        usage++;
+    if(!running){
+        return;
     }
 
-    if(rightDoorClosed){
-        usage++;
+
+    const chance =
+        .20 +
+        currentNight *
+        .055;
+
+
+    if(
+        Math.random() <
+        chance &&
+
+        enemy1Step <
+        enemy1Route.length - 1
+    ){
+
+        enemy1Step++;
     }
 
-    if(leftLightOn){
-        usage++;
+
+    if(
+        Math.random() <
+        chance &&
+
+        enemy2Step <
+        enemy2Route.length - 1
+    ){
+
+        enemy2Step++;
     }
 
-    if(rightLightOn){
-        usage++;
+
+    if(
+        Math.random() <
+        chance * .82 &&
+
+        enemy3Step <
+        enemy3Route.length - 1
+    ){
+
+        enemy3Step++;
     }
+
+
+    checkEnemyAttack();
+
+
+    updateDoorEnemies();
+
 
     if(camerasOpen){
+
+        renderCamera();
+    }
+}
+
+
+/* =========================
+   ATTACK CHECK
+========================= */
+
+function checkEnemyAttack(){
+
+    if(
+        !running
+    ){
+
+        return;
+    }
+
+
+    if(
+        enemy1Position() ===
+        "left"
+    ){
+
+        attemptAttack(
+            "left",
+            "👀",
+            1
+        );
+    }
+
+
+    if(
+        !running
+    ){
+
+        return;
+    }
+
+
+    if(
+        enemy2Position() ===
+        "right"
+    ){
+
+        attemptAttack(
+            "right",
+            "🐺",
+            2
+        );
+    }
+
+
+    if(
+        !running
+    ){
+
+        return;
+    }
+
+
+    if(
+        enemy3Position() ===
+        enemy3Side
+    ){
+
+        attemptAttack(
+            enemy3Side,
+            "🦆",
+            3
+        );
+    }
+}
+
+
+/* =========================
+   ATTACK
+========================= */
+
+function attemptAttack(
+    side,
+    icon,
+    enemyNumber
+){
+
+    if(
+        !running
+    ){
+
+        return;
+    }
+
+
+    const closed =
+        side === "left"
+            ? leftDoorClosed
+            : rightDoorClosed;
+
+
+    if(closed){
+
+        hitSound();
+
+
+        statusText.textContent =
+            side === "left"
+                ? "💥 ВОРОГ УДАРИВ У ЛІВІ ДВЕРІ!"
+                : "💥 ВОРОГ УДАРИВ У ПРАВІ ДВЕРІ!";
+
+
+        resetEnemy(
+            enemyNumber
+        );
+
+
+        return;
+    }
+
+
+    showJumpscare(
+        icon,
+        side
+    );
+}
+
+
+/* =========================
+   RESET ENEMY
+========================= */
+
+function resetEnemy(number){
+
+    if(
+        number === 1
+    ){
+
+        enemy1Step =
+            0;
+    }
+
+
+    if(
+        number === 2
+    ){
+
+        enemy2Step =
+            0;
+    }
+
+
+    if(
+        number === 3
+    ){
+
+        enemy3Step =
+            0;
+
+
+        enemy3Side =
+            Math.random() < .5
+                ? "left"
+                : "right";
+
+
+        createDuckRoute();
+    }
+
+
+    updateDoorEnemies();
+
+
+    if(camerasOpen){
+
+        renderCamera();
+    }
+}
+
+
+/* =========================
+   JUMPSCARE
+========================= */
+
+function showJumpscare(
+    icon,
+    side
+){
+
+    if(
+        scareRunning
+    ){
+
+        return;
+    }
+
+
+    scareRunning =
+        true;
+
+
+    running =
+        false;
+
+
+    stopTimers();
+
+
+    camerasOpen =
+        false;
+
+
+    cameraPanel.classList.add(
+        "hidden"
+    );
+
+
+    warning.classList.add(
+        "hidden"
+    );
+
+
+    jumpscareFace.textContent =
+        icon;
+
+
+    jumpscare.classList.add(
+        "active"
+    );
+
+
+    jumpscareSound();
+
+
+    setTimeout(
+        function(){
+
+            jumpscare.classList.remove(
+                "active"
+            );
+
+
+            showGameOver(
+                side === "left"
+                    ? "Ти не закрив ліві двері."
+                    : "Ти не закрив праві двері."
+            );
+
+
+            scareRunning =
+                false;
+
+        },
+        1200
+    );
+}
+
+
+/* =========================
+   USAGE
+========================= */
+
+function updateUsage(){
+
+    let usage =
+        1;
+
+
+    if(leftDoorClosed){
+
         usage++;
     }
+
+
+    if(rightDoorClosed){
+
+        usage++;
+    }
+
+
+    if(leftLightOn){
+
+        usage++;
+    }
+
+
+    if(rightLightOn){
+
+        usage++;
+    }
+
+
+    if(camerasOpen){
+
+        usage++;
+    }
+
 
     usageBars.forEach(
         function(bar,index){
 
             bar.classList.toggle(
                 "on",
-                index < usage
+
+                index <
+                usage
             );
         }
     );
 }
 
 
+/* =========================
+   POWER
+========================= */
+
 function updatePower(){
 
     if(!running){
+
         return;
     }
 
-    let drain = .007;
+
+    let drain =
+        .006;
+
 
     if(leftDoorClosed){
-        drain += .012;
+
+        drain +=
+            .011;
     }
+
 
     if(rightDoorClosed){
-        drain += .012;
+
+        drain +=
+            .011;
     }
+
 
     if(leftLightOn){
-        drain += .008;
+
+        drain +=
+            .008;
     }
+
 
     if(rightLightOn){
-        drain += .008;
+
+        drain +=
+            .008;
     }
+
 
     if(camerasOpen){
-        drain += .010;
+
+        drain +=
+            .009;
     }
 
-    power -= drain;
+
+    power -=
+        drain;
+
 
     if(
         power <= 0
     ){
 
-        power = 0;
+        power =
+            0;
+
 
         powerLabel.textContent =
             "0";
 
+
         powerOut();
+
 
         return;
     }
+
 
     powerLabel.textContent =
         Math.floor(
             power
         );
+
 
     if(
         power <= 20
@@ -2550,265 +3803,99 @@ function updatePower(){
 }
 
 
+/* =========================
+   POWER OUT
+========================= */
+
 function powerOut(){
 
-    leftDoorClosed = false;
+    if(!running){
 
-    rightDoorClosed = false;
+        return;
+    }
 
-    leftLightOn = false;
 
-    rightLightOn = false;
+    leftDoorClosed =
+        false;
 
-    leftDoor.classList.remove(
-        "closed"
-    );
 
-    rightDoor.classList.remove(
-        "closed"
-    );
+    rightDoorClosed =
+        false;
 
-    leftDoorBtn.classList.remove(
-        "doorOn"
-    );
 
-    rightDoorBtn.classList.remove(
-        "doorOn"
-    );
+    leftLightOn =
+        false;
 
-    leftLightBtn.classList.remove(
-        "lightOn"
-    );
 
-    rightLightBtn.classList.remove(
-        "lightOn"
-    );
+    rightLightOn =
+        false;
 
-    leftLightEffect.classList.remove(
-        "on"
-    );
 
-    rightLightEffect.classList.remove(
-        "on"
-    );
+    resetOffice();
 
-    leftDoorEnemy.classList.remove(
-        "visible"
-    );
-
-    rightDoorEnemy.classList.remove(
-        "visible"
-    );
 
     closeCamera();
+
 
     statusText.textContent =
         "⚡ ЕНЕРГІЯ ЗАКІНЧИЛАСЯ...";
 
-    setTimeout(
-        function(){
-
-            if(running){
-
-                loseGame(
-                    "Енергія закінчилася."
-                );
-            }
-
-        },
-        2500
-    );
-}
-
-
-function moveEnemies(){
-
-    if(!running){
-        return;
-    }
-
-    const chance =
-        .22 +
-        currentNight * .045;
-
-    if(
-        Math.random() < chance &&
-        enemy1 < 6
-    ){
-        enemy1++;
-    }
-
-    if(
-        Math.random() < chance &&
-        enemy2 < 6
-    ){
-        enemy2++;
-    }
-
-    if(
-        Math.random() <
-        chance * .75 &&
-        enemy3 < 6
-    ){
-        enemy3++;
-    }
-
-    if(
-        enemy1 >= 6
-    ){
-
-        attack(
-            "left",
-            "👀",
-            1
-        );
-    }
-
-    if(
-        enemy2 >= 6
-    ){
-
-        attack(
-            "right",
-            "🐺",
-            2
-        );
-    }
-
-    if(
-        enemy3 >= 6
-    ){
-
-        attack(
-            enemy3Side,
-            "🦆",
-            3
-        );
-    }
-
-    updateDoorEnemies();
-
-    if(camerasOpen){
-        renderCamera();
-    }
-}
-
-
-function attack(
-    side,
-    icon,
-    enemyNumber
-){
-
-    if(!running){
-        return;
-    }
-
-    const closed =
-        side === "left"
-            ? leftDoorClosed
-            : rightDoorClosed;
-
-    if(closed){
-
-        statusText.textContent =
-            side === "left"
-                ? "💥 Ворог ударив у ліві двері!"
-                : "💥 Ворог ударив у праві двері!";
-
-        hitSound();
-
-        if(
-            enemyNumber === 1
-        ){
-            enemy1 = 0;
-        }
-
-        if(
-            enemyNumber === 2
-        ){
-            enemy2 = 2;
-        }
-
-        if(
-            enemyNumber === 3
-        ){
-
-            enemy3 = 1;
-
-            enemy3Side =
-                Math.random() < .5
-                    ? "left"
-                    : "right";
-        }
-
-        updateDoorEnemies();
-
-        return;
-    }
-
-    warningIcon.textContent =
-        icon;
-
-    warningSound();
-
-    warning.classList.remove(
-        "hidden"
-    );
-
-    setTimeout(
-        function(){
-
-            warning.classList.add(
-                "hidden"
-            );
-
-        },
-        650
-    );
 
     setTimeout(
         function(){
 
             if(running){
 
-                loseGame(
-                    side === "left"
-                        ? "Ти не закрив ліві двері."
-                        : "Ти не закрив праві двері."
+                showJumpscare(
+                    "👀",
+                    "left"
                 );
             }
 
         },
-        850
+        2200
     );
 }
 
+
+/* =========================
+   TIME
+========================= */
 
 function advanceTime(){
 
     if(!running){
+
         return;
     }
 
+
     hour++;
+
 
     if(
         hour >= 6
     ){
 
-        hour = 6;
+        hour =
+            6;
+
 
         timeLabel.textContent =
             "6 AM";
 
+
         winGame();
+
 
         return;
     }
 
+
     timeLabel.textContent =
-        hour + " AM";
+        hour +
+        " AM";
+
 
     if(
         hour === 5
@@ -2820,33 +3907,49 @@ function advanceTime(){
 }
 
 
+/* =========================
+   WIN
+========================= */
+
 function winGame(){
 
     if(!running){
+
         return;
     }
 
-    running = false;
+
+    running =
+        false;
+
 
     stopTimers();
 
+
     closeCamera();
 
+
     winSound();
+
 
     endScreen.classList.remove(
         "hidden"
     );
 
+
     endTitle.textContent =
         "🎉 6 AM";
 
+
     if(
-        currentNight < 5
+        currentNight <
+        5
     ){
 
         const nextNight =
-            currentNight + 1;
+            currentNight +
+            1;
+
 
         if(
             nextNight >
@@ -2856,6 +3959,7 @@ function winGame(){
             unlockedNight =
                 nextNight;
 
+
             localStorage.setItem(
                 "atbNight",
                 String(
@@ -2863,6 +3967,7 @@ function winGame(){
                 )
             );
         }
+
 
         endText.textContent =
             "Ніч " +
@@ -2877,39 +3982,34 @@ function winGame(){
             "🏆 ТИ ПЕРЕЖИВ УСІ П'ЯТЬ НОЧЕЙ В АТБ!";
     }
 
+
     updateNightButtons();
 }
 
 
-function loseGame(reason){
+/* =========================
+   GAME OVER
+========================= */
 
-    if(!running){
-        return;
-    }
-
-    running = false;
-
-    stopTimers();
-
-    closeCamera();
-
-    warning.classList.add(
-        "hidden"
-    );
+function showGameOver(reason){
 
     endScreen.classList.remove(
         "hidden"
     );
 
+
     endTitle.textContent =
         "GAME OVER";
 
+
     endText.textContent =
         reason;
-
-    warningSound();
 }
 
+
+/* =========================
+   RESTART
+========================= */
 
 restartBtn.addEventListener(
     "click",
@@ -2922,25 +4022,44 @@ restartBtn.addEventListener(
 );
 
 
+/* =========================
+   MENU BUTTON
+========================= */
+
 menuBtn.addEventListener(
     "click",
     function(){
 
         stopTimers();
 
-        running = false;
+
+        running =
+            false;
+
+
+        scareRunning =
+            false;
+
+
+        jumpscare.classList.remove(
+            "active"
+        );
+
 
         game.classList.add(
             "hidden"
         );
 
+
         endScreen.classList.add(
             "hidden"
         );
 
+
         cameraPanel.classList.add(
             "hidden"
         );
+
 
         menu.classList.remove(
             "hidden"
@@ -2948,6 +4067,10 @@ menuBtn.addEventListener(
     }
 );
 
+
+/* =========================
+   TIMERS
+========================= */
 
 function startTimers(){
 
@@ -2957,19 +4080,24 @@ function startTimers(){
             100
         );
 
+
     timeTimer =
         setInterval(
             advanceTime,
             20000
         );
 
+
     enemyTimer =
         setInterval(
             moveEnemies,
+
             Math.max(
-                2200,
-                5200 -
-                currentNight * 400
+                2300,
+
+                5900 -
+                currentNight *
+                500
             )
         );
 }
@@ -2981,80 +4109,131 @@ function stopTimers(){
         powerTimer
     );
 
+
     clearInterval(
         timeTimer
     );
+
 
     clearInterval(
         enemyTimer
     );
 
-    powerTimer = null;
-    timeTimer = null;
-    enemyTimer = null;
+
+    powerTimer =
+        null;
+
+
+    timeTimer =
+        null;
+
+
+    enemyTimer =
+        null;
 }
 
+
+/* =========================
+   KEYBOARD
+========================= */
 
 document.addEventListener(
     "keydown",
     function(event){
 
-        if(!running){
+        if(
+            !running
+        ){
+
             return;
         }
+
 
         const key =
             event.key.toLowerCase();
 
+
+        /*
+        Q = ЛІВІ ДВЕРІ
+        E = ПРАВІ ДВЕРІ
+
+        A = ЛІВЕ СВІТЛО
+        D = ПРАВЕ СВІТЛО
+
+        C = КАМЕРИ
+        ESC = ЗАКРИТИ КАМЕРИ
+        */
+
+
         if(
             key === "q"
         ){
+
             leftDoorBtn.click();
         }
+
 
         if(
             key === "e"
         ){
+
             rightDoorBtn.click();
         }
+
 
         if(
             key === "a"
         ){
+
             leftLightBtn.click();
         }
+
 
         if(
             key === "d"
         ){
+
             rightLightBtn.click();
         }
+
 
         if(
             key === "c"
         ){
 
             if(camerasOpen){
+
                 closeCamera();
+
             }else{
+
                 cameraBtn.click();
             }
         }
 
+
         if(
-            event.key === "Escape" &&
+            event.key ===
+            "Escape" &&
+
             camerasOpen
         ){
+
             closeCamera();
         }
     }
 );
 
 
+/* =========================
+   START
+========================= */
+
 updateNightButtons();
 
+
 console.log(
-    "П'ЯТЬ НОЧЕЙ В АТБ — ГОТОВО"
+    "П'ЯТЬ НОЧЕЙ В АТБ — CAMERAS 2.0 + JUMPSCARE"
 );
 
 </script>
