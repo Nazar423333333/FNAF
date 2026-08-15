@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
 <title>П'ЯТЬ НОЧЕЙ В АТБ</title>
 
 <style>
@@ -13,8 +12,7 @@
     padding:0;
 }
 
-html,
-body{
+html,body{
     width:100%;
     height:100%;
 }
@@ -43,7 +41,6 @@ button{
 .screen{
     position:fixed;
     inset:0;
-
     z-index:5000;
 
     display:flex;
@@ -64,7 +61,6 @@ button{
 
 .title{
     font-size:clamp(42px,7vw,90px);
-
     letter-spacing:4px;
 
     text-shadow:
@@ -75,35 +71,27 @@ button{
 
 .subtitle{
     margin-top:15px;
-
     color:#aaa;
-
     font-size:18px;
 }
 
 .menuBtn{
     min-width:280px;
-
     margin-top:22px;
-
     padding:16px 26px;
 
     border:1px solid #555;
-
     border-radius:12px;
 
     background:#151515;
-
     color:#fff;
 
     font-size:18px;
-
     font-weight:bold;
 }
 
 .menuBtn:hover{
     background:#292929;
-
     transform:scale(1.03);
 }
 
@@ -112,46 +100,37 @@ button{
 }
 
 /* =========================================================
-   NIGHT SELECT
+   NIGHT MENU
 ========================================================= */
 
 .nightButtons{
     display:flex;
-
     flex-wrap:wrap;
-
     justify-content:center;
 
     gap:12px;
-
     margin-top:25px;
 }
 
 .nightBtn{
     width:135px;
-
     height:105px;
 
     border:1px solid #555;
-
     border-radius:12px;
 
     background:#151515;
-
     color:#fff;
 
     font-size:16px;
-
     font-weight:bold;
 }
 
 .nightBtn span{
     display:block;
-
     margin-top:8px;
 
     color:#aaa;
-
     font-size:12px;
 }
 
@@ -161,7 +140,6 @@ button{
 
 .nightBtn:disabled{
     opacity:.3;
-
     cursor:not-allowed;
 }
 
@@ -171,11 +149,9 @@ button{
 
 #game{
     position:fixed;
-
     inset:0;
 
     overflow:hidden;
-
     background:#000;
 }
 
@@ -185,7 +161,6 @@ button{
 
 #office{
     position:absolute;
-
     inset:0;
 
     overflow:hidden;
@@ -198,23 +173,20 @@ button{
         url("office.png");
 
     background-size:cover;
-
-    background-position:center center;
-
+    background-position:center;
     background-repeat:no-repeat;
 
     background-color:#050505;
 }
 
 /* =========================================================
-   TOP
+   TOP BAR
 ========================================================= */
 
 #topbar{
     position:absolute;
 
     top:16px;
-
     left:50%;
 
     transform:translateX(-50%);
@@ -226,21 +198,17 @@ button{
     padding:14px 20px;
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
     background:rgba(0,0,0,.88);
 
     border:1px solid #555;
-
     border-radius:12px;
 
     box-shadow:0 0 25px #000;
 
     font-size:18px;
-
     font-weight:bold;
 }
 
@@ -250,9 +218,7 @@ button{
 
 #power.low{
     color:#ff3333;
-
-    text-shadow:
-        0 0 10px red;
+    text-shadow:0 0 10px red;
 }
 
 /* =========================================================
@@ -263,7 +229,6 @@ button{
     position:absolute;
 
     top:25%;
-
     left:50%;
 
     transform:translateX(-50%);
@@ -279,25 +244,22 @@ button{
     background:rgba(0,0,0,.72);
 
     border:1px solid #444;
-
     border-radius:9px;
 }
 
 /* =========================================================
-   SOUND CONTROLS
+   AUDIO CONTROLS
 ========================================================= */
 
 #audioControls{
     position:absolute;
 
     top:82px;
-
     left:15px;
 
     z-index:900;
 
     display:flex;
-
     flex-direction:column;
 
     gap:7px;
@@ -309,27 +271,22 @@ button{
     padding:9px 10px;
 
     border:1px solid #555;
-
     border-radius:8px;
 
     background:rgba(0,0,0,.88);
-
     color:#fff;
 
     font-size:12px;
-
     font-weight:bold;
 }
 
 #effectsBtn.effectsOn{
     background:#123a20;
-
     border-color:#35cf65;
 }
 
 #musicOnBtn.active{
     background:#126a35;
-
     border-color:#4cff7c;
 
     box-shadow:
@@ -338,11 +295,85 @@ button{
 
 #musicOffBtn.active{
     background:#7b1717;
-
     border-color:#ff5050;
 
     box-shadow:
         0 0 12px rgba(255,60,60,.45);
+}
+
+/* =========================================================
+   ⚡ USAGE — ПОВЕРНУТО
+========================================================= */
+
+#usage{
+    position:absolute;
+
+    top:82px;
+    right:15px;
+
+    z-index:900;
+
+    min-width:225px;
+
+    padding:11px 13px;
+
+    background:rgba(0,0,0,.88);
+
+    border:1px solid #555;
+    border-radius:9px;
+
+    box-shadow:0 0 18px #000;
+
+    font-size:13px;
+    font-weight:bold;
+}
+
+#usageTitle{
+    display:block;
+    margin-bottom:7px;
+
+    color:#fff;
+}
+
+#usageBars{
+    display:flex;
+    gap:5px;
+}
+
+.usageBar{
+    width:25px;
+    height:12px;
+
+    border:1px solid #555;
+    border-radius:2px;
+
+    background:#151515;
+
+    transition:.15s;
+}
+
+.usageBar.on{
+    background:#63ff4d;
+
+    border-color:#9aff8b;
+
+    box-shadow:
+        0 0 6px #63ff4d,
+        0 0 12px rgba(99,255,77,.5);
+}
+
+.usageBar.warning{
+    background:#ffd43b;
+    border-color:#fff17c;
+
+    box-shadow:0 0 8px #ffd43b;
+}
+
+.usageBar.danger{
+    background:#ff3030;
+    border-color:#ff7777;
+
+    box-shadow:0 0 9px red;
 }
 
 /* =========================================================
@@ -355,7 +386,6 @@ button{
     top:21%;
 
     width:11.5%;
-
     height:56%;
 
     overflow:hidden;
@@ -379,7 +409,6 @@ button{
 
 .doorLight{
     position:absolute;
-
     inset:0;
 
     z-index:5;
@@ -393,7 +422,7 @@ button{
             ellipse at center,
             rgba(255,255,220,.98),
             rgba(255,215,80,.68) 35%,
-            rgba(255,170,20,.2) 68%,
+            rgba(255,170,20,.20) 68%,
             transparent 95%
         );
 }
@@ -410,20 +439,17 @@ button{
     position:absolute;
 
     left:50%;
-
     top:52%;
 
-    transform:
-        translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 
     z-index:10;
 
     opacity:0;
 
-    font-size:
-        clamp(65px,7vw,115px);
-
     pointer-events:none;
+
+    font-size:clamp(65px,7vw,115px);
 
     filter:
         drop-shadow(0 0 10px #fff)
@@ -436,21 +462,18 @@ button{
 }
 
 /* =========================================================
-   DOOR
+   DOORS
 ========================================================= */
 
 .door{
     position:absolute;
-
     inset:0;
 
     z-index:30;
 
-    transform:
-        translateY(-105%);
+    transform:translateY(-105%);
 
-    transition:
-        transform .35s ease;
+    transition:transform .35s ease;
 
     background:
         repeating-linear-gradient(
@@ -469,12 +492,11 @@ button{
 }
 
 .door.closed{
-    transform:
-        translateY(0);
+    transform:translateY(0);
 }
 
 /* =========================================================
-   LIGHT
+   LIGHT EFFECT
 ========================================================= */
 
 .lightEffect{
@@ -483,7 +505,6 @@ button{
     top:0;
 
     width:35%;
-
     height:100%;
 
     opacity:0;
@@ -492,8 +513,7 @@ button{
 
     pointer-events:none;
 
-    transition:
-        opacity .12s;
+    transition:opacity .12s;
 }
 
 #leftLightEffect{
@@ -534,7 +554,6 @@ button{
     z-index:700;
 
     display:flex;
-
     flex-direction:column;
 
     gap:10px;
@@ -554,18 +573,14 @@ button{
     padding:13px 8px;
 
     border:1px solid #666;
-
     border-radius:10px;
 
-    background:
-        rgba(5,5,5,.92);
-
+    background:rgba(5,5,5,.92);
     color:#fff;
 
     font-weight:bold;
 
-    box-shadow:
-        0 0 18px #000;
+    box-shadow:0 0 18px #000;
 }
 
 .controlBtn:hover{
@@ -574,7 +589,6 @@ button{
 
 .controlBtn.lightActive{
     background:#ffd63a;
-
     color:#111;
 
     box-shadow:
@@ -597,31 +611,25 @@ button{
     position:absolute;
 
     bottom:20px;
-
     left:50%;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     z-index:700;
 
     padding:15px 30px;
 
     border:0;
-
     border-radius:12px;
 
     background:#0874ff;
-
     color:#fff;
 
     font-size:17px;
-
     font-weight:bold;
 
     box-shadow:
-        0 0 25px
-        rgba(0,100,255,.55);
+        0 0 25px rgba(0,100,255,.55);
 }
 
 /* =========================================================
@@ -632,11 +640,9 @@ button{
     position:fixed;
 
     top:85px;
-
     left:50%;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     z-index:99990;
 
@@ -647,22 +653,18 @@ button{
     background:#050805;
 
     border:3px solid #42ff79;
-
     border-radius:18px;
 
     box-shadow:
-        0 0 25px
-        rgba(66,255,121,.5),
+        0 0 25px rgba(66,255,121,.5),
         0 0 80px #000;
 }
 
 #phone.ringing{
-    animation:
-        ring .16s infinite alternate;
+    animation:ring .16s infinite alternate;
 }
 
 @keyframes ring{
-
     from{
         transform:
             translateX(-50%)
@@ -678,38 +680,31 @@ button{
 
 .phoneHeader{
     display:flex;
-
-    gap:14px;
-
     align-items:center;
+    gap:14px;
 }
 
 .phoneIcon{
     width:65px;
-
     height:65px;
 
     display:flex;
-
-    align-items:center;
-
     justify-content:center;
+    align-items:center;
 
     flex-shrink:0;
 
-    background:#159447;
-
     border-radius:50%;
+
+    background:#159447;
 
     font-size:36px;
 
-    box-shadow:
-        0 0 20px #32ff70;
+    box-shadow:0 0 20px #32ff70;
 }
 
 #callerName{
     font-size:21px;
-
     font-weight:900;
 }
 
@@ -725,7 +720,6 @@ button{
     max-height:180px;
 
     margin-top:14px;
-
     padding:12px;
 
     overflow:auto;
@@ -733,7 +727,6 @@ button{
     background:#090909;
 
     border:1px solid #333;
-
     border-radius:9px;
 
     color:#ddd;
@@ -745,7 +738,6 @@ button{
 
 .phoneButtons{
     display:flex;
-
     flex-wrap:wrap;
 
     gap:9px;
@@ -761,7 +753,6 @@ button{
     padding:13px 7px;
 
     border:0;
-
     border-radius:9px;
 
     color:#fff;
@@ -791,7 +782,6 @@ button{
 
 #cameraPanel{
     position:fixed;
-
     inset:0;
 
     z-index:3000;
@@ -805,24 +795,19 @@ button{
     height:55px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
-    border-bottom:
-        1px solid #444;
+    border-bottom:1px solid #444;
 }
 
 #closeCamera{
     padding:10px 15px;
 
     border:0;
-
     border-radius:8px;
 
     background:#a00;
-
     color:#fff;
 
     font-weight:bold;
@@ -831,8 +816,7 @@ button{
 #cameraView{
     position:relative;
 
-    height:
-        calc(100vh - 90px);
+    height:calc(100vh - 90px);
 
     margin-top:12px;
 
@@ -853,7 +837,6 @@ button{
     content:"";
 
     position:absolute;
-
     inset:0;
 
     z-index:60;
@@ -871,21 +854,17 @@ button{
 
 #cameraScene{
     position:absolute;
-
     inset:0;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
     padding-bottom:130px;
 
     opacity:.4;
 
-    font-size:
-        clamp(25px,4vw,55px);
+    font-size:clamp(25px,4vw,55px);
 }
 
 .camEnemy{
@@ -915,33 +894,27 @@ button{
 #camEnemy3{
     left:50%;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 }
 
 #cameraInfo{
     position:absolute;
 
     left:20px;
-
     bottom:20px;
 
     z-index:100;
 
     padding:14px;
 
-    background:
-        rgba(0,0,0,.9);
+    background:rgba(0,0,0,.9);
 
-    border:
-        1px solid #555;
-
+    border:1px solid #555;
     border-radius:9px;
 }
 
 #cameraInfo p{
     margin-top:7px;
-
     color:#aaa;
 }
 
@@ -949,21 +922,16 @@ button{
     position:absolute;
 
     right:20px;
-
     bottom:20px;
 
     z-index:100;
 
     width:290px;
-
     height:215px;
 
-    background:
-        rgba(0,0,0,.9);
+    background:rgba(0,0,0,.9);
 
-    border:
-        1px solid #555;
-
+    border:1px solid #555;
     border-radius:10px;
 }
 
@@ -974,14 +942,11 @@ button{
 
     padding:8px;
 
-    background:#151515;
-
-    color:#fff;
-
-    border:
-        1px solid #555;
-
+    border:1px solid #555;
     border-radius:6px;
+
+    background:#151515;
+    color:#fff;
 
     font-weight:bold;
 }
@@ -992,37 +957,31 @@ button{
 
 .camBtn[data-cam="0"]{
     top:18px;
-
     left:106px;
 }
 
 .camBtn[data-cam="1"]{
     top:65px;
-
     left:20px;
 }
 
 .camBtn[data-cam="2"]{
     top:65px;
-
     right:20px;
 }
 
 .camBtn[data-cam="3"]{
     top:115px;
-
     left:20px;
 }
 
 .camBtn[data-cam="4"]{
     top:115px;
-
     right:20px;
 }
 
 .camBtn[data-cam="5"]{
     bottom:12px;
-
     left:106px;
 }
 
@@ -1032,17 +991,14 @@ button{
 
 #jumpscare{
     position:fixed;
-
     inset:0;
 
     z-index:100000;
 
     display:none;
 
-    align-items:center;
-
     justify-content:center;
-
+    align-items:center;
     flex-direction:column;
 
     background:
@@ -1063,94 +1019,60 @@ button{
 }
 
 #jumpscareFace{
-    font-size:
-        min(50vw,480px);
+    font-size:min(50vw,480px);
 
-    animation:
-        zoom .5s forwards;
+    animation:zoom .5s forwards;
 }
 
 #jumpscare h1{
-    font-size:
-        clamp(40px,8vw,100px);
+    font-size:clamp(40px,8vw,100px);
 }
 
 @keyframes zoom{
-
     from{
-        transform:
-            scale(.15);
+        transform:scale(.15);
     }
 
     to{
-        transform:
-            scale(1.25);
+        transform:scale(1.25);
     }
 }
 
 @keyframes flash{
-
     0%{
-        filter:
-            brightness(.6);
+        filter:brightness(.6);
     }
 
     50%{
-        filter:
-            brightness(2);
+        filter:brightness(2);
     }
 
     100%{
-        filter:
-            brightness(.8);
+        filter:brightness(.8);
     }
 }
 
 @keyframes shake{
-
-    0%{
-        transform:
-            translate(0,0);
-    }
-
-    25%{
-        transform:
-            translate(-8px,5px);
-    }
-
-    50%{
-        transform:
-            translate(8px,-5px);
-    }
-
-    75%{
-        transform:
-            translate(-5px,-3px);
-    }
-
-    100%{
-        transform:
-            translate(0,0);
-    }
+    0%{transform:translate(0,0);}
+    25%{transform:translate(-8px,5px);}
+    50%{transform:translate(8px,-5px);}
+    75%{transform:translate(-5px,-3px);}
+    100%{transform:translate(0,0);}
 }
 
 /* =========================================================
-   END
+   END SCREEN
 ========================================================= */
 
 #endScreen{
     position:fixed;
-
     inset:0;
 
     z-index:5000;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
 
     background:#000;
@@ -1159,15 +1081,13 @@ button{
 }
 
 #endTitle{
-    font-size:
-        clamp(55px,10vw,120px);
+    font-size:clamp(55px,10vw,120px);
 }
 
 #endText{
     margin-top:15px;
 
     color:#aaa;
-
     font-size:20px;
 }
 
@@ -1180,7 +1100,7 @@ button{
 }
 
 /* =========================================================
-   MOBILE
+   TABLET
 ========================================================= */
 
 @media(max-width:1100px){
@@ -1207,10 +1127,21 @@ button{
 
     .controlBtn{
         width:140px;
-
         font-size:13px;
     }
+
+    #usage{
+        min-width:190px;
+    }
+
+    .usageBar{
+        width:20px;
+    }
 }
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:750px){
 
@@ -1224,7 +1155,6 @@ button{
 
     #audioControls{
         top:55px;
-
         left:5px;
 
         gap:4px;
@@ -1238,6 +1168,32 @@ button{
         font-size:9px;
     }
 
+    /* USAGE НА ТЕЛЕФОНІ */
+
+    #usage{
+        top:55px;
+        right:5px;
+
+        min-width:145px;
+
+        padding:7px;
+
+        font-size:9px;
+    }
+
+    #usageTitle{
+        margin-bottom:5px;
+    }
+
+    #usageBars{
+        gap:3px;
+    }
+
+    .usageBar{
+        width:17px;
+        height:9px;
+    }
+
     #phone{
         top:52px;
 
@@ -1248,7 +1204,6 @@ button{
 
     .phoneIcon{
         width:43px;
-
         height:43px;
 
         font-size:25px;
@@ -1320,11 +1275,9 @@ button{
 
     #cameraMap{
         width:240px;
-
         height:190px;
 
         right:8px;
-
         bottom:8px;
     }
 
@@ -1344,7 +1297,6 @@ button{
 
     #cameraInfo{
         left:8px;
-
         bottom:8px;
 
         max-width:160px;
@@ -1372,10 +1324,7 @@ button{
      MENU
 ====================================================== -->
 
-<section
-    id="menu"
-    class="screen"
->
+<section id="menu" class="screen">
 
     <h1 class="title">
         П'ЯТЬ НОЧЕЙ В АТБ
@@ -1385,17 +1334,11 @@ button{
         Переживи п'ять нічних змін
     </div>
 
-    <button
-        id="playBtn"
-        class="menuBtn"
-    >
+    <button id="playBtn" class="menuBtn">
         ▶ ГРАТИ
     </button>
 
-    <button
-        id="resetBtn"
-        class="menuBtn"
-    >
+    <button id="resetBtn" class="menuBtn">
         ♻ СКИНУТИ ПРОГРЕС
     </button>
 
@@ -1420,37 +1363,15 @@ button{
 
     <div class="nightButtons">
 
-        <button
-            class="nightBtn"
-            data-night="1"
-        ></button>
-
-        <button
-            class="nightBtn"
-            data-night="2"
-        ></button>
-
-        <button
-            class="nightBtn"
-            data-night="3"
-        ></button>
-
-        <button
-            class="nightBtn"
-            data-night="4"
-        ></button>
-
-        <button
-            class="nightBtn"
-            data-night="5"
-        ></button>
+        <button class="nightBtn" data-night="1"></button>
+        <button class="nightBtn" data-night="2"></button>
+        <button class="nightBtn" data-night="3"></button>
+        <button class="nightBtn" data-night="4"></button>
+        <button class="nightBtn" data-night="5"></button>
 
     </div>
 
-    <button
-        id="backBtn"
-        class="menuBtn"
-    >
+    <button id="backBtn" class="menuBtn">
         ← НАЗАД
     </button>
 
@@ -1460,10 +1381,9 @@ button{
      GAME
 ====================================================== -->
 
-<section
-    id="game"
-    class="hidden"
->
+<section id="game" class="hidden">
+
+    <!-- TOP -->
 
     <div id="topbar">
 
@@ -1488,9 +1408,7 @@ button{
 
     </div>
 
-    <!-- ==================================================
-         SOUND BUTTONS
-    ================================================== -->
+    <!-- AUDIO -->
 
     <div id="audioControls">
 
@@ -1518,8 +1436,32 @@ button{
     </div>
 
     <!-- ==================================================
-         OFFICE
+         ⚡ ВИКОРИСТАННЯ
     ================================================== -->
+
+    <div id="usage">
+
+        <span id="usageTitle">
+            ⚡ ВИКОРИСТАННЯ:
+            <span id="usageNumber">
+                1
+            </span>/6
+        </span>
+
+        <div id="usageBars">
+
+            <div class="usageBar on"></div>
+            <div class="usageBar"></div>
+            <div class="usageBar"></div>
+            <div class="usageBar"></div>
+            <div class="usageBar"></div>
+            <div class="usageBar"></div>
+
+        </div>
+
+    </div>
+
+    <!-- OFFICE -->
 
     <main id="office">
 
@@ -1645,10 +1587,7 @@ button{
      PHONE
 ====================================================== -->
 
-<div
-    id="phone"
-    class="hidden"
->
+<div id="phone" class="hidden">
 
     <div class="phoneHeader">
 
@@ -1836,7 +1775,7 @@ button{
 </div>
 
 <!-- ======================================================
-     END
+     END SCREEN
 ====================================================== -->
 
 <section
@@ -1872,9 +1811,8 @@ button{
 
 <script>
 
-const $ =
-    id =>
-        document.getElementById(id);
+const $ = id =>
+    document.getElementById(id);
 
 /* =========================================================
    CONFIG
@@ -1994,42 +1932,26 @@ const PHONE_TEXT = {
    ELEMENTS
 ========================================================= */
 
-const menu =
-    $("menu");
+const menu = $("menu");
+const nightMenu = $("nightMenu");
+const game = $("game");
 
-const nightMenu =
-    $("nightMenu");
-
-const game =
-    $("game");
-
-const playBtn =
-    $("playBtn");
-
-const resetBtn =
-    $("resetBtn");
-
-const backBtn =
-    $("backBtn");
+const playBtn = $("playBtn");
+const resetBtn = $("resetBtn");
+const backBtn = $("backBtn");
 
 const nightButtons =
-    document.querySelectorAll(
-        ".nightBtn"
-    );
+    document.querySelectorAll(".nightBtn");
 
-const nightLabel =
-    $("night");
+const nightLabel = $("night");
+const clockLabel = $("clock");
+const powerLabel = $("power");
 
-const clockLabel =
-    $("clock");
+const statusText = $("status");
 
-const powerLabel =
-    $("power");
+/* MUSIC */
 
-const statusText =
-    $("status");
-
-/* AUDIO */
+const bgMusic = $("bgMusic");
 
 const effectsBtn =
     $("effectsBtn");
@@ -2040,16 +1962,20 @@ const musicOnBtn =
 const musicOffBtn =
     $("musicOffBtn");
 
-const bgMusic =
-    $("bgMusic");
+/* USAGE */
 
-/* OFFICE */
+const usageBars =
+    document.querySelectorAll(
+        ".usageBar"
+    );
 
-const leftDoor =
-    $("leftDoor");
+const usageNumber =
+    $("usageNumber");
 
-const rightDoor =
-    $("rightDoor");
+/* DOORS */
+
+const leftDoor = $("leftDoor");
+const rightDoor = $("rightDoor");
 
 const leftDoorFrame =
     $("leftDoorFrame");
@@ -2081,7 +2007,7 @@ const leftDoorBtn =
 const rightDoorBtn =
     $("rightDoorBtn");
 
-/* CAMERAS */
+/* CAMERA */
 
 const cameraBtn =
     $("cameraBtn");
@@ -2167,8 +2093,7 @@ const menuBtn =
    VARIABLES
 ========================================================= */
 
-let currentNight =
-    1;
+let currentNight = 1;
 
 let unlockedNight =
     Number(
@@ -2177,129 +2102,79 @@ let unlockedNight =
         ) || 1
     );
 
-let running =
-    false;
+let running = false;
 
-let power =
-    100;
+let power = 100;
 
-let hour =
-    0;
+let hour = 0;
 
-let leftDoorClosed =
-    false;
+let leftDoorClosed = false;
+let rightDoorClosed = false;
 
-let rightDoorClosed =
-    false;
+let leftLightOn = false;
+let rightLightOn = false;
 
-let leftLightOn =
-    false;
+let camerasOpen = false;
 
-let rightLightOn =
-    false;
+let selectedCamera = 0;
 
-let camerasOpen =
-    false;
+let e1 = 0;
+let e2 = 0;
+let e3 = 0;
 
-let selectedCamera =
-    0;
+let duckSide = "left";
 
-let e1 =
-    0;
+let powerTimer = null;
+let clockTimer = null;
+let enemyTimer = null;
 
-let e2 =
-    0;
-
-let e3 =
-    0;
-
-let duckSide =
-    "left";
-
-let powerTimer =
-    null;
-
-let clockTimer =
-    null;
-
-let enemyTimer =
-    null;
-
-let attack1 =
-    null;
-
-let attack2 =
-    null;
-
-let attack3 =
-    null;
+let attack1 = null;
+let attack2 = null;
+let attack3 = null;
 
 /* =========================================================
-   AUDIO VARIABLES
+   AUDIO
 ========================================================= */
 
-let effectsEnabled =
-    true;
+let effectsEnabled = true;
 
-let musicEnabled =
-    true;
+let musicEnabled = true;
 
-let audioContext =
-    null;
+let audioContext = null;
 
-let phoneRingTimer =
-    null;
+let phoneRingTimer = null;
 
-/* =========================================================
-   MUSIC SETTINGS
-========================================================= */
+bgMusic.loop = true;
 
-bgMusic.loop =
-    true;
-
-/*
-    0.18 = 18% гучності.
-    Якщо хочеш голосніше:
-    0.30
-    0.40
-    0.50
-*/
-
-bgMusic.volume =
-    0.18;
+bgMusic.volume = 0.18;
 
 /* =========================================================
-   START MUSIC
+   MUSIC
 ========================================================= */
 
 function startMusic(){
 
-    if(
-        !musicEnabled
-    ){
+    if(!musicEnabled){
         return;
     }
 
-    bgMusic.volume =
-        0.18;
+    bgMusic.volume = 0.18;
 
-    const promise =
+    const p =
         bgMusic.play();
 
     if(
-        promise &&
-        typeof promise.catch ===
+        p &&
+        typeof p.catch ===
         "function"
     ){
 
-        promise.catch(
-            function(error){
-
+        p.catch(
+            error =>
                 console.log(
-                    "Music blocked:",
+                    "Music:",
                     error
-                );
-            }
+                )
         );
     }
 
@@ -2311,10 +2186,6 @@ function startMusic(){
         "active"
     );
 }
-
-/* =========================================================
-   STOP MUSIC
-========================================================= */
 
 function stopMusic(){
 
@@ -2329,42 +2200,27 @@ function stopMusic(){
     );
 }
 
-/* =========================================================
-   MUSIC ON BUTTON
-========================================================= */
-
 musicOnBtn.onclick =
 function(){
 
-    musicEnabled =
-        true;
+    musicEnabled = true;
 
     startMusic();
 
     statusText.textContent =
-        "🎵 Фонова музика увімкнена.";
+        "🎵 Музика увімкнена.";
 };
-
-/* =========================================================
-   MUSIC OFF BUTTON
-========================================================= */
 
 musicOffBtn.onclick =
 function(){
 
-    musicEnabled =
-        false;
+    musicEnabled = false;
 
     stopMusic();
 
     statusText.textContent =
-        "🔇 Фонова музика вимкнена.";
+        "🔇 Музика вимкнена.";
 };
-
-/* =========================================================
-   MUSIC DUCKING
-   Під час голосу музика стає тихіша
-========================================================= */
 
 function lowerMusic(){
 
@@ -2390,26 +2246,23 @@ function restoreMusic(){
 }
 
 /* =========================================================
-   AUDIO CONTEXT
+   WEB AUDIO
 ========================================================= */
 
 function getAudioContext(){
 
     if(!audioContext){
 
-        const AudioContextClass =
+        const Ctx =
             window.AudioContext ||
             window.webkitAudioContext;
 
-        if(
-            !AudioContextClass
-        ){
-
+        if(!Ctx){
             return null;
         }
 
         audioContext =
-            new AudioContextClass();
+            new Ctx();
     }
 
     if(
@@ -2423,21 +2276,14 @@ function getAudioContext(){
     return audioContext;
 }
 
-/* =========================================================
-   BEEP
-========================================================= */
-
 function beep(
-    frequency = 440,
-    duration = 100,
-    volume = .06,
-    type = "square"
+    frequency=440,
+    duration=100,
+    volume=.06,
+    type="square"
 ){
 
-    if(
-        !effectsEnabled
-    ){
-
+    if(!effectsEnabled){
         return;
     }
 
@@ -2447,7 +2293,6 @@ function beep(
             getAudioContext();
 
         if(!ctx){
-
             return;
         }
 
@@ -2457,8 +2302,7 @@ function beep(
         const gain =
             ctx.createGain();
 
-        osc.type =
-            type;
+        osc.type = type;
 
         osc.frequency.value =
             frequency;
@@ -2474,9 +2318,7 @@ function beep(
             duration / 1000
         );
 
-        osc.connect(
-            gain
-        );
+        osc.connect(gain);
 
         gain.connect(
             ctx.destination
@@ -2491,14 +2333,12 @@ function beep(
 
     }catch(error){
 
-        console.log(
-            error
-        );
+        console.log(error);
     }
 }
 
 /* =========================================================
-   SOUND EFFECTS
+   SOUNDS
 ========================================================= */
 
 function doorSound(){
@@ -2511,16 +2351,12 @@ function doorSound(){
     );
 
     setTimeout(
-        function(){
-
-            beep(
-                80,
-                180,
-                .07,
-                "square"
-            );
-
-        },
+        ()=>beep(
+            80,
+            180,
+            .07,
+            "square"
+        ),
         90
     );
 }
@@ -2545,16 +2381,12 @@ function cameraOpenSound(){
     );
 
     setTimeout(
-        function(){
-
-            beep(
-                310,
-                60,
-                .04,
-                "square"
-            );
-
-        },
+        ()=>beep(
+            310,
+            60,
+            .04,
+            "square"
+        ),
         80
     );
 }
@@ -2577,20 +2409,6 @@ function enemyHitDoorSound(){
         .14,
         "sawtooth"
     );
-
-    setTimeout(
-        function(){
-
-            beep(
-                55,
-                250,
-                .10,
-                "square"
-            );
-
-        },
-        100
-    );
 }
 
 function phoneRingSound(){
@@ -2603,16 +2421,12 @@ function phoneRingSound(){
     );
 
     setTimeout(
-        function(){
-
-            beep(
-                850,
-                190,
-                .075,
-                "sine"
-            );
-
-        },
+        ()=>beep(
+            850,
+            190,
+            .075,
+            "sine"
+        ),
         220
     );
 }
@@ -2627,31 +2441,13 @@ function jumpscareSound(){
     );
 
     setTimeout(
-        function(){
-
-            beep(
-                650,
-                450,
-                .12,
-                "square"
-            );
-
-        },
+        ()=>beep(
+            650,
+            450,
+            .12,
+            "square"
+        ),
         80
-    );
-
-    setTimeout(
-        function(){
-
-            beep(
-                1050,
-                300,
-                .08,
-                "sawtooth"
-            );
-
-        },
-        170
     );
 }
 
@@ -2665,36 +2461,28 @@ function winSound(){
     );
 
     setTimeout(
-        function(){
-
-            beep(
-                680,
-                160,
-                .08,
-                "sine"
-            );
-
-        },
+        ()=>beep(
+            680,
+            160,
+            .08,
+            "sine"
+        ),
         170
     );
 
     setTimeout(
-        function(){
-
-            beep(
-                880,
-                350,
-                .09,
-                "sine"
-            );
-
-        },
+        ()=>beep(
+            880,
+            350,
+            .09,
+            "sine"
+        ),
         340
     );
 }
 
 /* =========================================================
-   EFFECTS ON/OFF
+   EFFECTS ON / OFF
 ========================================================= */
 
 effectsBtn.onclick =
@@ -2713,13 +2501,7 @@ function(){
         effectsEnabled
     );
 
-    if(
-        !effectsEnabled
-    ){
-
-        stopPhoneRinging();
-
-    }else{
+    if(effectsEnabled){
 
         getAudioContext();
 
@@ -2729,11 +2511,92 @@ function(){
             .05,
             "sine"
         );
+
+    }else{
+
+        stopPhoneRinging();
     }
 };
 
 /* =========================================================
-   PHONE RING LOOP
+   ⚡ UPDATE USAGE
+========================================================= */
+
+function updateUsage(){
+
+    /*
+        1 = сама система
+
+        +1 ліві двері
+        +1 праві двері
+        +1 ліве світло
+        +1 праве світло
+        +1 камери
+
+        Максимум = 6
+    */
+
+    let usage = 1;
+
+    if(leftDoorClosed){
+        usage++;
+    }
+
+    if(rightDoorClosed){
+        usage++;
+    }
+
+    if(leftLightOn){
+        usage++;
+    }
+
+    if(rightLightOn){
+        usage++;
+    }
+
+    if(camerasOpen){
+        usage++;
+    }
+
+    usageNumber.textContent =
+        usage;
+
+    usageBars.forEach(
+        function(bar,index){
+
+            bar.classList.remove(
+                "on",
+                "warning",
+                "danger"
+            );
+
+            if(index < usage){
+
+                if(usage >= 6){
+
+                    bar.classList.add(
+                        "danger"
+                    );
+
+                }else if(usage >= 4){
+
+                    bar.classList.add(
+                        "warning"
+                    );
+
+                }else{
+
+                    bar.classList.add(
+                        "on"
+                    );
+                }
+            }
+        }
+    );
+}
+
+/* =========================================================
+   PHONE RING
 ========================================================= */
 
 function startPhoneRinging(){
@@ -2755,28 +2618,22 @@ function stopPhoneRinging(){
         phoneRingTimer
     );
 
-    phoneRingTimer =
-        null;
+    phoneRingTimer = null;
 }
 
 /* =========================================================
-   SPEECH
+   PHONE VOICE
 ========================================================= */
 
-let cachedVoices =
-    [];
+let cachedVoices = [];
 
-let activeUtterance =
-    null;
+let activeUtterance = null;
 
-let speechParts =
-    [];
+let speechParts = [];
 
-let speechPartIndex =
-    0;
+let speechPartIndex = 0;
 
-let speechStopped =
-    false;
+let speechStopped = false;
 
 function loadVoices(){
 
@@ -2791,23 +2648,19 @@ function loadVoices(){
     }
 
     cachedVoices =
-        window
-        .speechSynthesis
+        speechSynthesis
         .getVoices();
 
     return cachedVoices;
 }
 
 if(
-    "speechSynthesis"
-    in window
+    "speechSynthesis" in window
 ){
 
     loadVoices();
 
-    window
-    .speechSynthesis
-    .onvoiceschanged =
+    speechSynthesis.onvoiceschanged =
     function(){
 
         loadVoices();
@@ -2819,54 +2672,36 @@ function chooseVoice(){
     const voices =
         loadVoices();
 
-    if(
-        !voices.length
-    ){
-
+    if(!voices.length){
         return null;
     }
 
     let voice =
         voices.find(
-            function(v){
-
-                return (
-                    v.lang &&
-                    v.lang
-                    .toLowerCase()
-                    .startsWith("uk")
-                );
-            }
+            v =>
+                v.lang &&
+                v.lang
+                .toLowerCase()
+                .startsWith("uk")
         );
 
     if(!voice){
 
         voice =
             voices.find(
-                function(v){
-
-                    return (
-                        v.lang &&
-                        v.lang
-                        .toLowerCase()
-                        .startsWith("ru")
-                    );
-                }
+                v =>
+                    v.lang &&
+                    v.lang
+                    .toLowerCase()
+                    .startsWith("ru")
             );
     }
 
-    if(!voice){
-
-        voice =
-            voices[0];
-    }
-
-    return voice;
+    return voice ||
+        voices[0];
 }
 
-function makeSpeechParts(
-    text
-){
+function makeSpeechParts(text){
 
     const parts =
         text
@@ -2878,23 +2713,11 @@ function makeSpeechParts(
             /[^.!?]+[.!?]+|[^.!?]+$/g
         );
 
-    if(
-        !parts
-    ){
-
-        return [
-            text
-        ];
-    }
-
     return parts
-        .map(
-            function(part){
-
-                return part.trim();
-            }
-        )
-        .filter(Boolean);
+        ? parts
+            .map(x=>x.trim())
+            .filter(Boolean)
+        : [text];
 }
 
 function speakPhoneGuy(){
@@ -2918,16 +2741,11 @@ function speakPhoneGuy(){
 
     lowerMusic();
 
-    window
-    .speechSynthesis
-    .cancel();
+    speechSynthesis.cancel();
 
-    window
-    .speechSynthesis
-    .resume();
+    speechSynthesis.resume();
 
-    speechStopped =
-        false;
+    speechStopped = false;
 
     speechParts =
         makeSpeechParts(
@@ -2936,8 +2754,7 @@ function speakPhoneGuy(){
             ]
         );
 
-    speechPartIndex =
-        0;
+    speechPartIndex = 0;
 
     phoneState.textContent =
         "🔊 ОХОРОНЕЦЬ ГОВОРИТЬ...";
@@ -2950,10 +2767,7 @@ function speakPhoneGuy(){
 
 function speakNextPart(){
 
-    if(
-        speechStopped
-    ){
-
+    if(speechStopped){
         return;
     }
 
@@ -2962,11 +2776,10 @@ function speakNextPart(){
         speechParts.length
     ){
 
-        activeUtterance =
-            null;
-
         phoneState.textContent =
             "✅ РОЗМОВУ ЗАВЕРШЕНО";
+
+        activeUtterance = null;
 
         restoreMusic();
 
@@ -2980,18 +2793,16 @@ function speakNextPart(){
             ]
         );
 
-    const selectedVoice =
+    const voice =
         chooseVoice();
 
-    if(
-        selectedVoice
-    ){
+    if(voice){
 
         activeUtterance.voice =
-            selectedVoice;
+            voice;
 
         activeUtterance.lang =
-            selectedVoice.lang;
+            voice.lang;
 
     }else{
 
@@ -3030,35 +2841,27 @@ function speakNextPart(){
         );
     };
 
-    window
-    .speechSynthesis
-    .speak(
+    speechSynthesis.speak(
         activeUtterance
     );
 }
 
 function stopSpeech(){
 
-    speechStopped =
-        true;
+    speechStopped = true;
 
-    speechParts =
-        [];
+    speechParts = [];
 
-    speechPartIndex =
-        0;
+    speechPartIndex = 0;
 
-    activeUtterance =
-        null;
+    activeUtterance = null;
 
     if(
         "speechSynthesis"
         in window
     ){
 
-        window
-        .speechSynthesis
-        .cancel();
+        speechSynthesis.cancel();
     }
 
     restoreMusic();
@@ -3084,8 +2887,7 @@ const route2 = [
     "right"
 ];
 
-let route3 =
-    [];
+let route3 = [];
 
 function createDuckRoute(){
 
@@ -3111,28 +2913,19 @@ function createDuckRoute(){
 }
 
 function position1(){
-
-    return route1[
-        e1
-    ];
+    return route1[e1];
 }
 
 function position2(){
-
-    return route2[
-        e2
-    ];
+    return route2[e2];
 }
 
 function position3(){
-
-    return route3[
-        e3
-    ];
+    return route3[e3];
 }
 
 /* =========================================================
-   NIGHT BUTTONS
+   NIGHT MENU
 ========================================================= */
 
 function updateNightButtons(){
@@ -3142,39 +2935,26 @@ function updateNightButtons(){
 
             const n =
                 Number(
-                    button
-                    .dataset
-                    .night
+                    button.dataset.night
                 );
 
             button.innerHTML =
                 (
-                    n <=
-                    unlockedNight
-
+                    n <= unlockedNight
                     ? "🌙 "
                     : "🔒 "
                 ) +
-
                 "Ніч " +
                 n +
-
                 "<span>" +
-
                 NIGHT_MINUTES[n] +
-
                 " хв</span>";
 
             button.disabled =
-                n >
-                unlockedNight;
+                n > unlockedNight;
         }
     );
 }
-
-/* =========================================================
-   MENU
-========================================================= */
 
 playBtn.onclick =
 function(){
@@ -3209,8 +2989,7 @@ function(){
 resetBtn.onclick =
 function(){
 
-    unlockedNight =
-        1;
+    unlockedNight = 1;
 
     localStorage.setItem(
         "atbNight",
@@ -3232,24 +3011,9 @@ nightButtons.forEach(
 
             getAudioContext();
 
-            /*
-                ВАЖЛИВО:
-                музика запускається
-                після кліку користувача.
-            */
-
-            if(
-                musicEnabled
-            ){
-
-                startMusic();
-            }
-
             const n =
                 Number(
-                    button
-                    .dataset
-                    .night
+                    button.dataset.night
                 );
 
             if(
@@ -3266,7 +3030,7 @@ nightButtons.forEach(
 );
 
 /* =========================================================
-   TIME
+   NIGHT TIME
 ========================================================= */
 
 function nightMs(){
@@ -3292,52 +3056,33 @@ function hourMs(){
    START GAME
 ========================================================= */
 
-function startGame(
-    n
-){
+function startGame(n){
 
     stopTimers();
 
     stopPhone();
 
-    currentNight =
-        n;
+    currentNight = n;
 
-    running =
-        true;
+    running = true;
 
-    power =
-        100;
+    power = 100;
 
-    hour =
-        0;
+    hour = 0;
 
-    leftDoorClosed =
-        false;
+    leftDoorClosed = false;
+    rightDoorClosed = false;
 
-    rightDoorClosed =
-        false;
+    leftLightOn = false;
+    rightLightOn = false;
 
-    leftLightOn =
-        false;
+    camerasOpen = false;
 
-    rightLightOn =
-        false;
+    selectedCamera = 0;
 
-    camerasOpen =
-        false;
-
-    selectedCamera =
-        0;
-
-    e1 =
-        0;
-
-    e2 =
-        0;
-
-    e3 =
-        0;
+    e1 = 0;
+    e2 = 0;
+    e3 = 0;
 
     duckSide =
         Math.random() < .5
@@ -3388,11 +3133,11 @@ function startGame(
 
     renderCamera();
 
+    updateUsage();
+
     startTimers();
 
-    if(
-        musicEnabled
-    ){
+    if(musicEnabled){
 
         startMusic();
     }
@@ -3406,10 +3151,7 @@ function startGame(
 
 function showPhoneCall(){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
@@ -3490,8 +3232,6 @@ function(){
 
 repeatVoiceBtn.onclick =
 function(){
-
-    getAudioContext();
 
     speakPhoneGuy();
 };
@@ -3587,6 +3327,8 @@ function resetOffice(){
 
     rightDoorBtn.textContent =
         "🚪 Праві двері";
+
+    updateUsage();
 }
 
 /* =========================================================
@@ -3627,6 +3369,8 @@ function(){
         : "🚪 Ліві двері";
 
     updateDoorEnemies();
+
+    updateUsage();
 };
 
 /* =========================================================
@@ -3667,10 +3411,12 @@ function(){
         : "🚪 Праві двері";
 
     updateDoorEnemies();
+
+    updateUsage();
 };
 
 /* =========================================================
-   LIGHTS
+   LEFT LIGHT
 ========================================================= */
 
 leftLightBtn.onclick =
@@ -3707,7 +3453,13 @@ function(){
     );
 
     updateDoorEnemies();
+
+    updateUsage();
 };
+
+/* =========================================================
+   RIGHT LIGHT
+========================================================= */
 
 rightLightBtn.onclick =
 function(){
@@ -3743,6 +3495,8 @@ function(){
     );
 
     updateDoorEnemies();
+
+    updateUsage();
 };
 
 /* =========================================================
@@ -3854,16 +3608,13 @@ const CAMERA_SCENES = [
 ];
 
 /* =========================================================
-   CAMERAS
+   CAMERA OPEN
 ========================================================= */
 
 cameraBtn.onclick =
 function(){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
@@ -3871,28 +3622,38 @@ function(){
 
     cameraOpenSound();
 
-    camerasOpen =
-        true;
+    camerasOpen = true;
 
     cameraPanel.classList.remove(
         "hidden"
     );
 
     renderCamera();
+
+    updateUsage();
 };
+
+/* =========================================================
+   CAMERA CLOSE
+========================================================= */
 
 closeCamera.onclick =
 function(){
 
     cameraOpenSound();
 
-    camerasOpen =
-        false;
+    camerasOpen = false;
 
     cameraPanel.classList.add(
         "hidden"
     );
+
+    updateUsage();
 };
+
+/* =========================================================
+   CAMERA SWITCH
+========================================================= */
 
 cameraButtons.forEach(
     function(button){
@@ -3900,15 +3661,11 @@ cameraButtons.forEach(
         button.onclick =
         function(){
 
-            getAudioContext();
-
             cameraSwitchSound();
 
             selectedCamera =
                 Number(
-                    button
-                    .dataset
-                    .cam
+                    button.dataset.cam
                 );
 
             renderCamera();
@@ -3924,9 +3681,7 @@ function renderCamera(){
             button.classList.toggle(
                 "active",
                 Number(
-                    button
-                    .dataset
-                    .cam
+                    button.dataset.cam
                 ) ===
                 selectedCamera
             );
@@ -3955,8 +3710,7 @@ function renderCamera(){
         "visible"
     );
 
-    let found =
-        0;
+    let found = 0;
 
     if(
         position1() ===
@@ -3994,16 +3748,12 @@ function renderCamera(){
         found++;
     }
 
-    if(
-        found === 0
-    ){
+    if(found === 0){
 
         cameraMessage.textContent =
             "Нікого не видно...";
 
-    }else if(
-        found === 1
-    ){
+    }else if(found === 1){
 
         cameraMessage.textContent =
             "⚠️ ВОРОГ НА КАМЕРІ!";
@@ -4021,17 +3771,13 @@ function renderCamera(){
 
 function moveEnemies(){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
     const chance =
         .16 +
-        currentNight *
-        .04;
+        currentNight * .04;
 
     if(
         Math.random() <
@@ -4067,9 +3813,7 @@ function moveEnemies(){
 
     checkAttacks();
 
-    if(
-        camerasOpen
-    ){
+    if(camerasOpen){
 
         renderCamera();
     }
@@ -4091,8 +3835,7 @@ function checkAttacks(){
             setTimeout(
                 function(){
 
-                    attack1 =
-                        null;
+                    attack1 = null;
 
                     if(
                         running &&
@@ -4124,8 +3867,7 @@ function checkAttacks(){
             setTimeout(
                 function(){
 
-                    attack2 =
-                        null;
+                    attack2 = null;
 
                     if(
                         running &&
@@ -4157,8 +3899,7 @@ function checkAttacks(){
             setTimeout(
                 function(){
 
-                    attack3 =
-                        null;
+                    attack3 = null;
 
                     if(
                         running &&
@@ -4192,9 +3933,7 @@ function attackEnemy(
         ? leftDoorClosed
         : rightDoorClosed;
 
-    if(
-        closed
-    ){
+    if(closed){
 
         enemyHitDoorSound();
 
@@ -4214,53 +3953,39 @@ function attackEnemy(
     }
 }
 
-function resetEnemy(
-    number
-){
+function resetEnemy(number){
 
-    if(
-        number === 1
-    ){
+    if(number === 1){
 
-        e1 =
-            0;
+        e1 = 0;
 
         clearTimeout(
             attack1
         );
 
-        attack1 =
-            null;
+        attack1 = null;
     }
 
-    if(
-        number === 2
-    ){
+    if(number === 2){
 
-        e2 =
-            0;
+        e2 = 0;
 
         clearTimeout(
             attack2
         );
 
-        attack2 =
-            null;
+        attack2 = null;
     }
 
-    if(
-        number === 3
-    ){
+    if(number === 3){
 
-        e3 =
-            0;
+        e3 = 0;
 
         clearTimeout(
             attack3
         );
 
-        attack3 =
-            null;
+        attack3 = null;
 
         duckSide =
             Math.random() < .5
@@ -4272,9 +3997,7 @@ function resetEnemy(
 
     updateDoorEnemies();
 
-    if(
-        camerasOpen
-    ){
+    if(camerasOpen){
 
         renderCamera();
     }
@@ -4284,9 +4007,7 @@ function resetEnemy(
    POWER
 ========================================================= */
 
-function drainForNight(
-    percent
-){
+function drainForNight(percent){
 
     return (
         percent /
@@ -4299,10 +4020,7 @@ function drainForNight(
 
 function updatePower(){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
@@ -4311,9 +4029,7 @@ function updatePower(){
             40
         );
 
-    if(
-        leftDoorClosed
-    ){
+    if(leftDoorClosed){
 
         drain +=
             drainForNight(
@@ -4321,9 +4037,7 @@ function updatePower(){
             );
     }
 
-    if(
-        rightDoorClosed
-    ){
+    if(rightDoorClosed){
 
         drain +=
             drainForNight(
@@ -4331,9 +4045,7 @@ function updatePower(){
             );
     }
 
-    if(
-        leftLightOn
-    ){
+    if(leftLightOn){
 
         drain +=
             drainForNight(
@@ -4341,9 +4053,7 @@ function updatePower(){
             );
     }
 
-    if(
-        rightLightOn
-    ){
+    if(rightLightOn){
 
         drain +=
             drainForNight(
@@ -4351,9 +4061,7 @@ function updatePower(){
             );
     }
 
-    if(
-        camerasOpen
-    ){
+    if(camerasOpen){
 
         drain +=
             drainForNight(
@@ -4361,15 +4069,11 @@ function updatePower(){
             );
     }
 
-    power -=
-        drain;
+    power -= drain;
 
-    if(
-        power <= 0
-    ){
+    if(power <= 0){
 
-        power =
-            0;
+        power = 0;
 
         powerLabel.textContent =
             "0";
@@ -4389,17 +4093,13 @@ function updatePower(){
         "medium"
     );
 
-    if(
-        power <= 20
-    ){
+    if(power <= 20){
 
         powerLabel.classList.add(
             "low"
         );
 
-    }else if(
-        power <= 40
-    ){
+    }else if(power <= 40){
 
         powerLabel.classList.add(
             "medium"
@@ -4413,10 +4113,7 @@ function updatePower(){
 
 function powerOut(){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
@@ -4436,20 +4133,13 @@ function powerOut(){
         enemyTimer
     );
 
-    leftDoorClosed =
-        false;
+    leftDoorClosed = false;
+    rightDoorClosed = false;
 
-    rightDoorClosed =
-        false;
+    leftLightOn = false;
+    rightLightOn = false;
 
-    leftLightOn =
-        false;
-
-    rightLightOn =
-        false;
-
-    camerasOpen =
-        false;
+    camerasOpen = false;
 
     leftDoor.classList.remove(
         "closed"
@@ -4479,15 +4169,15 @@ function powerOut(){
         "hidden"
     );
 
+    updateUsage();
+
     statusText.textContent =
         "⚡ ЕНЕРГІЯ ЗАКІНЧИЛАСЯ...";
 
     setTimeout(
         function(){
 
-            if(
-                running
-            ){
+            if(running){
 
                 showJumpscare(
                     "👀",
@@ -4506,21 +4196,15 @@ function powerOut(){
 
 function advanceHour(){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
     hour++;
 
-    if(
-        hour >= 6
-    ){
+    if(hour >= 6){
 
-        hour =
-            6;
+        hour = 6;
 
         clockLabel.textContent =
             "6 AM";
@@ -4534,9 +4218,7 @@ function advanceHour(){
         hour +
         " AM";
 
-    if(
-        hour === 5
-    ){
+    if(hour === 5){
 
         statusText.textContent =
             "🕔 МАЙЖЕ 6 AM!";
@@ -4552,15 +4234,11 @@ function showJumpscare(
     side
 ){
 
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
 
-    running =
-        false;
+    running = false;
 
     stopTimers();
 
@@ -4605,8 +4283,7 @@ function showJumpscare(
 
 function winGame(){
 
-    running =
-        false;
+    running = false;
 
     stopTimers();
 
@@ -4627,9 +4304,7 @@ function winGame(){
     endTitle.textContent =
         "🎉 6 AM";
 
-    if(
-        currentNight < 5
-    ){
+    if(currentNight < 5){
 
         const next =
             currentNight + 1;
@@ -4644,9 +4319,7 @@ function winGame(){
 
             localStorage.setItem(
                 "atbNight",
-                String(
-                    next
-                )
+                String(next)
             );
         }
 
@@ -4670,9 +4343,7 @@ function winGame(){
    GAME OVER
 ========================================================= */
 
-function showGameOver(
-    reason
-){
+function showGameOver(reason){
 
     endScreen.classList.remove(
         "hidden"
@@ -4686,7 +4357,7 @@ function showGameOver(
 }
 
 /* =========================================================
-   RESTART
+   END BUTTONS
 ========================================================= */
 
 restartBtn.onclick =
@@ -4694,27 +4365,15 @@ function(){
 
     getAudioContext();
 
-    if(
-        musicEnabled
-    ){
-
-        startMusic();
-    }
-
     startGame(
         currentNight
     );
 };
 
-/* =========================================================
-   MENU BUTTON
-========================================================= */
-
 menuBtn.onclick =
 function(){
 
-    running =
-        false;
+    running = false;
 
     stopTimers();
 
@@ -4792,23 +4451,13 @@ function stopTimers(){
         attack3
     );
 
-    powerTimer =
-        null;
+    powerTimer = null;
+    clockTimer = null;
+    enemyTimer = null;
 
-    clockTimer =
-        null;
-
-    enemyTimer =
-        null;
-
-    attack1 =
-        null;
-
-    attack2 =
-        null;
-
-    attack3 =
-        null;
+    attack1 = null;
+    attack2 = null;
+    attack3 = null;
 }
 
 /* =========================================================
@@ -4819,10 +4468,7 @@ document.addEventListener(
     "keydown",
     function(event){
 
-        if(
-            !running
-        ){
-
+        if(!running){
             return;
         }
 
@@ -4832,41 +4478,29 @@ document.addEventListener(
             event.key
             .toLowerCase();
 
-        if(
-            key === "a"
-        ){
+        if(key === "a"){
 
             leftLightBtn.click();
         }
 
-        if(
-            key === "d"
-        ){
+        if(key === "d"){
 
             rightLightBtn.click();
         }
 
-        if(
-            key === "q"
-        ){
+        if(key === "q"){
 
             leftDoorBtn.click();
         }
 
-        if(
-            key === "e"
-        ){
+        if(key === "e"){
 
             rightDoorBtn.click();
         }
 
-        if(
-            key === "c"
-        ){
+        if(key === "c"){
 
-            if(
-                camerasOpen
-            ){
+            if(camerasOpen){
 
                 closeCamera.click();
 
@@ -4895,16 +4529,10 @@ updateNightButtons();
 
 loadVoices();
 
-musicOnBtn.classList.add(
-    "active"
-);
-
-musicOffBtn.classList.remove(
-    "active"
-);
+updateUsage();
 
 console.log(
-    "П'ЯТЬ НОЧЕЙ В АТБ — MUSIC + PHONE + EFFECTS"
+    "П'ЯТЬ НОЧЕЙ В АТБ — USAGE RESTORED"
 );
 
 </script>
