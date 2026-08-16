@@ -13,7 +13,8 @@
     padding:0;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
 }
@@ -104,15 +105,15 @@ button{
 }
 
 /* =========================================================
-   NIGHT SELECT
+   NIGHT MENU
 ========================================================= */
 
 .nightButtons{
     display:flex;
-    justify-content:center;
     flex-wrap:wrap;
-    gap:12px;
+    justify-content:center;
 
+    gap:12px;
     margin-top:25px;
 }
 
@@ -128,6 +129,8 @@ button{
 
     font-size:16px;
     font-weight:bold;
+
+    transition:.15s;
 }
 
 .nightBtn span{
@@ -140,6 +143,7 @@ button{
 
 .nightBtn:hover:not(:disabled){
     background:#0874ff;
+    transform:translateY(-2px);
 }
 
 .nightBtn:disabled{
@@ -183,11 +187,12 @@ button{
 }
 
 /* =========================================================
-   TOP BAR
+   TOP
 ========================================================= */
 
 #topbar{
     position:absolute;
+
     top:16px;
     left:50%;
 
@@ -250,7 +255,7 @@ button{
 }
 
 /* =========================================================
-   AUDIO CONTROLS
+   AUDIO BUTTONS
 ========================================================= */
 
 #audioControls{
@@ -357,7 +362,7 @@ button{
 }
 
 /* =========================================================
-   DOOR FRAMES
+   DOORS
 ========================================================= */
 
 .doorFrame{
@@ -406,14 +411,14 @@ button{
 }
 
 /* =========================================================
-   BIG REAL PNG MOB AT DOOR
+   PNG MOB AT DOOR
 ========================================================= */
 
 .doorEnemy{
     position:absolute;
 
     left:50%;
-    top:58%;
+    top:57%;
 
     z-index:15;
 
@@ -428,21 +433,20 @@ button{
 
     transform:
         translate(-50%,-50%)
-        scale(.82);
+        scale(.86);
 
     transform-origin:center bottom;
 
     transition:
-        opacity .12s ease,
-        transform .16s ease,
-        filter .16s ease;
+        opacity .1s,
+        transform .12s;
 
     filter:
-        brightness(.72)
-        contrast(1.25)
-        saturate(.8)
+        brightness(.75)
+        contrast(1.22)
+        saturate(.78)
         drop-shadow(0 0 12px #000)
-        drop-shadow(0 0 18px rgba(255,0,0,.45));
+        drop-shadow(0 0 17px rgba(255,0,0,.5));
 }
 
 .doorEnemy.visible{
@@ -455,24 +459,24 @@ button{
 
 .doorEnemy.threat{
     animation:
-        doorThreat .34s
-        ease-in-out
-        infinite alternate;
+        threatMove .28s
+        infinite alternate
+        ease-in-out;
 }
 
-@keyframes doorThreat{
+@keyframes threatMove{
     from{
         transform:
             translate(-50%,-50%)
-            scale(1.04)
-            rotate(-1deg);
+            scale(1.05)
+            rotate(-.8deg);
     }
 
     to{
         transform:
             translate(-50%,-50%)
-            scale(1.14)
-            rotate(1deg);
+            scale(1.15)
+            rotate(.8deg);
     }
 }
 
@@ -511,7 +515,7 @@ button{
 }
 
 /* =========================================================
-   LIGHT EFFECT
+   LIGHT
 ========================================================= */
 
 .lightEffect{
@@ -596,12 +600,6 @@ button{
     font-weight:bold;
 
     box-shadow:0 0 18px #000;
-
-    transition:.15s;
-}
-
-.controlBtn:hover{
-    background:#303030;
 }
 
 .controlBtn.lightActive{
@@ -615,7 +613,6 @@ button{
 
 .controlBtn.doorActive{
     background:#a40000;
-
     box-shadow:0 0 20px red;
 }
 
@@ -644,7 +641,8 @@ button{
     font-size:17px;
     font-weight:bold;
 
-    box-shadow:0 0 25px rgba(0,100,255,.55);
+    box-shadow:
+        0 0 25px rgba(0,100,255,.55);
 }
 
 /* =========================================================
@@ -760,6 +758,7 @@ button{
     flex:1;
 
     min-width:125px;
+
     padding:13px 7px;
 
     border:0;
@@ -835,7 +834,7 @@ button{
     border:3px solid #333;
     border-radius:8px;
 
-    background-color:#000;
+    background:#000;
 
     background-size:cover;
     background-position:center;
@@ -843,7 +842,7 @@ button{
 }
 
 /* =========================================================
-   CAMERA PNG MOBS
+   CAMERA MOBS
 ========================================================= */
 
 .camEnemy{
@@ -858,19 +857,16 @@ button{
     pointer-events:none;
 
     transition:
-        opacity .15s ease,
-        left .25s ease,
-        right .25s ease,
-        bottom .25s ease,
-        width .25s ease,
-        height .25s ease,
-        transform .25s ease;
+        opacity .12s,
+        width .25s,
+        height .25s,
+        bottom .25s;
 
     filter:
-        brightness(.68)
-        contrast(1.3)
-        saturate(.65)
-        drop-shadow(0 0 25px #000);
+        brightness(.72)
+        contrast(1.25)
+        saturate(.70)
+        drop-shadow(0 0 24px #000);
 }
 
 .camEnemy.visible{
@@ -879,23 +875,33 @@ button{
 
 .camEnemy.cameraThreat{
     animation:
-        cameraMobMove .42s
-        ease-in-out
-        infinite alternate;
+        cameraThreat .35s
+        infinite alternate
+        ease-in-out;
 }
 
-@keyframes cameraMobMove{
+@keyframes cameraThreat{
     from{
         margin-bottom:0;
+        filter:
+            brightness(.72)
+            contrast(1.25)
+            saturate(.70)
+            drop-shadow(0 0 24px #000);
     }
 
     to{
-        margin-bottom:8px;
+        margin-bottom:9px;
+        filter:
+            brightness(.85)
+            contrast(1.3)
+            saturate(.80)
+            drop-shadow(0 0 30px #000);
     }
 }
 
 /* =========================================================
-   CAMERA EFFECTS
+   CCTV EFFECTS
 ========================================================= */
 
 #cameraVignette{
@@ -982,12 +988,12 @@ button{
 }
 
 @keyframes flashCam{
-    0%{opacity:.9;}
+    0%{opacity:.95;}
     100%{opacity:0;}
 }
 
 /* =========================================================
-   CAMERA LABELS
+   CAMERA UI
 ========================================================= */
 
 #cameraLabel{
@@ -1024,23 +1030,20 @@ button{
     border-radius:6px;
 
     color:#ff3535;
-
     font-weight:bold;
 }
 
 #cameraRec::before{
     content:"● ";
-    animation:recBlink .8s infinite;
+
+    animation:
+        recBlink .8s infinite;
 }
 
 @keyframes recBlink{
     0%,49%{opacity:1;}
     50%,100%{opacity:.2;}
 }
-
-/* =========================================================
-   CAMERA INFO
-========================================================= */
 
 #cameraInfo{
     position:absolute;
@@ -1064,10 +1067,6 @@ button{
     margin-top:7px;
     color:#aaa;
 }
-
-/* =========================================================
-   CAMERA MAP
-========================================================= */
 
 #cameraMap{
     position:absolute;
@@ -1102,10 +1101,6 @@ button{
     color:#fff;
 
     font-weight:bold;
-}
-
-.camBtn:hover{
-    background:#333;
 }
 
 .camBtn.active{
@@ -1163,7 +1158,7 @@ button{
     background:
         radial-gradient(
             circle,
-            #320000,
+            #330000,
             #080000 55%,
             #000
         );
@@ -1188,7 +1183,8 @@ button{
         brightness(1.08)
         drop-shadow(0 0 40px red);
 
-    animation:scareZoom .72s forwards;
+    animation:
+        scareZoom .72s forwards;
 }
 
 @keyframes scareZoom{
@@ -1281,7 +1277,6 @@ button{
 
     .controlBtn{
         width:140px;
-        font-size:13px;
     }
 }
 
@@ -1293,24 +1288,18 @@ button{
 
     #topbar{
         top:5px;
-
         padding:9px;
-
         font-size:12px;
     }
 
     #audioControls{
         top:55px;
         left:5px;
-
-        gap:4px;
     }
 
     .audioBtn{
         min-width:100px;
-
         padding:6px 4px;
-
         font-size:9px;
     }
 
@@ -1347,7 +1336,7 @@ button{
     }
 
     .doorEnemy{
-        width:210%;
+        width:215%;
         height:135%;
     }
 
@@ -1361,9 +1350,7 @@ button{
 
     .controlBtn{
         width:102px;
-
         padding:9px 4px;
-
         font-size:10px;
     }
 
@@ -1505,59 +1492,77 @@ button{
 
 <body>
 
-<!-- ======================================================
+<!-- =========================================================
      AUDIO
-====================================================== -->
+========================================================= -->
 
-<audio id="bgMusic"
-       src="sounds/discipline_eqjphn0.mp3"
-       preload="auto"
-       loop
-       playsinline></audio>
+<audio
+    id="bgMusic"
+    src="sounds/discipline_eqjphn0.mp3"
+    preload="auto"
+    loop
+    playsinline
+></audio>
 
-<audio id="soundAlarm"
-       src="sounds/alarm.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundAlarm"
+    src="sounds/alarm.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundCamera"
-       src="sounds/camera.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundCamera"
+    src="sounds/camera.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundDoor"
-       src="sounds/door.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundDoor"
+    src="sounds/door.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundLight"
-       src="sounds/light.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundLight"
+    src="sounds/light.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundHit"
-       src="sounds/hit.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundHit"
+    src="sounds/hit.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundWin"
-       src="sounds/win.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundWin"
+    src="sounds/win.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundGameOver"
-       src="sounds/gameover.wav"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundGameOver"
+    src="sounds/gameover.wav"
+    preload="auto"
+    playsinline
+></audio>
 
-<audio id="soundJumpscare"
-       src="sounds/five-nights-at-freddys-3-springtraps-jumpscare-brightened.mp3"
-       preload="auto"
-       playsinline></audio>
+<audio
+    id="soundJumpscare"
+    src="sounds/five-nights-at-freddys-3-springtraps-jumpscare-brightened.mp3"
+    preload="auto"
+    playsinline
+></audio>
 
-<!-- ======================================================
+<!-- =========================================================
      MENU
-====================================================== -->
+========================================================= -->
 
 <section id="menu" class="screen">
 
@@ -1566,31 +1571,40 @@ button{
     </h1>
 
     <div class="subtitle">
-        Переживи 5 нічних змін
+        Переживи п'ять нічних змін
     </div>
 
-    <button id="playBtn" class="menuBtn">
+    <button
+        id="playBtn"
+        class="menuBtn"
+    >
         ▶ ГРАТИ
     </button>
 
-    <button id="resetBtn" class="menuBtn">
+    <button
+        id="resetBtn"
+        class="menuBtn"
+    >
         ♻ СКИНУТИ ПРОГРЕС
     </button>
 
 </section>
 
-<!-- ======================================================
+<!-- =========================================================
      NIGHT MENU
-====================================================== -->
+========================================================= -->
 
-<section id="nightMenu" class="screen hidden">
+<section
+    id="nightMenu"
+    class="screen hidden"
+>
 
     <h2 class="title">
         ОБЕРИ НІЧ
     </h2>
 
     <div class="subtitle">
-        📞 На початку ночі дзвонить охоронець
+        📞 На початку кожної ночі дзвонить охоронець
     </div>
 
     <div class="nightButtons">
@@ -1603,17 +1617,23 @@ button{
 
     </div>
 
-    <button id="backBtn" class="menuBtn">
+    <button
+        id="backBtn"
+        class="menuBtn"
+    >
         ← НАЗАД
     </button>
 
 </section>
 
-<!-- ======================================================
+<!-- =========================================================
      GAME
-====================================================== -->
+========================================================= -->
 
-<section id="game" class="hidden">
+<section
+    id="game"
+    class="hidden"
+>
 
     <div id="topbar">
 
@@ -1636,15 +1656,24 @@ button{
 
     <div id="audioControls">
 
-        <button id="effectsBtn" class="audioBtn active">
+        <button
+            id="effectsBtn"
+            class="audioBtn active"
+        >
             🔊 ЕФЕКТИ ON
         </button>
 
-        <button id="musicOnBtn" class="audioBtn active">
+        <button
+            id="musicOnBtn"
+            class="audioBtn active"
+        >
             🎵 MUSIC ON
         </button>
 
-        <button id="musicOffBtn" class="audioBtn">
+        <button
+            id="musicOffBtn"
+            class="audioBtn"
+        >
             🔇 MUSIC OFF
         </button>
 
@@ -1654,16 +1683,20 @@ button{
 
         <span id="usageTitle">
             ⚡ ВИКОРИСТАННЯ:
-            <span id="usageNumber">1</span>/6
+            <span id="usageNumber">
+                1
+            </span>/6
         </span>
 
         <div id="usageBars">
+
             <div class="usageBar on"></div>
             <div class="usageBar"></div>
             <div class="usageBar"></div>
             <div class="usageBar"></div>
             <div class="usageBar"></div>
             <div class="usageBar"></div>
+
         </div>
 
     </div>
@@ -1671,21 +1704,29 @@ button{
     <main id="office">
 
         <div id="statusBox">
+
             <span id="status">
                 Ніч почалася...
             </span>
+
         </div>
 
-        <div id="leftLightEffect"
-             class="lightEffect"></div>
+        <div
+            id="leftLightEffect"
+            class="lightEffect"
+        ></div>
 
-        <div id="rightLightEffect"
-             class="lightEffect"></div>
+        <div
+            id="rightLightEffect"
+            class="lightEffect"
+        ></div>
 
-        <!-- LEFT -->
+        <!-- LEFT DOOR -->
 
-        <div id="leftDoorFrame"
-             class="doorFrame">
+        <div
+            id="leftDoorFrame"
+            class="doorFrame"
+        >
 
             <div class="doorLight"></div>
 
@@ -1696,15 +1737,19 @@ button{
                 alt=""
             >
 
-            <div id="leftDoor"
-                 class="door"></div>
+            <div
+                id="leftDoor"
+                class="door"
+            ></div>
 
         </div>
 
-        <!-- RIGHT -->
+        <!-- RIGHT DOOR -->
 
-        <div id="rightDoorFrame"
-             class="doorFrame">
+        <div
+            id="rightDoorFrame"
+            class="doorFrame"
+        >
 
             <div class="doorLight"></div>
 
@@ -1715,36 +1760,50 @@ button{
                 alt=""
             >
 
-            <div id="rightDoor"
-                 class="door"></div>
+            <div
+                id="rightDoor"
+                class="door"
+            ></div>
 
         </div>
 
-        <div id="leftControls"
-             class="sideControls">
+        <div
+            id="leftControls"
+            class="sideControls"
+        >
 
-            <button id="leftLightBtn"
-                    class="controlBtn">
+            <button
+                id="leftLightBtn"
+                class="controlBtn"
+            >
                 💡 Ліве світло
             </button>
 
-            <button id="leftDoorBtn"
-                    class="controlBtn">
+            <button
+                id="leftDoorBtn"
+                class="controlBtn"
+            >
                 🚪 Ліві двері
             </button>
 
         </div>
 
-        <div id="rightControls"
-             class="sideControls">
+        <div
+            id="rightControls"
+            class="sideControls"
+        >
 
-            <button id="rightLightBtn"
-                    class="controlBtn">
+            <button
+                id="rightLightBtn"
+                class="controlBtn"
+            >
                 💡 Праве світло
             </button>
 
-            <button id="rightDoorBtn"
-                    class="controlBtn">
+            <button
+                id="rightDoorBtn"
+                class="controlBtn"
+            >
                 🚪 Праві двері
             </button>
 
@@ -1758,11 +1817,14 @@ button{
 
 </section>
 
-<!-- ======================================================
+<!-- =========================================================
      PHONE
-====================================================== -->
+========================================================= -->
 
-<div id="phone" class="hidden">
+<div
+    id="phone"
+    class="hidden"
+>
 
     <div class="phoneHeader">
 
@@ -1784,28 +1846,38 @@ button{
 
     </div>
 
-    <div id="phoneText"
-         class="hidden"></div>
+    <div
+        id="phoneText"
+        class="hidden"
+    ></div>
 
     <div class="phoneButtons">
 
-        <button id="answerBtn"
-                class="phoneBtn">
+        <button
+            id="answerBtn"
+            class="phoneBtn"
+        >
             📞 ВІДПОВІСТИ
         </button>
 
-        <button id="repeatVoiceBtn"
-                class="phoneBtn hidden">
+        <button
+            id="repeatVoiceBtn"
+            class="phoneBtn hidden"
+        >
             🔊 ПОВТОРИТИ
         </button>
 
-        <button id="skipBtn"
-                class="phoneBtn hidden">
+        <button
+            id="skipBtn"
+            class="phoneBtn hidden"
+        >
             ⏭ ПРОПУСТИТИ
         </button>
 
-        <button id="hangBtn"
-                class="phoneBtn">
+        <button
+            id="hangBtn"
+            class="phoneBtn"
+        >
             ❌ СКИНУТИ
         </button>
 
@@ -1813,12 +1885,14 @@ button{
 
 </div>
 
-<!-- ======================================================
-     CAMERA
-====================================================== -->
+<!-- =========================================================
+     CAMERAS
+========================================================= -->
 
-<section id="cameraPanel"
-         class="hidden">
+<section
+    id="cameraPanel"
+    class="hidden"
+>
 
     <div class="cameraHeader">
 
@@ -1834,20 +1908,26 @@ button{
 
     <div id="cameraView">
 
-        <img id="camBear"
-             class="camEnemy"
-             src=""
-             alt="">
+        <img
+            id="camBear"
+            class="camEnemy"
+            src=""
+            alt=""
+        >
 
-        <img id="camWolf"
-             class="camEnemy"
-             src=""
-             alt="">
+        <img
+            id="camWolf"
+            class="camEnemy"
+            src=""
+            alt=""
+        >
 
-        <img id="camDuck"
-             class="camEnemy"
-             src=""
-             alt="">
+        <img
+            id="camDuck"
+            class="camEnemy"
+            src=""
+            alt=""
+        >
 
         <div id="cameraVignette"></div>
         <div id="cameraScanlines"></div>
@@ -1876,33 +1956,45 @@ button{
 
         <div id="cameraMap">
 
-            <button class="camBtn active"
-                    data-cam="0">
+            <button
+                class="camBtn active"
+                data-cam="0"
+            >
                 CAM 1
             </button>
 
-            <button class="camBtn"
-                    data-cam="1">
+            <button
+                class="camBtn"
+                data-cam="1"
+            >
                 CAM 2
             </button>
 
-            <button class="camBtn"
-                    data-cam="2">
+            <button
+                class="camBtn"
+                data-cam="2"
+            >
                 CAM 3
             </button>
 
-            <button class="camBtn"
-                    data-cam="3">
+            <button
+                class="camBtn"
+                data-cam="3"
+            >
                 CAM 4
             </button>
 
-            <button class="camBtn"
-                    data-cam="4">
+            <button
+                class="camBtn"
+                data-cam="4"
+            >
                 CAM 5
             </button>
 
-            <button class="camBtn"
-                    data-cam="5">
+            <button
+                class="camBtn"
+                data-cam="5"
+            >
                 CAM 6
             </button>
 
@@ -1912,9 +2004,9 @@ button{
 
 </section>
 
-<!-- ======================================================
+<!-- =========================================================
      JUMPSCARE
-====================================================== -->
+========================================================= -->
 
 <div id="jumpscare">
 
@@ -1926,12 +2018,14 @@ button{
 
 </div>
 
-<!-- ======================================================
+<!-- =========================================================
      END
-====================================================== -->
+========================================================= -->
 
-<section id="endScreen"
-         class="hidden">
+<section
+    id="endScreen"
+    class="hidden"
+>
 
     <h1 id="endTitle">
         GAME OVER
@@ -1941,13 +2035,17 @@ button{
 
     <div class="endBtns">
 
-        <button id="restartBtn"
-                class="menuBtn">
+        <button
+            id="restartBtn"
+            class="menuBtn"
+        >
             🔄 ЩЕ РАЗ
         </button>
 
-        <button id="menuBtn"
-                class="menuBtn">
+        <button
+            id="menuBtn"
+            class="menuBtn"
+        >
             🏠 МЕНЮ
         </button>
 
@@ -1956,11 +2054,13 @@ button{
 </section>
 
 <script>
-const $ = id =>
-    document.getElementById(id);
+
+const $ =
+    id =>
+        document.getElementById(id);
 
 /* =========================================================
-   CONFIG
+   NIGHT CONFIG
 ========================================================= */
 
 const NIGHT_MINUTES = {
@@ -1988,7 +2088,7 @@ const ATTACK_DELAY = {
 };
 
 /* =========================================================
-   CAMERA BACKGROUNDS
+   CAMERAS
 ========================================================= */
 
 const CAMERA_IMAGES = [
@@ -2010,7 +2110,7 @@ const CAMERA_NAMES = [
 ];
 
 /* =========================================================
-   MOB PNG ANIMATION
+   MOB FILES
 ========================================================= */
 
 const MOB_ANIMATIONS = {
@@ -2040,29 +2140,30 @@ const MOB_ANIMATIONS = {
 
     wolf:{
 
+        /*
+            FIXED CLEAN WOLF
+            ТІЛЬКИ ФАЙЛИ, ЯКІ Є В НОВОМУ ZIP
+        */
+
         idle:[
             "mobs/wolf_idle_1.png",
             "mobs/wolf_idle_2.png",
             "mobs/wolf_idle_3.png",
-            "mobs/wolf_idle_4.png",
-            "mobs/wolf_idle_5.png",
-            "mobs/wolf_idle_6.png"
+            "mobs/wolf_idle_4.png"
         ],
 
         walk:[
+            "mobs/wolf_idle_1.png",
             "mobs/wolf_idle_2.png",
             "mobs/wolf_idle_3.png",
-            "mobs/wolf_idle_4.png",
-            "mobs/wolf_idle_5.png"
+            "mobs/wolf_idle_4.png"
         ],
 
         attack:[
             "mobs/wolf_attack_1.png",
             "mobs/wolf_attack_2.png",
             "mobs/wolf_attack_3.png",
-            "mobs/wolf_attack_4.png",
-            "mobs/wolf_attack_5.png",
-            "mobs/wolf_attack_close.png"
+            "mobs/wolf_attack_2.png"
         ],
 
         jumpscare:
@@ -2070,6 +2171,10 @@ const MOB_ANIMATIONS = {
     },
 
     duck:{
+
+        /*
+            FIXED CLEAN DUCK
+        */
 
         idle:[
             "mobs/duck_idle_1.png",
@@ -2084,7 +2189,8 @@ const MOB_ANIMATIONS = {
             "mobs/duck_idle_2.png",
             "mobs/duck_idle_3.png",
             "mobs/duck_idle_4.png",
-            "mobs/duck_idle_5.png"
+            "mobs/duck_idle_5.png",
+            "mobs/duck_idle_6.png"
         ],
 
         attack:[
@@ -2102,50 +2208,50 @@ const MOB_ANIMATIONS = {
 };
 
 /* =========================================================
-   CAMERA MOB POSITIONS
+   CAMERA MOB SIZES
 ========================================================= */
 
 const CAMERA_MOB_STYLE = {
 
     0:{
-        width:"34%",
-        height:"70%",
-        bottom:"4%"
+        width:"31%",
+        height:"67%",
+        bottom:"3%"
     },
 
     1:{
-        width:"40%",
-        height:"78%",
+        width:"36%",
+        height:"72%",
         bottom:"2%"
     },
 
     2:{
         width:"34%",
         height:"70%",
-        bottom:"3%"
+        bottom:"2%"
     },
 
     3:{
-        width:"48%",
-        height:"88%",
-        bottom:"-5%"
+        width:"42%",
+        height:"82%",
+        bottom:"-3%"
     },
 
     4:{
-        width:"48%",
-        height:"88%",
-        bottom:"-5%"
+        width:"42%",
+        height:"82%",
+        bottom:"-3%"
     },
 
     5:{
-        width:"60%",
-        height:"105%",
-        bottom:"-18%"
+        width:"52%",
+        height:"96%",
+        bottom:"-12%"
     }
 };
 
 /* =========================================================
-   PHONE TEXT
+   PHONE
 ========================================================= */
 
 const PHONE_TEXT = {
@@ -2174,7 +2280,7 @@ const PHONE_TEXT = {
 
 Сьогодні вони активніші.
 
-Регулярно перевіряй камери та коридори.
+Регулярно перевіряй камери.
 
 Світло використовуй коротко.
 
@@ -2240,7 +2346,9 @@ const resetBtn = $("resetBtn");
 const backBtn = $("backBtn");
 
 const nightButtons =
-    document.querySelectorAll(".nightBtn");
+    document.querySelectorAll(
+        ".nightBtn"
+    );
 
 const nightLabel = $("night");
 const clockLabel = $("clock");
@@ -2268,12 +2376,14 @@ const musicOffBtn = $("musicOffBtn");
 /* USAGE */
 
 const usageBars =
-    document.querySelectorAll(".usageBar");
+    document.querySelectorAll(
+        ".usageBar"
+    );
 
 const usageNumber =
     $("usageNumber");
 
-/* OFFICE */
+/* DOORS */
 
 const leftDoor = $("leftDoor");
 const rightDoor = $("rightDoor");
@@ -2284,11 +2394,8 @@ const rightDoorFrame = $("rightDoorFrame");
 const leftDoorEnemy = $("leftDoorEnemy");
 const rightDoorEnemy = $("rightDoorEnemy");
 
-const leftLightEffect =
-    $("leftLightEffect");
-
-const rightLightEffect =
-    $("rightLightEffect");
+const leftLightEffect = $("leftLightEffect");
+const rightLightEffect = $("rightLightEffect");
 
 const leftLightBtn = $("leftLightBtn");
 const rightLightBtn = $("rightLightBtn");
@@ -2310,7 +2417,9 @@ const cameraName = $("cameraName");
 const cameraMessage = $("cameraMessage");
 
 const cameraButtons =
-    document.querySelectorAll(".camBtn");
+    document.querySelectorAll(
+        ".camBtn"
+    );
 
 const camBear = $("camBear");
 const camWolf = $("camWolf");
@@ -2319,7 +2428,6 @@ const camDuck = $("camDuck");
 /* PHONE */
 
 const phone = $("phone");
-
 const phoneState = $("phoneState");
 const phoneText = $("phoneText");
 
@@ -2331,9 +2439,7 @@ const hangBtn = $("hangBtn");
 /* JUMPSCARE */
 
 const jumpscare = $("jumpscare");
-
-const jumpscareImage =
-    $("jumpscareImage");
+const jumpscareImage = $("jumpscareImage");
 
 /* END */
 
@@ -2345,21 +2451,26 @@ const restartBtn = $("restartBtn");
 const menuBtn = $("menuBtn");
 
 /* =========================================================
-   VARIABLES
+   GAME VARIABLES
 ========================================================= */
 
 let currentNight = 1;
 
 let unlockedNight =
     Number(
-        localStorage.getItem("atbNight") || 1
+        localStorage.getItem(
+            "atbNight"
+        ) || 1
     );
 
 let running = false;
+
 let powerOutActive = false;
+
 let scareRunning = false;
 
 let power = 100;
+
 let hour = 0;
 
 let leftDoorClosed = false;
@@ -2372,38 +2483,17 @@ let camerasOpen = false;
 
 let selectedCamera = 0;
 
-/* ENEMY */
+let animationTick = 0;
+
+/* =========================================================
+   ENEMIES
+========================================================= */
 
 let e1 = 0;
 let e2 = 0;
 let e3 = 0;
 
 let duckSide = "left";
-
-/* TIMERS */
-
-let powerTimer = null;
-let clockTimer = null;
-let enemyTimer = null;
-
-let attack1 = null;
-let attack2 = null;
-let attack3 = null;
-
-let phoneRingTimer = null;
-
-let animationTimer = null;
-
-let animationTick = 0;
-
-/* AUDIO */
-
-let effectsEnabled = true;
-let musicEnabled = true;
-
-/* =========================================================
-   ROUTES
-========================================================= */
 
 const route1 = [
     0,
@@ -2423,10 +2513,39 @@ const route2 = [
 
 let route3 = [];
 
+/* =========================================================
+   TIMERS
+========================================================= */
+
+let powerTimer = null;
+let clockTimer = null;
+let enemyTimer = null;
+let animationTimer = null;
+
+let attack1 = null;
+let attack2 = null;
+let attack3 = null;
+
+let phoneRingTimer = null;
+
+/* =========================================================
+   AUDIO SETTINGS
+========================================================= */
+
+let effectsEnabled = true;
+let musicEnabled = true;
+
+bgMusic.volume = .18;
+
+/* =========================================================
+   ROUTES
+========================================================= */
+
 function createDuckRoute(){
 
     route3 =
         duckSide === "left"
+
         ? [
             0,
             2,
@@ -2434,6 +2553,7 @@ function createDuckRoute(){
             5,
             "left"
         ]
+
         : [
             0,
             2,
@@ -2456,7 +2576,7 @@ function position3(){
 }
 
 /* =========================================================
-   GET ANIMATION FRAME
+   ANIMATION
 ========================================================= */
 
 function getFrame(
@@ -2465,9 +2585,17 @@ function getFrame(
 ){
 
     const frames =
-        MOB_ANIMATIONS[mob][state];
+        MOB_ANIMATIONS[
+            mob
+        ][
+            state
+        ];
 
-    if(!Array.isArray(frames)){
+    if(
+        !Array.isArray(
+            frames
+        )
+    ){
         return frames;
     }
 
@@ -2477,33 +2605,9 @@ function getFrame(
     ];
 }
 
-/* =========================================================
-   CAMERA MOB STATE
-========================================================= */
-
-function cameraStateForPosition(position){
-
-    if(position === 5){
-        return "attack";
-    }
-
-    if(
-        position === 0 ||
-        position === 2
-    ){
-        return "idle";
-    }
-
-    return "walk";
-}
-
-/* =========================================================
-   ANIMATION LOOP
-========================================================= */
-
 function startAnimation(){
 
-    clearInterval(animationTimer);
+    stopAnimation();
 
     animationTimer =
         setInterval(
@@ -2522,13 +2626,15 @@ function startAnimation(){
                 }
 
             },
-            185
+            190
         );
 }
 
 function stopAnimation(){
 
-    clearInterval(animationTimer);
+    clearInterval(
+        animationTimer
+    );
 
     animationTimer = null;
 }
@@ -2536,8 +2642,6 @@ function stopAnimation(){
 /* =========================================================
    SOUND
 ========================================================= */
-
-bgMusic.volume = .18;
 
 function playSound(
     audio,
@@ -2554,22 +2658,28 @@ function playSound(
     try{
 
         audio.pause();
+
         audio.currentTime = 0;
 
         audio.volume = volume;
 
-        const p = audio.play();
+        const p =
+            audio.play();
 
         if(
             p &&
-            typeof p.catch === "function"
+            typeof p.catch ===
+            "function"
         ){
+
             p.catch(
-                error =>
+                function(error){
+
                     console.log(
                         "Audio:",
                         error
-                    )
+                    );
+                }
             );
         }
 
@@ -2588,6 +2698,7 @@ function stopSound(audio){
     try{
 
         audio.pause();
+
         audio.currentTime = 0;
 
     }catch(error){
@@ -2608,7 +2719,9 @@ function stopAllEffects(){
         soundGameOver,
         soundJumpscare
     ]
-    .forEach(stopSound);
+    .forEach(
+        stopSound
+    );
 }
 
 /* =========================================================
@@ -2623,18 +2736,23 @@ function startMusic(){
 
     bgMusic.volume = .18;
 
-    const p = bgMusic.play();
+    const p =
+        bgMusic.play();
 
     if(
         p &&
-        typeof p.catch === "function"
+        typeof p.catch ===
+        "function"
     ){
+
         p.catch(
-            error =>
+            function(error){
+
                 console.log(
                     "Music:",
                     error
-                )
+                );
+            }
         );
     }
 
@@ -2685,7 +2803,7 @@ function(){
     startMusic();
 
     statusText.textContent =
-        "🎵 Музика увімкнена.";
+        "🎵 MUSIC ON";
 };
 
 musicOffBtn.onclick =
@@ -2696,7 +2814,7 @@ function(){
     stopMusic();
 
     statusText.textContent =
-        "🔇 Музика вимкнена.";
+        "🔇 MUSIC OFF";
 };
 
 effectsBtn.onclick =
@@ -2754,7 +2872,10 @@ function updateUsage(){
         usage;
 
     usageBars.forEach(
-        function(bar,index){
+        function(
+            bar,
+            index
+        ){
 
             bar.classList.remove(
                 "on",
@@ -2770,7 +2891,9 @@ function updateUsage(){
                         "danger"
                     );
 
-                }else if(usage >= 4){
+                }else if(
+                    usage >= 4
+                ){
 
                     bar.classList.add(
                         "warning"
@@ -2788,7 +2911,7 @@ function updateUsage(){
 }
 
 /* =========================================================
-   NIGHT BUTTONS
+   NIGHT MENU
 ========================================================= */
 
 function updateNightButtons(){
@@ -2813,18 +2936,18 @@ function updateNightButtons(){
                     ? "🌙 "
                     : "🔒 "
                 ) +
+
                 "Ніч " +
                 n +
+
                 "<span>" +
+
                 NIGHT_MINUTES[n] +
+
                 " хв</span>";
         }
     );
 }
-
-/* =========================================================
-   MENU
-========================================================= */
 
 playBtn.onclick =
 function(){
@@ -2881,6 +3004,7 @@ nightButtons.forEach(
                 );
 
             if(n <= unlockedNight){
+
                 startGame(n);
             }
         };
@@ -2888,14 +3012,22 @@ nightButtons.forEach(
 );
 
 /* =========================================================
-   TIME
+   NIGHT TIME
 ========================================================= */
 
 function nightMs(){
 
     return (
-        NIGHT_MINUTES[currentNight] *
-        60 *
+        NIGHT_MINUTES[
+            currentNight
+        ]
+
+        *
+
+        60
+
+        *
+
         1000
     );
 }
@@ -2913,6 +3045,7 @@ function startGame(night){
 
     stopTimers();
     stopAnimation();
+
     stopPhone();
     stopAllEffects();
 
@@ -2949,14 +3082,25 @@ function startGame(night){
 
     createDuckRoute();
 
-    menu.classList.add("hidden");
-    nightMenu.classList.add("hidden");
+    menu.classList.add(
+        "hidden"
+    );
 
-    game.classList.remove("hidden");
+    nightMenu.classList.add(
+        "hidden"
+    );
 
-    cameraPanel.classList.add("hidden");
+    game.classList.remove(
+        "hidden"
+    );
 
-    endScreen.classList.add("hidden");
+    cameraPanel.classList.add(
+        "hidden"
+    );
+
+    endScreen.classList.add(
+        "hidden"
+    );
 
     jumpscare.classList.remove(
         "active"
@@ -2978,9 +3122,9 @@ function startGame(night){
 
     resetOffice();
 
-    updateUsage();
-
     renderCamera();
+
+    updateUsage();
 
     startTimers();
 
@@ -3217,7 +3361,7 @@ function(){
 };
 
 /* =========================================================
-   BIG DOOR MOB ANIMATION
+   DOOR MOBS
 ========================================================= */
 
 function updateDoorEnemies(){
@@ -3265,7 +3409,7 @@ function updateDoorEnemies(){
         );
 
         statusText.textContent =
-            "🚨 МОБ ДУЖЕ БЛИЗЬКО ЗЛІВА!";
+            "🚨 МОБ БІЛЯ ЛІВИХ ДВЕРЕЙ!";
 
     }else{
 
@@ -3295,7 +3439,7 @@ function updateDoorEnemies(){
         );
 
         statusText.textContent =
-            "🚨 МОБ ДУЖЕ БЛИЗЬКО СПРАВА!";
+            "🚨 МОБ БІЛЯ ПРАВИХ ДВЕРЕЙ!";
 
     }else{
 
@@ -3309,6 +3453,7 @@ function updateDoorEnemies(){
         leftLightOn &&
         !leftMob
     ){
+
         statusText.textContent =
             "💡 Зліва нікого.";
     }
@@ -3317,13 +3462,14 @@ function updateDoorEnemies(){
         rightLightOn &&
         !rightMob
     ){
+
         statusText.textContent =
             "💡 Справа нікого.";
     }
 }
 
 /* =========================================================
-   CAMERA OPEN
+   CAMERA
 ========================================================= */
 
 cameraBtn.onclick =
@@ -3413,7 +3559,29 @@ function flashCamera(){
 }
 
 /* =========================================================
-   SET CAMERA MOB POSITION
+   CAMERA STATE
+========================================================= */
+
+function cameraStateForPosition(
+    position
+){
+
+    if(position === 5){
+        return "attack";
+    }
+
+    if(
+        position === 0 ||
+        position === 2
+    ){
+        return "idle";
+    }
+
+    return "walk";
+}
+
+/* =========================================================
+   CAMERA MOB POSITION
 ========================================================= */
 
 function setCameraMobStyle(
@@ -3423,7 +3591,9 @@ function setCameraMobStyle(
 ){
 
     const style =
-        CAMERA_MOB_STYLE[camera];
+        CAMERA_MOB_STYLE[
+            camera
+        ];
 
     element.style.width =
         style.width;
@@ -3445,26 +3615,18 @@ function setCameraMobStyle(
 
     if(mob === "bear"){
 
-        if(camera === 5){
-
-            element.style.left =
-                "14%";
-
-        }else{
-
-            element.style.left =
-                camera % 2 === 0
-                ? "7%"
-                : "13%";
-        }
+        element.style.left =
+            camera === 5
+            ? "10%"
+            : "8%";
     }
 
     if(mob === "wolf"){
 
         element.style.right =
-            camera % 2 === 0
-            ? "8%"
-            : "12%";
+            camera === 5
+            ? "10%"
+            : "8%";
     }
 
     if(mob === "duck"){
@@ -3478,34 +3640,42 @@ function setCameraMobStyle(
 }
 
 /* =========================================================
-   CAMERA RENDER
+   RENDER CAMERA
 ========================================================= */
 
 function renderCamera(){
 
     cameraView.style.backgroundImage =
         "linear-gradient(" +
-        "rgba(0,0,0,.06)," +
+        "rgba(0,0,0,.05)," +
         "rgba(0,0,0,.18)" +
         ")," +
         "url('" +
-        CAMERA_IMAGES[selectedCamera] +
+        CAMERA_IMAGES[
+            selectedCamera
+        ] +
         "')";
 
     cameraLabel.textContent =
-        CAMERA_NAMES[selectedCamera];
+        CAMERA_NAMES[
+            selectedCamera
+        ];
 
     cameraName.textContent =
-        CAMERA_NAMES[selectedCamera];
+        CAMERA_NAMES[
+            selectedCamera
+        ];
 
     cameraButtons.forEach(
         function(button){
 
             button.classList.toggle(
                 "active",
+
                 Number(
                     button.dataset.cam
-                ) === selectedCamera
+                ) ===
+                selectedCamera
             );
         }
     );
@@ -3531,12 +3701,16 @@ function renderCamera(){
     const p2 = position2();
     const p3 = position3();
 
-    /* BEAR */
+    /* =====================================================
+       BEAR
+    ===================================================== */
 
     if(p1 === selectedCamera){
 
         const state =
-            cameraStateForPosition(p1);
+            cameraStateForPosition(
+                p1
+            );
 
         camBear.src =
             getFrame(
@@ -3564,12 +3738,16 @@ function renderCamera(){
         found++;
     }
 
-    /* WOLF */
+    /* =====================================================
+       WOLF FIXED
+    ===================================================== */
 
     if(p2 === selectedCamera){
 
         const state =
-            cameraStateForPosition(p2);
+            cameraStateForPosition(
+                p2
+            );
 
         camWolf.src =
             getFrame(
@@ -3597,12 +3775,16 @@ function renderCamera(){
         found++;
     }
 
-    /* DUCK */
+    /* =====================================================
+       DUCK FIXED
+    ===================================================== */
 
     if(p3 === selectedCamera){
 
         const state =
-            cameraStateForPosition(p3);
+            cameraStateForPosition(
+                p3
+            );
 
         camDuck.src =
             getFrame(
@@ -3640,7 +3822,7 @@ function renderCamera(){
         if(selectedCamera === 5){
 
             cameraMessage.textContent =
-                "🚨 МОБ ВЖЕ БІЛЯ ОФІСУ!";
+                "🚨 МОБ ДУЖЕ БЛИЗЬКО!";
 
         }else{
 
@@ -3674,24 +3856,32 @@ function moveEnemies(){
         .04;
 
     if(
-        Math.random() < chance &&
-        e1 < route1.length - 1
+        Math.random() <
+        chance &&
+        e1 <
+        route1.length - 1
     ){
+
         e1++;
     }
 
     if(
-        Math.random() < chance &&
-        e2 < route2.length - 1
+        Math.random() <
+        chance &&
+        e2 <
+        route2.length - 1
     ){
+
         e2++;
     }
 
     if(
         Math.random() <
         chance * .75 &&
-        e3 < route3.length - 1
+        e3 <
+        route3.length - 1
     ){
+
         e3++;
     }
 
@@ -3705,7 +3895,7 @@ function moveEnemies(){
 }
 
 /* =========================================================
-   ATTACKS
+   ATTACK TIMERS
 ========================================================= */
 
 function checkAttacks(){
@@ -3723,7 +3913,8 @@ function checkAttacks(){
 
                     if(
                         running &&
-                        position1() === "left"
+                        position1() ===
+                        "left"
                     ){
 
                         attackEnemy(
@@ -3753,7 +3944,8 @@ function checkAttacks(){
 
                     if(
                         running &&
-                        position2() === "right"
+                        position2() ===
+                        "right"
                     ){
 
                         attackEnemy(
@@ -3783,7 +3975,8 @@ function checkAttacks(){
 
                     if(
                         running &&
-                        position3() === duckSide
+                        position3() ===
+                        duckSide
                     ){
 
                         attackEnemy(
@@ -3800,6 +3993,10 @@ function checkAttacks(){
             );
     }
 }
+
+/* =========================================================
+   ATTACK
+========================================================= */
 
 function attackEnemy(
     side,
@@ -3822,7 +4019,9 @@ function attackEnemy(
         statusText.textContent =
             "💥 МОБ УДАРИВ У ДВЕРІ!";
 
-        resetEnemy(number);
+        resetEnemy(
+            number
+        );
 
         return;
     }
@@ -3843,7 +4042,9 @@ function resetEnemy(number){
 
         e1 = 0;
 
-        clearTimeout(attack1);
+        clearTimeout(
+            attack1
+        );
 
         attack1 = null;
     }
@@ -3852,7 +4053,9 @@ function resetEnemy(number){
 
         e2 = 0;
 
-        clearTimeout(attack2);
+        clearTimeout(
+            attack2
+        );
 
         attack2 = null;
     }
@@ -3861,7 +4064,9 @@ function resetEnemy(number){
 
         e3 = 0;
 
-        clearTimeout(attack3);
+        clearTimeout(
+            attack3
+        );
 
         attack3 = null;
 
@@ -3905,26 +4110,48 @@ function updatePower(){
     }
 
     let drain =
-        drainForNight(40);
+        drainForNight(
+            40
+        );
 
     if(leftDoorClosed){
-        drain += drainForNight(34);
+
+        drain +=
+            drainForNight(
+                34
+            );
     }
 
     if(rightDoorClosed){
-        drain += drainForNight(34);
+
+        drain +=
+            drainForNight(
+                34
+            );
     }
 
     if(leftLightOn){
-        drain += drainForNight(21);
+
+        drain +=
+            drainForNight(
+                21
+            );
     }
 
     if(rightLightOn){
-        drain += drainForNight(21);
+
+        drain +=
+            drainForNight(
+                21
+            );
     }
 
     if(camerasOpen){
-        drain += drainForNight(20);
+
+        drain +=
+            drainForNight(
+                20
+            );
     }
 
     power -= drain;
@@ -3942,7 +4169,9 @@ function updatePower(){
     }
 
     powerLabel.textContent =
-        Math.floor(power);
+        Math.floor(
+            power
+        );
 
     powerLabel.classList.remove(
         "low",
@@ -4097,6 +4326,10 @@ function startPhoneRinging(){
 
     stopPhoneRinging();
 
+    if(!effectsEnabled){
+        return;
+    }
+
     playSound(
         soundAlarm,
         .65
@@ -4137,41 +4370,32 @@ function stopPhoneRinging(){
 }
 
 /* =========================================================
-   SPEECH
+   PHONE VOICE
 ========================================================= */
 
 let speechParts = [];
 let speechIndex = 0;
 let speechStopped = false;
 
-function loadVoices(){
-
-    if(
-        "speechSynthesis" in window
-    ){
-        return speechSynthesis.getVoices();
-    }
-
-    return [];
-}
-
-if(
-    "speechSynthesis" in window
-){
-
-    speechSynthesis.onvoiceschanged =
-    function(){
-
-        loadVoices();
-    };
-}
+let activeUtterance = null;
 
 function chooseVoice(){
 
+    if(
+        !(
+            "speechSynthesis"
+            in window
+        )
+    ){
+        return null;
+    }
+
     const voices =
-        loadVoices();
+        speechSynthesis
+        .getVoices();
 
     return (
+
         voices.find(
             voice =>
                 voice.lang &&
@@ -4179,7 +4403,9 @@ function chooseVoice(){
                 .toLowerCase()
                 .startsWith("uk")
         )
+
         ||
+
         voices.find(
             voice =>
                 voice.lang &&
@@ -4187,9 +4413,13 @@ function chooseVoice(){
                 .toLowerCase()
                 .startsWith("ru")
         )
+
         ||
+
         voices[0]
+
         ||
+
         null
     );
 }
@@ -4213,9 +4443,18 @@ function speakPhoneGuy(){
 
     if(
         !(
-            "speechSynthesis" in window
+            "speechSynthesis"
+            in window
+        ) ||
+        !(
+            "SpeechSynthesisUtterance"
+            in window
         )
     ){
+
+        phoneState.textContent =
+            "❌ ГОЛОС НЕ ПІДТРИМУЄТЬСЯ";
+
         return;
     }
 
@@ -4228,7 +4467,9 @@ function speakPhoneGuy(){
 
     speechParts =
         makeSpeechParts(
-            PHONE_TEXT[currentNight]
+            PHONE_TEXT[
+                currentNight
+            ]
         );
 
     speechIndex = 0;
@@ -4253,6 +4494,8 @@ function speakNext(){
         speechParts.length
     ){
 
+        activeUtterance = null;
+
         phoneState.textContent =
             "✅ РОЗМОВУ ЗАВЕРШЕНО";
 
@@ -4261,9 +4504,11 @@ function speakNext(){
         return;
     }
 
-    const utterance =
+    activeUtterance =
         new SpeechSynthesisUtterance(
-            speechParts[speechIndex]
+            speechParts[
+                speechIndex
+            ]
         );
 
     const voice =
@@ -4271,20 +4516,28 @@ function speakNext(){
 
     if(voice){
 
-        utterance.voice = voice;
-        utterance.lang = voice.lang;
+        activeUtterance.voice =
+            voice;
+
+        activeUtterance.lang =
+            voice.lang;
 
     }else{
 
-        utterance.lang =
+        activeUtterance.lang =
             "uk-UA";
     }
 
-    utterance.rate = .90;
-    utterance.pitch = .82;
-    utterance.volume = 1;
+    activeUtterance.rate =
+        .90;
 
-    utterance.onend =
+    activeUtterance.pitch =
+        .82;
+
+    activeUtterance.volume =
+        1;
+
+    activeUtterance.onend =
     function(){
 
         speechIndex++;
@@ -4295,7 +4548,7 @@ function speakNext(){
         );
     };
 
-    utterance.onerror =
+    activeUtterance.onerror =
     function(){
 
         speechIndex++;
@@ -4307,7 +4560,7 @@ function speakNext(){
     };
 
     speechSynthesis.speak(
-        utterance
+        activeUtterance
     );
 }
 
@@ -4315,9 +4568,17 @@ function stopSpeech(){
 
     speechStopped = true;
 
+    activeUtterance = null;
+
+    speechParts = [];
+
+    speechIndex = 0;
+
     if(
-        "speechSynthesis" in window
+        "speechSynthesis"
+        in window
     ){
+
         speechSynthesis.cancel();
     }
 
@@ -4346,7 +4607,8 @@ function showPhoneCall(){
         "📳 ВХІДНИЙ ДЗВІНОК — НІЧ " +
         currentNight;
 
-    phoneText.textContent = "";
+    phoneText.textContent =
+        "";
 
     phoneText.classList.add(
         "hidden"
@@ -4380,7 +4642,9 @@ function(){
     );
 
     phoneText.textContent =
-        PHONE_TEXT[currentNight];
+        PHONE_TEXT[
+            currentNight
+        ];
 
     phoneText.classList.remove(
         "hidden"
@@ -4437,7 +4701,7 @@ function(){
 };
 
 /* =========================================================
-   JUMPSCARE PNG
+   JUMPSCARE
 ========================================================= */
 
 function showJumpscare(
@@ -4542,6 +4806,7 @@ function showGameOver(reason){
 function winGame(){
 
     running = false;
+
     powerOutActive = false;
 
     stopTimers();
@@ -4575,7 +4840,8 @@ function winGame(){
 
         if(next > unlockedNight){
 
-            unlockedNight = next;
+            unlockedNight =
+                next;
 
             localStorage.setItem(
                 "atbNight",
@@ -4621,6 +4887,7 @@ menuBtn.onclick =
 function(){
 
     running = false;
+
     powerOutActive = false;
     scareRunning = false;
 
@@ -4643,6 +4910,10 @@ function(){
 
     endScreen.classList.add(
         "hidden"
+    );
+
+    jumpscare.classList.remove(
+        "active"
     );
 
     menu.classList.remove(
@@ -4671,19 +4942,37 @@ function startTimers(){
     enemyTimer =
         setInterval(
             moveEnemies,
-            MOVE_TIME[currentNight]
+            MOVE_TIME[
+                currentNight
+            ]
         );
 }
 
 function stopTimers(){
 
-    clearInterval(powerTimer);
-    clearInterval(clockTimer);
-    clearInterval(enemyTimer);
+    clearInterval(
+        powerTimer
+    );
 
-    clearTimeout(attack1);
-    clearTimeout(attack2);
-    clearTimeout(attack3);
+    clearInterval(
+        clockTimer
+    );
+
+    clearInterval(
+        enemyTimer
+    );
+
+    clearTimeout(
+        attack1
+    );
+
+    clearTimeout(
+        attack2
+    );
+
+    clearTimeout(
+        attack3
+    );
 
     powerTimer = null;
     clockTimer = null;
@@ -4707,7 +4996,8 @@ document.addEventListener(
         }
 
         const key =
-            event.key.toLowerCase();
+            event.key
+            .toLowerCase();
 
         if(key === "a"){
             leftLightBtn.click();
@@ -4738,9 +5028,11 @@ document.addEventListener(
         }
 
         if(
-            event.key === "Escape" &&
+            event.key ===
+            "Escape" &&
             camerasOpen
         ){
+
             closeCamera.click();
         }
     }
@@ -4775,13 +5067,17 @@ function preloadImages(){
         MOB_ANIMATIONS.duck.jumpscare
     ];
 
-    files.forEach(
+    const uniqueFiles =
+        [...new Set(files)];
+
+    uniqueFiles.forEach(
         function(src){
 
             const image =
                 new Image();
 
-            image.src = src;
+            image.src =
+                src;
         }
     );
 }
@@ -4801,8 +5097,9 @@ preloadImages();
 renderCamera();
 
 console.log(
-    "П'ЯТЬ НОЧЕЙ В АТБ — BIG MOB ANIMATION VERSION"
+    "П'ЯТЬ НОЧЕЙ В АТБ — CLEAN WOLF + CLEAN DUCK VERSION"
 );
+
 </script>
 
 </body>
